@@ -264,6 +264,7 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
+nnoremap <CR> :nohlsearch<cr>
 
 " Get rid of those annoying ~'s on lines that don't exist yet
 highlight NonText ctermfg= bg

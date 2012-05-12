@@ -13,6 +13,7 @@ create_links() {
   ln -s ${dir}/.tmux.conf ~/.tmux.conf
   ln -s ${dir}/.vim ~/.vim
   ln -s ${dir}/.vimrc ~/.vimrc
+  ln -s ${dir}/.jshintrc ~/.jshintrc
 }
 
 destroy_links() {
@@ -24,4 +25,5 @@ destroy_links() {
   rm -f ~/.tmux.conf
   rm -rf ~/.vim
   rm -f ~/.vimrc
+  rm -f ~/.jshintrc
 }

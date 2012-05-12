@@ -6,7 +6,6 @@
         "console",
         "describe",
         "expect",
-        "export",
         "beforeEach",
         "waits",
         "waitsFor",
@@ -18,7 +17,7 @@
     "browser" : true,
 
     "boss" : false,
-    "curly": false,
+    "curly": true,
     "debug": false,
     "devel": false,
     "eqeqeq": true,
@@ -37,5 +36,5 @@
     "undef": true,
     "sub": true,
     "strict": false,
-    "white": true
+    "white": false
 }

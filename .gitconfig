@@ -3,6 +3,7 @@
   email = keith.thompson2690@gmail.com
 [core]
   editor = vim
+  excludesfile = ~/.gitignore_global
 [color]
   ui = auto
 [alias]

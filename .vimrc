@@ -68,6 +68,7 @@ highlight SpecialKey guifg=#FF003F
 " Allow syntastic sytax checking
 let syntastic_enable_signs=1
 let syntastic_check_on_open=1
+let syntastic_quiet_warnings=1
 
 " Custom Commands. Switching bufferes, running CoffeeScript, CommandT, running
 " tests
@@ -126,7 +127,7 @@ if has("autocmd")
   autocmd FileType python,doctest set ts=4 sw=4 sts=4 et
 
   " Set Syntax Highlighting for odd file types
-    au BufNewFile,BufRead *.sass setfiletype sass
+    au BufNewFile,BufRead *.ejs set filetype=html
     au BufNewFile,BufRead *.json set filetype=json syntax=javascript
     au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
     au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml

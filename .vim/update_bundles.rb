@@ -9,6 +9,8 @@ git_bundles = [
   "git://github.com/tomtom/tcomment_vim.git",
   # Python Plugins
   "git://github.com/vim-scripts/pyflakes.vim.git",
+  # Syntax highlighting
+  "git://github.com/digitaltoad/vim-jade.git",
 ]
 
 # Currently doesn't do anything

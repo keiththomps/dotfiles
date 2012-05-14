@@ -9,12 +9,14 @@
         "beforeEach",
         "waits",
         "waitsFor",
+        "io",
         "runs"
     ],
 
     "node" : true,
     "es5" : true,
     "browser" : true,
+    "jquery" : true,
 
     "boss" : false,
     "curly": true,

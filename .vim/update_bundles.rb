@@ -11,11 +11,7 @@ git_bundles = [
   "git://github.com/vim-scripts/pyflakes.vim.git",
   # Syntax highlighting
   "git://github.com/digitaltoad/vim-jade.git",
-]
-
-# Currently doesn't do anything
-git_themes= [
-  "https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim",
+  "git://github.com/kchmck/vim-coffee-script.git",
 ]
 
 # Vim.org syntax scripts, also doesn't do anything

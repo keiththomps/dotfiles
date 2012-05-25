@@ -1,6 +1,6 @@
 # Temp Files #
 ##############
-*.swp
+*.sw[op]
 *.pyc
 
 # Compiled source #
@@ -33,6 +33,7 @@
 
 # OS generated files #
 ######################
+.netrwhist
 .DS_Store*
 ehthumbs.db
 Icon?

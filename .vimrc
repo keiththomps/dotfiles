@@ -260,5 +260,5 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
-map <leader>nt :!make test<cr>
+map <leader>nt :!npm test -s<cr>
 nnoremap <CR> :nohlsearch<cr>

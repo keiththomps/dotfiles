@@ -16,6 +16,9 @@ create_links() {
   ln -s ${dir}/.vim ~/.vim
   rm -f ${dir}/.vim/.vim
   ln -s ${dir}/.vimrc ~/.vimrc
+  ln -s ${dir}/.zlogin ~/.zlogin
+  ln -s ${dir}/.zshrc ~/.zshrc
+  ln -s ${dir}/bin ~/bin
 }
 
 destroy_links() {
@@ -29,4 +32,7 @@ destroy_links() {
   rm -f ~/.tmux.conf
   rm -rf ~/.vim
   rm -f ~/.vimrc
+  rm -f ~/.zlogin
+  rm -f ~/.zshrc
+  rm -rf ~/bin
 }

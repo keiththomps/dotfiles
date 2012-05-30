@@ -47,8 +47,8 @@ syntax on
 " turn on all python syntax highlighting
 let python_highlight_all=1
 
-" Solarized Theme Dark
-colorscheme desert
+" User Tomorrow-Night Theme
+colorscheme Tomorrow-Night
 
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
@@ -261,4 +261,6 @@ map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
 map <leader>nt :!npm test -s<cr>
+map <leader>nu :!make test-unit<cr>
+map <leader>nc :!make test-client<cr>
 nnoremap <CR> :nohlsearch<cr>

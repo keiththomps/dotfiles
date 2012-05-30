@@ -47,6 +47,11 @@ function virtualenv_info {
   [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
 }
 
+# Display Rbenv cleanly if Rbenv is istalled
+function rbenv_info {
+  if which rbenv > /dev/null; then echo "$(rbenv version-name)"; fi
+}
+
 # Command Status
 local command_status="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$reset_colors%})"
 
@@ -56,4 +61,4 @@ PROMPT='
 ${command_status} %{$reset_color%} '
 
 # Add $(~/.rbenv/bin/rbenv version-name) to show rbenv version
-RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(rbenv version-name)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
+RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(rbenv_info)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'

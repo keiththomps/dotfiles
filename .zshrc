@@ -1,5 +1,5 @@
-# rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Alias hub
 eval "$(hub alias -s)"
@@ -16,11 +16,6 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 # Set default Variables
 export EDITOR=vim
 
-# Set directory and file colors for ls
-# export LS_OPTIONS='--color=auto'
-# export CLICOLOR='Yes'
-# export LSCOLORS=''
-
 # Homebrew added to my path
 PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
@@ -32,10 +27,16 @@ alias tmk='tmux kill-session -t'
 # Django aliases
 alias pm='python manage.py'
 
+# Show completion on first TAB
+setopt menucomplete
+
+# Load completions for Ruby, Git, etc.
+autoload compinit
+compinit
 
 # PROMPT FUNCTIONS AND SETTINGS #
 #################################
-#
+
 # Colors
 autoload -U colors
 colors
@@ -46,19 +47,13 @@ function virtualenv_info {
   [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
 }
 
-# Smiley
-local smiley="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$reset_colors%})"
+# Command Status
+local command_status="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$reset_colors%})"
 
-# Show relative path on one line, then smiley
+# Show relative path on one line, then command status
 PROMPT='
 %{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~
-${smiley} %{$reset_color%} '
+${command_status} %{$reset_color%} '
 
-RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
-
-# Show completion on first TAB
-setopt menucomplete
-
-# Load completions for Ruby, Git, etc.
-autoload compinit
-compinit
+# Add $(~/.rbenv/bin/rbenv version-name) to show rbenv version
+RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(rbenv version-name)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'

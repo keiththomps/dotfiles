@@ -1,6 +1,3 @@
-# rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 # Alias hub
 eval "$(hub alias -s)"
 

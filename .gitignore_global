@@ -38,3 +38,7 @@
 ehthumbs.db
 Icon?
 Thumbs.db
+
+# Rbenv local config #
+######################
+.rbenv-version

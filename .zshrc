@@ -1,3 +1,6 @@
+# Vi mode
+bindkey -v
+
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -55,9 +58,17 @@ function rbenv_info {
 # Command Status
 local command_status="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$reset_colors%})"
 
+# Vi Mode Statue
+function zle-keymap-select {
+  VIMODE="${${KEYMAP/vicmd/command}/(main|viins)/insert}"
+  zle reset-prompt
+}
+
+zle -N zle-keymap-select
+
 # Show relative path on one line, then command status
 PROMPT='
-%{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~
+%{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~ %{$fg[white]%}: %{$fg[cyan]%}${VIMODE}
 ${command_status} %{$reset_color%} '
 
 # Add $(~/.rbenv/bin/rbenv version-name) to show rbenv version

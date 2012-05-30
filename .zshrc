@@ -32,10 +32,19 @@ alias tmk='tmux kill-session -t'
 # Django aliases
 alias pm='python manage.py'
 
+
+# PROMPT FUNCTIONS AND SETTINGS #
+#################################
+#
 # Colors
 autoload -U colors
 colors
 setopt prompt_subst
+
+# Display Virtualenv cleanly in right column
+function virtualenv_info {
+  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
+}
 
 # Smiley
 local smiley="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$reset_colors%})"
@@ -45,7 +54,7 @@ PROMPT='
 %{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~
 ${smiley} %{$reset_color%} '
 
-RPROMPT='%{$fg[white]%} $(~/bin/git-cwd-info.sh)%{$reset_colors%}'
+RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
 
 # Show completion on first TAB
 setopt menucomplete

@@ -1,11 +1,9 @@
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# Alias hub
-eval "$(hub alias -s)"
-
 # tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator_completion ]] && source $HOME/.tmuxinator/scripts/tmuxinator_completion
 
 # Virtualenv & Virtualenvwrapper setup
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python

@@ -32,14 +32,16 @@ setopt menucomplete
 
 # Load completions for Ruby, Git, etc.
 autoload compinit
-compinit
+compinit -C
 
 # PROMPT FUNCTIONS AND SETTINGS #
 #################################
 
+# Case insensitive auto complete
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 # Colors
-autoload -U colors
-colors
+autoload -U colors && colors
 setopt prompt_subst
 
 # Display Virtualenv cleanly in right column

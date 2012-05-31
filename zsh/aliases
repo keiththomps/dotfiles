@@ -1,6 +1,12 @@
 # ALIASES #
 ###########
 
+# Standard Shell
+alias c='clear'
+alias l='ls -l'
+alias la='ls -al'
+alias ..='cd ..'
+
 # Git
 alias g='git status'
 alias gb='git branch'

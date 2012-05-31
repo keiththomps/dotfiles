@@ -20,6 +20,11 @@ export EDITOR=vim
 # Homebrew added to my path
 PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
+# Set directory and file colors for ls
+export LS_OPTIONS='--color=auto'
+export CLICOLOR='Yes'
+export LSCOLORS=''
+
 # tmux aliases
 alias attach='tmux attach-session -t'
 alias switch='tmux switch-session -t'

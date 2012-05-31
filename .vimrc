@@ -260,6 +260,7 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
+map <leader>mt :!make test<cr>
 map <leader>nt :!npm test -s<cr>
 map <leader>nu :!make test-unit<cr>
 map <leader>nc :!make test-client<cr>

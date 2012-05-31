@@ -1,0 +1,19 @@
+# ALIASES #
+###########
+
+# Git
+alias g='git status'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gc='git commit -m '
+alias gca='git commit -am '
+alias gco='git checkout '
+alias gcob='git checkout -b '
+
+# tmux
+alias attach='tmux attach-session -t'
+alias switch='tmux switch-session -t'
+alias tmk='tmux kill-session -t'
+
+# Django
+alias pm='python manage.py'

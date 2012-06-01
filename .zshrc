@@ -1,3 +1,2 @@
 # Load in my zsh settings from the relative zsh dir
-dir=$(pwd)
-source ${dir}/zsh/zshrc
+source ~/code/github-projects/dotfiles/zsh/zshrc

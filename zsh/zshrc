@@ -1,5 +1,4 @@
-dir=$(pwd)
-# Load Various zsh files, this looks weird but dir is passed from one directory back
-source ${dir}/zsh/env
-source ${dir}/zsh/config
-source ${dir}/zsh/aliases
+# Load Various zsh files
+source ~/code/github-projects/dotfiles/zsh/env
+source ~/code/github-projects/dotfiles/zsh/config
+source ~/code/github-projects/dotfiles/zsh/aliases

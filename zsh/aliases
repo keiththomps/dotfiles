@@ -5,16 +5,15 @@
 alias c='clear'
 alias l='ls -l'
 alias la='ls -al'
-alias ..='cd ..'
 
 # Git
-alias g='git status'
+alias g='git status -s'
 alias gb='git branch'
 alias gba='git branch -a'
-alias gc='git commit -m '
-alias gca='git commit -am '
-alias gco='git checkout '
-alias gcob='git checkout -b '
+alias gc='git commit -m'
+alias gca='git commit -am'
+alias gco='git checkout'
+alias gcob='git checkout -b'
 
 # tmux
 alias attach='tmux attach-session -t'

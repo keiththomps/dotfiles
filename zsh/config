@@ -53,6 +53,7 @@ function zle-keymap-select {
   VIMODE="${${KEYMAP/vicmd/command}/(main|viins)/insert}"
   zle reset-prompt
 }
+
 zle -N zle-keymap-select
 
 # Show relative path on one line, then command status

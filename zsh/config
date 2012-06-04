@@ -1,8 +1,8 @@
 # ZSH CONFIGURATION #
 #####################
 
-# Turn on Vi mode
-bindkey -v
+# Turn off Vi mode
+bindkey -e
 
 # Alias hub to git
 eval "$(hub alias -s)"
@@ -37,16 +37,13 @@ setopt prompt_subst
 
 # Display Virtualenv cleanly in right column
 function virtualenv_info {
-  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
+  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
 
 # Display Rbenv cleanly if Rbenv is installed
 function rbenv_info {
   if which rbenv > /dev/null; then echo "$(rbenv version-name)"; fi
 }
-
-# Command Status
-local command_status="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$reset_colors%})"
 
 # Vi Mode Statue
 function zle-keymap-select {
@@ -58,7 +55,7 @@ zle -N zle-keymap-select
 
 # Show relative path on one line, then command status
 PROMPT='
-%{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~ %{$fg[white]%}: %{$fg[cyan]%}${VIMODE}
+%{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~ %{$fg[white]%}
 ${command_status} %{$reset_color%} '
 
 # Show virtualenv, rbenv, branch, sha, and repo dirty status on right side

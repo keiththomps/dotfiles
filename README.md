@@ -1,6 +1,6 @@
 Prerequisites
 =============
-* Vim with Ruby support (on OS X use this script "https://gist.github.com/1110471")
+* Vim with Ruby support (on OS X use this script https://gist.github.com/1110471 )
 * Ruby used to compile Vim set to active, needs to have bundler and rake installed
 
 Installation

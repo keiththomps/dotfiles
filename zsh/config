@@ -4,9 +4,6 @@
 # Turn off Vi mode
 bindkey -e
 
-# Alias hub to git
-eval "$(hub alias -s)"
-
 # Allow rbenv if it's installed (which it should be!)
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 

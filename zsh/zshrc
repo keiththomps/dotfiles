@@ -1,4 +1,0 @@
-# Load Various zsh files
-source ~/code/github-projects/dotfiles/zsh/env
-source ~/code/github-projects/dotfiles/zsh/config
-source ~/code/github-projects/dotfiles/zsh/aliases

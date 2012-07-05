@@ -39,6 +39,10 @@ alias tmk='tmux kill-session -t'
 # Django
 alias pm='python manage.py'
 
+# Ruby REPL's
+alias irb='irb --simple-prompt'
+alias pry='pry --simple-prompt'
+
 # ZSH CONFIGURATION #
 #####################
 

@@ -40,6 +40,7 @@ set guioptions-=T
 set showcmd
 set laststatus=2
 set mouse=
+set paste
 set noerrorbells visualbell t_vb=
 set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,
 syntax on

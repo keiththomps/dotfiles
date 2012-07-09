@@ -40,7 +40,6 @@ set guioptions-=T
 set showcmd
 set laststatus=2
 set mouse=
-set paste
 set noerrorbells visualbell t_vb=
 set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,
 syntax on
@@ -81,18 +80,12 @@ map <leader>dt :w\|:!python -m doctest %<cr>
 nnoremap <leader><leader> <c-^>
 
 " Simple auto closing backets & parenthesis
-inoremap (      ()<Left>
 inoremap (<CR>  (<CR>)<Esc>O
 inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-inoremap [      []<Left>
 inoremap [<CR>  [<CR>]<Esc>O
 inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-inoremap {      {}<Left>
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-
-" Custom django template tag matching
-inoremap {%     {%%}<Left><Left>
 
 " Custom Single and double quote handling, most people
 " probably wouldn't like this
@@ -259,8 +252,7 @@ endfunction
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
+map <leader>c :w\|:!bundle exec cucumber<cr>
 map <leader>mt :!make test<cr>
 map <leader>nt :!npm test -s<cr>
 map <leader>nu :!make test-unit<cr>

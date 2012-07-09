@@ -21,6 +21,9 @@ alias c='clear'
 alias l='ls -l'
 alias la='ls -al'
 
+# Bundle Exec
+alias be="bundle exec"
+
 # Git
 alias g='git status -s'
 alias gb='git branch'
@@ -39,9 +42,10 @@ alias tmk='tmux kill-session -t'
 # Django
 alias pm='python manage.py'
 
-# Ruby REPL's
-alias irb='irb --simple-prompt'
-alias pry='pry --simple-prompt'
+# Ruby REPLs & Pry for Rails
+# alias irb='irb --simple-prompt'
+# alias pry='pry --simple-prompt'
+alias pryr='pry --simple-prompt -r ./config/environment'
 
 # ZSH CONFIGURATION #
 #####################

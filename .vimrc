@@ -10,9 +10,8 @@ call pathogen#infect()
 call pathogen#helptags()
 
 " Remap Leader to ,
-imap jj <esc>
+inoremap jj <esc>
 let mapleader= ","
-let g:mapleader= ","
 
 " Basic setup, enter :help [setting] to see what these are
 set encoding=utf-8
@@ -71,7 +70,7 @@ let syntastic_quiet_warnings=1
 " tests
 map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>
-map <leader>x :bd<cr>
+map <leader>x :Kwbd<cr>
 map <leader><S-c> <C-w><C-w>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 map <leader>cr :CoffeeRun<cr>
@@ -126,9 +125,6 @@ if has("autocmd")
 
     " Set Syntax Highlighting for html to default to django
     au BufNewFile,BufRead *.html set ft=htmldjango
-
-    " Indent p tags
-    autocmd fileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
 
     " This automatically removes the trailing whitespace in specific file types
     autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()
@@ -253,8 +249,4 @@ map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!bundle exec cucumber<cr>
-map <leader>mt :!make test<cr>
-map <leader>nt :!npm test -s<cr>
-map <leader>nu :!make test-unit<cr>
-map <leader>nc :!make test-client<cr>
 nnoremap <CR> :nohlsearch<cr>

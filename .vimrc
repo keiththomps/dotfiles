@@ -13,6 +13,13 @@ call pathogen#helptags()
 inoremap jj <esc>
 let mapleader= ","
 
+" Copy to OS X pasteboard
+noremap <leader>y "*y
+
+" Paste from OS X pasteboard without messing up indent.
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+noremap <leader>P :set paste<CR>:put! *<CR>:set nopaste<CR>
+
 " Basic setup, enter :help [setting] to see what these are
 set encoding=utf-8
 set number

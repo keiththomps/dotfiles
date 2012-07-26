@@ -16,6 +16,10 @@ let mapleader= ","
 " Copy to OS X pasteboard
 noremap <leader>y "*y
 
+" Swap : and ;
+nnoremap ; :
+nnoremap : ;
+
 " Paste from OS X pasteboard without messing up indent.
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 noremap <leader>P :set paste<CR>:put! *<CR>:set nopaste<CR>
@@ -252,8 +256,8 @@ function! RunNearestTest()
   call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
+map <leader>a :call RunTests('')<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
-map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!bundle exec cucumber<cr>
 nnoremap <CR> :nohlsearch<cr>

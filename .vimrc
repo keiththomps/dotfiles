@@ -37,6 +37,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set foldlevel=0
+set foldmethod=syntax
 set autoindent
 set incsearch
 set hlsearch

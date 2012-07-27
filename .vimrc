@@ -16,10 +16,6 @@ let mapleader= ","
 " Copy to OS X pasteboard
 noremap <leader>y "*y
 
-" Swap : and ;
-nnoremap ; :
-nnoremap : ;
-
 " Paste from OS X pasteboard without messing up indent.
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 noremap <leader>P :set paste<CR>:put! *<CR>:set nopaste<CR>

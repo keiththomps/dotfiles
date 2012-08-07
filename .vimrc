@@ -32,8 +32,6 @@ set textwidth=0
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set foldlevel=0
-set foldmethod=syntax
 set autoindent
 set incsearch
 set hlsearch
@@ -48,7 +46,10 @@ set showcmd
 set laststatus=2
 set mouse=
 set noerrorbells visualbell t_vb=
-set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,
+set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,tmp
+set nobackup
+set nowritebackup
+set noswapfile
 syntax on
 
 " turn on all python syntax highlighting
@@ -256,5 +257,5 @@ endfunction
 map <leader>a :call RunTests('')<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
-map <leader>c :w\|:!bundle exec cucumber<cr>
+map <leader>c :w\|:!cucumber<cr>
 nnoremap <CR> :nohlsearch<cr>

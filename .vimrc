@@ -50,6 +50,9 @@ set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,tmp
 set nobackup
 set nowritebackup
 set noswapfile
+" This fixes the issue with Vim not using the proper path, therefore not
+" using my rbenv shims
+set shell=/bin/bash
 syntax on
 
 " turn on all python syntax highlighting

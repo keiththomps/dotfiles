@@ -42,9 +42,10 @@ alias tmk='tmux kill-session -t'
 # Django
 alias pm='python manage.py'
 
+# Server fanciness with python
+alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'
+
 # Ruby REPLs & Pry for Rails
-# alias irb='irb --simple-prompt'
-# alias pry='pry --simple-prompt'
 alias pryr='pry --simple-prompt -r ./config/environment'
 
 # ZSH CONFIGURATION #

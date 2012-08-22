@@ -21,21 +21,6 @@ end
 
 desc 'Update Vim bundles'
 task :vim do
-  # Pull down up to date colorscheme
-  colors_dir = File.join(File.dirname(__FILE__), '.vim/colors')
-
-  if !File.directory?(colors_dir)
-    Dir.mkdir(colors_dir, 0755)
-  end
-
-  FileUtils.cd(colors_dir)
-
-  $colors.each do |url|
-    theme = url.split('/').last
-    puts "Grabbing #{theme}"
-    `curl #{url} >> #{theme}`
-  end
-
   # Grab newest version of all bundles
   bundles_dir = File.join(File.dirname(__FILE__), '.vim/bundle')
 

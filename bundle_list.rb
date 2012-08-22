@@ -16,11 +16,3 @@ $git_bundles = [
   # Python Plugins
   "git://github.com/vim-scripts/pyflakes.vim.git",
 ]
-
-$colors = [
-  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Eighties.vim",
-  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Bright.vim",
-  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Blue.vim",
-  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim",
-  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow.vim",
-]

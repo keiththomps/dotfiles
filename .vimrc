@@ -55,6 +55,9 @@ set noswapfile
 set shell=/bin/bash
 syntax on
 
+" This shows what kind of token is underneath the cursor for theming
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
+
 " turn on all python syntax highlighting
 let python_highlight_all=1
 

@@ -1,9 +1,3 @@
-" Common Commands
-" ---------------
-" Switch Buffers                                    = <Tab> or <S-Tab> (when in normal mode)
-" Close Current Buffer without messing with windows = ,x
-" Switch between currently open panes               = ,C
-
 " Pathogen lines
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
@@ -46,7 +40,7 @@ set showcmd
 set laststatus=2
 set mouse=
 set noerrorbells visualbell t_vb=
-set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,tmp
+set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,tmp,venv
 set nobackup
 set nowritebackup
 set noswapfile
@@ -56,7 +50,7 @@ set shell=/bin/bash
 syntax on
 
 " This shows what kind of token is underneath the cursor for theming
-set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
+" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
 
 " turn on all python syntax highlighting
 let python_highlight_all=1
@@ -81,17 +75,12 @@ let syntastic_enable_signs=1
 let syntastic_check_on_open=1
 let syntastic_quiet_warnings=1
 
-" Custom Commands. Switching bufferes, running CoffeeScript, CommandT, running
-" tests
+" Custom Commands for Switching buffers, CommandT
 map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>
 map <leader>x :Kwbd<cr>
 map <leader><S-c> <C-w><C-w>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>cr :CoffeeRun<cr>
-map <leader>cp :!clear && coffee -p %<cr>
-map <leader>dt :w\|:!python -m doctest %<cr>
-nnoremap <leader><leader> <c-^>
 
 " Simple auto closing backets & parenthesis
 inoremap (<CR>  (<CR>)<Esc>O
@@ -260,8 +249,16 @@ function! RunNearestTest()
   call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
+" Running Ruby & Cucumber Tests
 map <leader>a :call RunTests('')<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>c :w\|:!cucumber<cr>
+
+" Python & Django based tests
+map <leader>dt :w\|:!python -m doctest %<cr>
+map <leader>dT :w\|:!pm test %<cr>
+map <leader>h :w\|:!pm harvest<cr>
+
+" Toggle highlighting of search results
 nnoremap <CR> :nohlsearch<cr>

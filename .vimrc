@@ -117,27 +117,30 @@ filetype plugin indent on
 
 if has("autocmd")
   " Set filetype tab settings
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai sw=2 sts=2 et
-  autocmd FileType python,doctest set ts=4 sw=4 sts=4 et
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
+  autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
 
   " Set Syntax Highlighting for odd file types
-    au BufNewFile,BufRead *.ejs set filetype=html
-    au BufNewFile,BufRead *.json set filetype=json syntax=javascript
-    au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
-    au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml
-    au BufNewFile,BufRead *.txt set filetype=doctest
+  au BufNewFile,BufRead *.ejs set filetype=html
+  au BufNewFile,BufRead *.json set filetype=json syntax=javascript
+  au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
+  au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml
+  au BufNewFile,BufRead *.txt set filetype=doctest
 
-    " Set Syntax Highlighting for html to default to django
-    au BufNewFile,BufRead *.html set ft=htmldjango
+  " Set no expand tab for git files
+  au BufNewFile,BufRead .git*,.git/* set noexpandtab
 
-    " This automatically removes the trailing whitespace in specific file types
-    autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()
+  " Set Syntax Highlighting for html to default to django
+  au BufNewFile,BufRead *.html set ft=htmldjango
 
-    " Restore cursor position
-    autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \   exe "normal! g`\"" |
-      \ endif
+  " This automatically removes the trailing whitespace in specific file types
+  autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()
+
+  " Restore cursor position
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 endif
 
 " MULTIPURPOSE TAB KEY (taken from Gary Bernhardt)

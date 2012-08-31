@@ -11,7 +11,7 @@ export LSCOLOR=""
 
 # Setup PATH to use /usr/local first so Homebrew installs
 # are used instead of system installs
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/share/python:$PATH
+export PATH=/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$PATH
 
 # ALIASES #
 ###########

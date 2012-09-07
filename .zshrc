@@ -57,6 +57,9 @@ bindkey -e
 # Allow rbenv if it's installed (which it should be!)
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# Source zsh syntax highlighting
+source $HOME/bin/zsh-syntax-highlighting.zsh
+
 # Source Tmuxinator if installed
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 

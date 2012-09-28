@@ -685,6 +685,10 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("diffAdded", s:green, "", "")
 	call <SID>X("diffRemoved", s:red, "", "")
 
+	" Extra Cucumber Highlighting Added by Keith Thompson
+	call <SID>X("cucumberGiven", s:blue, "", "")
+	call <SID>X("cucumberGivenAnd", s:blue, "", "")
+
 	" Delete Functions
 	delf <SID>X
 	delf <SID>rgb

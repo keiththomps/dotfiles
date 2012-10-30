@@ -256,7 +256,7 @@ endfunction
 map <leader>a :call RunTests('')<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
-map <leader>c :w\|:!cucumber<cr>
+map <leader>c :!bundle exec cucumber<cr>
 
 " Python & Django based tests
 map <leader>dt :w\|:!python -m doctest %<cr>

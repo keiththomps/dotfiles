@@ -2,6 +2,7 @@
 $dotfiles = [
   ".bashrc",
   "bin",
+  ".gemrc",
   ".gitconfig",
   ".githelpers",
   ".gitignore_global",

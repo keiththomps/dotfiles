@@ -35,3 +35,5 @@
   la = !git l --all
 [merge]
   tool = vimdiff
+[push]
+	default = matching

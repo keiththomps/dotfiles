@@ -38,6 +38,7 @@ alias start='tmuxinator start'
 alias attach='tmux attach-session -t'
 alias switch='tmux switch-session -t'
 alias tmk='tmux kill-session -t'
+alias tls='tmux ls'
 
 # Django
 alias pm='python manage.py'
@@ -47,6 +48,9 @@ alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'
 
 # Ruby REPLs & Pry for Rails
 alias pryr='pry --simple-prompt -r ./config/environment'
+
+# Xcode
+alias pngcrush='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/pngcrush -q -revert-iphone-optimizations -d'
 
 # ZSH CONFIGURATION #
 #####################

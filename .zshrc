@@ -21,6 +21,9 @@ alias c='clear'
 alias l='ls -l'
 alias la='ls -al'
 
+# Pair programming
+alias pair='ssh Mumm-ra@pair.brilliantfantastic.com'
+
 # Bundle Exec
 alias be="bundle exec"
 

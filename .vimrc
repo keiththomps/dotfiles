@@ -126,6 +126,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
   au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml
   au BufNewFile,BufRead *.txt set filetype=doctest
+  au BufNewFile,BufRead *.md set filetype=markdown
 
   " Set no expand tab for git files
   au BufNewFile,BufRead .git*,.git/* set noexpandtab

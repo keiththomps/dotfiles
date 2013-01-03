@@ -16,4 +16,6 @@ $git_bundles = [
   "git://github.com/tpope/vim-cucumber.git",
   # Python Plugins
   "git://github.com/vim-scripts/pyflakes.vim.git",
+  # Go Plugins
+  "git://github.com/jnwhiteh/vim-golang.git",
 ]

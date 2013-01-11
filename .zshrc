@@ -9,9 +9,12 @@ export LS_OPTIONS="--color=auto"
 export CLICOLOR="Yes"
 export LSCOLOR=""
 
+# Setup GOPATH
+export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
+
 # Setup PATH to use /usr/local first so Homebrew installs
 # are used instead of system installs
-export PATH=/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$PATH
+export PATH=/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$HOME/code/github-projects/go:$HOME/code/go:$PATH
 
 # ALIASES #
 ###########

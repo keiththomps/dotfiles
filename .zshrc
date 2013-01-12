@@ -9,7 +9,8 @@ export LS_OPTIONS="--color=auto"
 export CLICOLOR="Yes"
 export LSCOLOR=""
 
-# Setup GOPATH
+# Setup GOPATH && GOROOT
+export GOROOT=/usr/local/Cellar/go
 export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
 
 # Setup PATH to use /usr/local first so Homebrew installs
@@ -57,6 +58,9 @@ alias pryr='pry --simple-prompt -r ./config/environment'
 
 # Xcode
 alias pngcrush='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/pngcrush -q -revert-iphone-optimizations -d'
+
+# Go stuff
+alias gf='gofmt -tabwidth=4'
 
 # ZSH CONFIGURATION #
 #####################

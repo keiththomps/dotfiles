@@ -47,10 +47,12 @@ set noswapfile
 " This fixes the issue with Vim not using the proper path, therefore not
 " using my rbenv shims
 set shell=/bin/bash
+" Add support for go using plugins that come with go install
+set rtp+=$GOROOT/misc/vim
 syntax on
 
 " This shows what kind of token is underneath the cursor for theming
-" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}
 
 " turn on all python syntax highlighting
 let python_highlight_all=1

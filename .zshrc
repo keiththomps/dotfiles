@@ -10,8 +10,11 @@ export CLICOLOR="Yes"
 export LSCOLOR=""
 
 # Setup GOPATH && GOROOT
-export GOROOT=/usr/local/Cellar/go
-export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
+if go version > /dev/null;
+then
+  export GOROOT=/usr/local/Cellar/go/$(go version | grep -o "\d\.\d\.\d")
+  export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
+fi
 
 # Setup PATH to use /usr/local first so Homebrew installs
 # are used instead of system installs

@@ -12,7 +12,6 @@ $git_bundles = [
   # Syntax highlighting
   "git://github.com/kchmck/vim-coffee-script.git",
   "git://github.com/vim-ruby/vim-ruby.git",
-  "git://github.com/bbommarito/vim-slim.git",
   "git://github.com/tpope/vim-cucumber.git",
   # Python Plugins
   "git://github.com/vim-scripts/pyflakes.vim.git",

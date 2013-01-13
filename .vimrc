@@ -101,51 +101,8 @@ inoremap ''     ''<Left>
 inoremap '''    '''<CR>'''<Esc>kA
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "'" ? "\<Right>" : "'"
 
-" Function for removing trailing white space on save
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  %s/\s\+$//e
-  " Clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-
 " Turn On FileType Detection
 filetype plugin indent on
-
-if has("autocmd")
-  " Set filetype tab settings
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
-  autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
-
-  " Set Syntax Highlighting for odd file types
-  au BufNewFile,BufRead *.ejs set filetype=html
-  au BufNewFile,BufRead *.json set filetype=json syntax=javascript
-  au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
-  au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml
-  au BufNewFile,BufRead *.txt set filetype=doctest
-  au BufNewFile,BufRead *.md set filetype=markdown
-
-  " Set no expand tab for git files
-  au BufNewFile,BufRead .git*,.git/* set noexpandtab
-
-  " Set Syntax Highlighting for html to default to django
-  au BufNewFile,BufRead *.html set ft=htmldjango
-
-  " This automatically removes the trailing whitespace in specific file types
-  autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()
-
-  " Restore cursor position
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-endif
-
 " MULTIPURPOSE TAB KEY (taken from Gary Bernhardt)
 " Indent if we're at the beginning of a line. Else, do completion.
 function! InsertTabWrapper()
@@ -164,6 +121,19 @@ map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
+
+" Function for removing trailing white space on save
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
 
 " RENAME CURRENT FILE
 function! RenameFile()
@@ -268,3 +238,34 @@ map <leader>h :w\|:!pm harvest<cr>
 
 " Toggle highlighting of search results
 nnoremap <CR> :nohlsearch<cr>
+
+" Set up filetype specific commands
+if has("autocmd")
+  " Set filetype tab settings
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
+  autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
+  autocmd FileType go set ai ts=8 sw=8 sts=8 noet
+
+  " Set Syntax Highlighting for odd file types
+  au BufNewFile,BufRead *.ejs set filetype=html
+  au BufNewFile,BufRead *.json set filetype=json syntax=javascript
+  au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
+  au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml
+  au BufNewFile,BufRead *.txt set filetype=doctest
+  au BufNewFile,BufRead *.md set filetype=markdown
+  au BufNewFile,BufRead .git*,.git/* set noet
+  au BufNewFile,BufRead *.html set ft=htmldjango
+
+  " This automatically removes the trailing whitespace in specific file types
+  autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()
+
+  " Restore cursor position
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  " Set Go specific commands
+  autocmd FileType go map <buffer> <leader>t :w \|:!go test<cr>
+  autocmd FileType go map <buffer> <leader>r :w \|:!go run %<cr>
+endif

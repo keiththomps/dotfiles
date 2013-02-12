@@ -16,6 +16,10 @@ then
   export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
 fi
 
+# Speed up the rubies
+export RUBY_GC_MALLOC_LIMIT=60000000
+export RUBY_FREE_MIN=200000
+
 # Setup PATH to use /usr/local first so Homebrew installs
 # are used instead of system installs
 export PATH=/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$HOME/code/github-projects/go:$HOME/code/go:$PATH
@@ -71,9 +75,6 @@ alias gf='gofmt -tabwidth=4'
 # Turn off Vi mode
 bindkey -e
 
-# Allow rbenv if it's installed (which it should be!)
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Source zsh syntax highlighting
 source $HOME/bin/zsh-syntax-highlighting.zsh
 
@@ -103,9 +104,19 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 autoload -U colors && colors
 setopt prompt_subst
 
+# Allow rbenv if it's installed (which it should be!)
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
 # Display Virtualenv cleanly in right column
 function virtualenv_info {
   [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+}
+
+# Display wheather you are in a Git or Mercurial repo
+function prompt_char {
+  git branch >/dev/null 2>/dev/null && echo ' ±' && return
+  hg root >/dev/null 2>/dev/null && echo ' ☿' && return
+  echo ' ○'
 }
 
 # Display Rbenv cleanly if Rbenv is installed
@@ -118,8 +129,11 @@ local command_status="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✘%{$re
 
 # Show relative path on one line, then command status
 PROMPT='
-%{$fg[cyan]%}%n %{$fg[white]%}: %{$fg[cyan]%}%~ %{$fg[white]%}
+%{$fg[cyan]%}%n@%m %{$fg[white]%}: %{$fg[cyan]%}%~ %{$fg[white]%}
 ${command_status} %{$reset_color%} '
 
 # Show virtualenv, rbenv, branch, sha, and repo dirty status on right side
-RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(rbenv_info)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
+RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(rbenv_info)$(prompt_char)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

@@ -42,3 +42,12 @@ Thumbs.db
 # Rbenv local config #
 ######################
 .rbenv-version
+.ruby-version
+
+# RVM local config #
+####################
+.rvmrc
+
+# POW #
+#######
+.powrc

@@ -3,3 +3,4 @@
 *.un~
 .vim/bundle/
 .vim/colors/
+.rbenv-version

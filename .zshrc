@@ -22,7 +22,7 @@ export RUBY_FREE_MIN=200000
 
 # Setup PATH to use /usr/local first so Homebrew installs
 # are used instead of system installs
-export PATH=/usr/local/share/npm/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$HOME/code/github-projects/go:$HOME/code/go:$PATH
+export PATH=$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$HOME/code/github-projects/go:$HOME/code/go:$PATH
 
 # ALIASES #
 ###########

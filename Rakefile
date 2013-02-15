@@ -1,6 +1,6 @@
 require 'fileutils'
 
-if RUBY_VERSION < "1.9.x"
+if RUBY_VERSION < "1.9.0"
   require 'bundle_list'
   require 'dotfile_list'
 else

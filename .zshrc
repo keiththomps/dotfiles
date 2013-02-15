@@ -10,7 +10,7 @@ export CLICOLOR="Yes"
 export LSCOLOR=""
 
 # Setup GOPATH && GOROOT
-if go version > /dev/null;
+if type go > /dev/null;
 then
   export GOROOT=/usr/local/Cellar/go/$(go version | grep -o "\d\.\d\.\d")
   export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
@@ -31,9 +31,6 @@ export PATH=$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$H
 alias c='clear'
 alias l='ls -l'
 alias la='ls -al'
-
-# Pair programming
-alias pair='ssh Mumm-ra@pair.brilliantfantastic.com'
 
 # Bundle Exec
 alias be="bundle exec"

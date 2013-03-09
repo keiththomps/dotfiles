@@ -9,20 +9,13 @@ export LS_OPTIONS="--color=auto"
 export CLICOLOR="Yes"
 export LSCOLOR=""
 
-# Setup GOPATH && GOROOT
-if type go > /dev/null;
-then
-  export GOROOT=/usr/local/Cellar/go/$(go version | grep -o "\d\.\d\.\d")
-  export GOPATH=$HOME/code/github-projects/go:$HOME/code/go
-fi
-
 # Speed up the rubies
 export RUBY_GC_MALLOC_LIMIT=60000000
 export RUBY_FREE_MIN=200000
 
-# Setup PATH to use /usr/local first so Homebrew installs
-# are used instead of system installs
-export PATH=$HOME/.rbenv/bin:$HOME/bin:/usr/local/bin:/usr/local/share/python:$HOME/code/github-projects/go:$HOME/code/go:$PATH
+# Setup PATH
+export PATH=$HOME/.rbenv/bin:$HOME/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
 # ALIASES #
 ###########
@@ -43,6 +36,7 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 alias gco='git checkout'
 alias gcob='git checkout -b'
+alias grpr='git remote prune origin'
 
 # tmux
 alias start='tmuxinator start'
@@ -63,8 +57,9 @@ alias pryr='pry --simple-prompt -r ./config/environment'
 # Xcode
 alias pngcrush='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/pngcrush -q -revert-iphone-optimizations -d'
 
-# Go stuff
-alias gf='gofmt -tabwidth=4'
+# Quick way to rebuild the Launch Services database and get rid
+# of duplicates in the Open With submenu.
+alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
 
 # ZSH CONFIGURATION #
 #####################

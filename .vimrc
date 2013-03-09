@@ -47,8 +47,6 @@ set noswapfile
 " This fixes the issue with Vim not using the proper path, therefore not
 " using my rbenv shims
 set shell=/bin/bash
-" Add support for go using plugins that come with go install
-set rtp+=$GOROOT/misc/vim
 syntax on
 
 " This shows what kind of token is underneath the cursor for theming
@@ -257,7 +255,6 @@ if has("autocmd")
   " Set filetype tab settings
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
   autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
-  autocmd FileType go set ai ts=8 sw=8 sts=8 noet
 
   " Set Syntax Highlighting for odd file types
   au BufNewFile,BufRead *.ejs set filetype=html
@@ -267,7 +264,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.txt set filetype=doctest
   au BufNewFile,BufRead *.md set filetype=markdown
   au BufNewFile,BufRead .git*,.git/* set noet
-  au BufNewFile,BufRead *.html set ft=htmldjango
+  au BufNewFile,BufRead *.hamstache set ft=haml
 
   " This automatically removes the trailing whitespace in specific file types
   autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()

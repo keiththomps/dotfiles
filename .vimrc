@@ -257,7 +257,7 @@ if has("autocmd")
   autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
 
   " Set Syntax Highlighting for odd file types
-  au BufNewFile,BufRead *.ejs set filetype=html
+  au BufNewFile,BufRead *.ejs set filetype=jst
   au BufNewFile,BufRead *.json set filetype=json syntax=javascript
   au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
   au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml

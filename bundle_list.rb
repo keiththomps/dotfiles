@@ -13,6 +13,8 @@ $git_bundles = [
   "git://github.com/kchmck/vim-coffee-script.git",
   "git://github.com/vim-ruby/vim-ruby.git",
   "git://github.com/tpope/vim-cucumber.git",
+  "git://github.com/pangloss/vim-javascript",
+  "git://github.com/briancollins/vim-jst",
   # Python Plugins
   "git://github.com/vim-scripts/pyflakes.vim.git",
 ]

@@ -7,9 +7,10 @@ $git_bundles = [
   "git://github.com/scrooloose/syntastic.git",
   "git://github.com/tomtom/tcomment_vim.git",
   "git://github.com/cespare/vim-bclose.git",
-  "git://github.com/mileszs/ack.vim.git",
   "git://github.com/tmhedberg/matchit.git",
+  "git://github.com/tristen/vim-sparkup.git",
   # Syntax highlighting
+  "git://github.com/othree/html5.vim.git",
   "git://github.com/kchmck/vim-coffee-script.git",
   "git://github.com/vim-ruby/vim-ruby.git",
   "git://github.com/tpope/vim-cucumber.git",

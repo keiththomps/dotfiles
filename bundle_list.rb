@@ -1,7 +1,7 @@
 # The bundles you use with Vim
 $git_bundles = [
   # General Purpose Plugins
-  "git://github.com/wincent/Command-T.git",
+  "git://github.com/kien/ctrlp.vim.git",
   "git://github.com/tpope/vim-pathogen.git",
   "git://github.com/tpope/vim-surround.git",
   "git://github.com/scrooloose/syntastic.git",

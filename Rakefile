@@ -37,11 +37,6 @@ task :vim do
     `git clone #{url} #{dir}`
     FileUtils.rm_rf(File.join(dir, ".git"))
   end
-
-  if File.directory?('Command-T')
-    FileUtils.cd('Command-T')
-    `bundle install && rake make`
-  end
 end
 
 desc 'Link dotfiles and setup vim configuration and bundles'

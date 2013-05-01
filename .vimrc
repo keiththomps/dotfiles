@@ -55,7 +55,7 @@ syntax on
 " turn on all python syntax highlighting
 let python_highlight_all=1
 
-" User Tomorrow-Night Theme
+" Use Tomorrow-Night Theme
 colorscheme Tomorrow-Night-Eighties
 
 " We have to have a winheight bigger than we want to set winminheight. But if
@@ -75,12 +75,16 @@ let syntastic_enable_signs=1
 let syntastic_check_on_open=1
 let syntastic_quiet_warnings=1
 
-" Custom Commands for Switching buffers, CommandT
+" Custom Commands for Switching buffers
 map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>
 map <leader>x :Kwbd<cr>
 map <leader><S-c> <C-w><C-w>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+
+" CtrlP Options
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
 
 " Simple auto closing backets & parenthesis
 inoremap (<CR>  (<CR>)<Esc>O
@@ -121,6 +125,7 @@ map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
 
 " Ctags
+nmap <F4> :!ctags -R .<cr>
 nmap <F8> :TagbarToggle<cr>
 
 " Function for removing trailing white space on save

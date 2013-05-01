@@ -23,6 +23,9 @@ export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 # ALIASES #
 ###########
 
+# Dotfiles
+alias dot='cd ~/code/github-projects/dotfiles'
+
 # Sublime Text
 alias e='subl -n . && subl -a .'
 

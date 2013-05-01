@@ -120,6 +120,9 @@ map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
 
+" Ctags
+nmap <F8> :TagbarToggle<cr>
+
 " Function for removing trailing white space on save
 function! <SID>StripTrailingWhitespaces()
   " Preparation: save last search, and cursor position.
@@ -256,6 +259,9 @@ if has("autocmd")
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
   autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
 
+  " Set auto-complete settings for various file types
+  autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+
   " Set Syntax Highlighting for odd file types
   au BufNewFile,BufRead *.ejs set filetype=jst
   au BufNewFile,BufRead *.json set filetype=json syntax=javascript
@@ -265,9 +271,10 @@ if has("autocmd")
   au BufNewFile,BufRead *.md set filetype=markdown
   au BufNewFile,BufRead .git*,.git/* set noet
   au BufNewFile,BufRead *.hamstache set ft=haml
+  au BufNewFile,BufRead *.html set ft=htmldjango
 
   " This automatically removes the trailing whitespace in specific file types
-  autocmd BufWritePre *.py,*.rb,*.css,*.js :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.py,*.rb,*.css,*.scss,*.js :call <SID>StripTrailingWhitespaces()
 
   " Restore cursor position
   autocmd BufReadPost *

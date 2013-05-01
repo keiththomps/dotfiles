@@ -2,6 +2,7 @@
 $dotfiles = [
   ".bashrc",
   "bin",
+  ".ctags",
   ".gemrc",
   ".gitconfig",
   ".githelpers",

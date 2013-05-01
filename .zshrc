@@ -17,8 +17,14 @@ export RUBY_FREE_MIN=200000
 export PATH=$HOME/.rbenv/bin:$HOME/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
+# Setup NODE_PATH
+export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+
 # ALIASES #
 ###########
+
+# Sublime Text
+alias e='subl -n . && subl -a .'
 
 # Standard Shell
 alias c='clear'
@@ -47,6 +53,7 @@ alias tls='tmux ls'
 
 # Django
 alias pm='python manage.py'
+alias da='django-admin.py'
 
 # Server fanciness with python
 alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'

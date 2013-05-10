@@ -47,6 +47,9 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias grpr='git remote prune origin'
 
+# Gitignores
+alias objc-ignore='curl https://raw.github.com/github/gitignore/master/Objective-C.gitignore > .gitignore'
+
 # tmux
 alias start='tmuxinator start'
 alias attach='tmux attach-session -t'

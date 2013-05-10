@@ -57,6 +57,7 @@ let python_highlight_all=1
 
 " Use Tomorrow-Night Theme
 colorscheme Tomorrow-Night-Eighties
+" colorscheme Tomorrow
 
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
@@ -85,6 +86,7 @@ map <leader><S-c> <C-w><C-w>
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_open_new_file = 'r'
 
 " Simple auto closing backets & parenthesis
 inoremap (<CR>  (<CR>)<Esc>O
@@ -277,6 +279,7 @@ if has("autocmd")
   au BufNewFile,BufRead .git*,.git/* set noet
   au BufNewFile,BufRead *.hamstache set ft=haml
   au BufNewFile,BufRead *.html set ft=htmldjango
+  au BufNewFile,BufRead Podfile set ft=ruby
 
   " This automatically removes the trailing whitespace in specific file types
   autocmd BufWritePre *.py,*.rb,*.css,*.scss,*.js :call <SID>StripTrailingWhitespaces()

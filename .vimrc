@@ -76,17 +76,12 @@ let syntastic_enable_signs=1
 let syntastic_check_on_open=1
 let syntastic_quiet_warnings=1
 
-" Custom Commands for Switching buffers
+" Custom Commands for Switching buffers and CommandT
 map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>
 map <leader>x :Kwbd<cr>
 map <leader><S-c> <C-w><C-w>
-
-" CtrlP Options
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_open_new_file = 'r'
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
 " Simple auto closing backets & parenthesis
 inoremap (<CR>  (<CR>)<Esc>O

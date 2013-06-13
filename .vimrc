@@ -40,7 +40,7 @@ set showcmd
 set laststatus=2
 set mouse=
 set noerrorbells visualbell t_vb=
-set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,tmp,venv,build
+set wildignore+=*.o,*.obj,.git,*.pyc,parts,*.egg-info,node_modules,tmp,venv,build,resources,vendor,tags
 set nobackup
 set nowritebackup
 set noswapfile
@@ -226,19 +226,6 @@ endfunction
 function! RunNearestTest()
   let spec_line_number = line('.')
   call RunTestFile(":" . spec_line_number . " -b")
-endfunction
-
-" Get list of Cucumber steps
-function! Given()
-  :Ack "^\s*Given.*[\n\r](^\s*And.*[\n\r])*" features/*.feature
-endfunction
-
-function! When()
-  :Ack "^\s*When.*[\n\r](^\s*And.*[\n\r])*" features/*.feature
-endfunction
-
-function! Then()
-  :Ack "^\s*Then.*[\n\r](^\s*And.*[\n\r])*" features/*.feature
 endfunction
 
 " Running Ruby & Cucumber Tests

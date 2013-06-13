@@ -48,7 +48,8 @@ alias gcob='git checkout -b'
 alias grpr='git remote prune origin'
 
 # Gitignores
-alias objc-ignore='curl https://raw.github.com/github/gitignore/master/Objective-C.gitignore > .gitignore'
+alias objc-ignore='cp ~/code/github-projects/gitignore/Objective-C.gitignore .gitignore'
+alias rm-ignore='cp ~/code/github-projects/gitignore/RubyMotion.gitignore .gitignore'
 
 # tmux
 alias start='tmuxinator start'

@@ -14,8 +14,11 @@ export RUBY_GC_MALLOC_LIMIT=60000000
 export RUBY_FREE_MIN=200000
 
 # Setup PATH
-export PATH=$HOME/.rbenv/bin:$HOME/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
+
+# Configure chruby
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 
 # Setup NODE_PATH
 export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
@@ -110,8 +113,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 autoload -U colors && colors
 setopt prompt_subst
 
-# Allow rbenv if it's installed (which it should be!)
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# Set default ruby
+chruby 2.0.0-p195
 
 # Display Virtualenv cleanly in right column
 function virtualenv_info {
@@ -125,9 +128,9 @@ function prompt_char {
   echo ' ○'
 }
 
-# Display Rbenv cleanly if Rbenv is installed
-function rbenv_info {
-  if which rbenv > /dev/null; then echo "$(rbenv version-name)"; fi
+# Display current ruby version
+function ruby_info {
+  echo "$(ruby -v | sed 's/.* \([0-9p\.]*\) .*/\1/')"
 }
 
 # Show previous command status
@@ -139,7 +142,7 @@ PROMPT='
 ${command_status} %{$reset_color%} '
 
 # Show virtualenv, rbenv, branch, sha, and repo dirty status on right side
-RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(rbenv_info)$(prompt_char)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
+RPROMPT='%{$fg[cyan]%}$(virtualenv_info)%{$fg[white]%}$(ruby_info)$(prompt_char)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

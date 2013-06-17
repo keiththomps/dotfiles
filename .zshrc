@@ -29,6 +29,9 @@ export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
 # Dotfiles
 alias dot='cd ~/code/github-projects/dotfiles'
 
+# Brew casks
+alias casks='open /opt/homebrew-cask/Caskroom'
+
 # Sublime Text
 alias e='subl -n . && subl -a .'
 

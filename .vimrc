@@ -11,12 +11,12 @@ let mapleader= ","
 noremap <leader>y "*y
 
 " Paste from OS X pasteboard without messing up indent.
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
 noremap <leader>P :set paste<CR>:put! *<CR>:set nopaste<CR>
 
 " Basic setup, enter :help [setting] to see what these are
 set encoding=utf-8
-set number
+set relativenumber
 set ruler
 set hidden
 set smarttab

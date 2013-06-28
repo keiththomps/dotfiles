@@ -17,9 +17,6 @@
   ff = merge --ff-only
   pullff = pull --ff-only
   noff = merge --no-ff
-  div = divergence
-  gn = goodness
-  gnc = goodness --cached
   fa = fetch --all
   pom = push origin master
   b = branch

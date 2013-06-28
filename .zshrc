@@ -71,6 +71,10 @@ alias da='django-admin.py'
 # Server fanciness with python
 alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'
 
+# Pairing
+alias pair!='ssh -R1337:localhost:22 keith@pairing.brilliantfantastic.com'
+alias pair-connect='ssh pair@pairing.brilliantfantastic.com'
+
 # Ruby REPLs & Pry for Rails
 alias pryr='pry --simple-prompt -r ./config/environment'
 

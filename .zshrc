@@ -39,6 +39,7 @@ alias e='subl -n . && subl -a .'
 alias c='clear'
 alias l='ls -l'
 alias la='ls -al'
+alias bloat='du -k | sort -nr | more'
 
 # Bundle Exec
 alias be="bundle exec"
@@ -72,8 +73,8 @@ alias da='django-admin.py'
 alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'
 
 # Pairing
-alias pair!='ssh -R1337:localhost:22 keith@pairing.brilliantfantastic.com'
-alias pair-connect='ssh pair@pairing.brilliantfantastic.com'
+alias pair!='ssh -R1337:localhost:22 keith@keith-pair.brilliantfantastic.com'
+alias jamie-pair='ssh pair@208.68.39.58'
 
 # Ruby REPLs & Pry for Rails
 alias pryr='pry --simple-prompt -r ./config/environment'

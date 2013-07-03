@@ -254,17 +254,14 @@ if has("autocmd")
   " Set Syntax Highlighting for odd file types
   au BufNewFile,BufRead *.ejs set filetype=jst
   au BufNewFile,BufRead *.json set filetype=json syntax=javascript
-  au BufNewFile,BufRead *.pt,*.cpt,*.zpt set filetype=zpt syntax=xml
-  au BufNewFile,BufRead *.zcml set filetype=zcml syntax=xml
-  au BufNewFile,BufRead *.txt set filetype=doctest
   au BufNewFile,BufRead *.md set filetype=markdown
-  au BufNewFile,BufRead .git*,.git/* set noet
-  au BufNewFile,BufRead *.hamstache set ft=haml
-  au BufNewFile,BufRead *.html set ft=htmldjango
   au BufNewFile,BufRead Podfile set ft=ruby
+  au BufNewFile,BufRead .git*,.git/* set noet
 
   " This automatically removes the trailing whitespace in specific file types
-  autocmd BufWritePre *.py,*.rb,*.css,*.scss,*.js :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.py,*.rb,*.css,*.scss,*.js,*.html :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.erb,*.coffee,*haml,*.md :call <SID>StripTrailingWhitespaces()
+  autocmd! BufWritePre *.js :JSHint<CR>
 
   " Restore cursor position
   autocmd BufReadPost *

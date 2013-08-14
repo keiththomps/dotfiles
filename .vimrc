@@ -7,16 +7,9 @@ call pathogen#helptags()
 inoremap jj <esc>
 let mapleader= ","
 
-" Copy to OS X pasteboard
-noremap <leader>y "*y
-
-" Paste from OS X pasteboard without messing up indent.
-noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
-noremap <leader>P :set paste<CR>:put! *<CR>:set nopaste<CR>
-
 " Basic setup, enter :help [setting] to see what these are
 set encoding=utf-8
-set relativenumber
+set number
 set ruler
 set hidden
 set smarttab
@@ -123,7 +116,6 @@ map <Down> :echo "no!"<cr>
 
 " Ctags
 nmap <F4> :!ctags -R .<cr>
-nmap <F8> :TagbarToggle<cr>
 
 " Function for removing trailing white space on save
 function! <SID>StripTrailingWhitespaces()
@@ -228,6 +220,9 @@ function! RunNearestTest()
   call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
+" Fix indentation in file
+map <leader>i mmgg=G`m<CR>
+
 " Running Ruby & Cucumber Tests
 map <leader>a :call RunTests('')<cr>
 map <leader>t :call RunTestFile()<cr>
@@ -245,7 +240,7 @@ nnoremap <CR> :nohlsearch<cr>
 " Set up filetype specific commands
 if has("autocmd")
   " Set filetype tab settings
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,coffee,sass,cucumber,stylus,css,xml,htmldjango set ai ts=2 sw=2 sts=2 et
   autocmd FileType python,doctest set ai ts=4 sw=4 sts=4 et
 
   " Set auto-complete settings for various file types
@@ -259,7 +254,7 @@ if has("autocmd")
   au BufNewFile,BufRead .git*,.git/* set noet
 
   " This automatically removes the trailing whitespace in specific file types
-  autocmd BufWritePre *.py,*.rb,*.css,*.scss,*.js,*.html :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.py,*.feature,*.rb,*.css,*.scss,*.js,*.html :call <SID>StripTrailingWhitespaces()
   autocmd BufWritePre *.erb,*.coffee,*haml,*.md :call <SID>StripTrailingWhitespaces()
   autocmd! BufWritePre *.js :JSHint<CR>
 

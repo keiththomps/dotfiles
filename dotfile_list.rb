@@ -11,6 +11,7 @@ $dotfiles = [
   ".jshintrc",
   ".profile",
   ".pryrc",
+  ".railsrc",
   ".tmux.conf",
   ".vim",
   ".vimrc",

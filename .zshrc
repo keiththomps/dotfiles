@@ -16,6 +16,9 @@ export RUBY_FREE_MIN=200000
 # Setup PATH
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
+# Add VMWare Fusion utilities to my path
+export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library/
+
 # Configure chruby
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
@@ -73,7 +76,8 @@ alias da='django-admin.py'
 alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'
 
 # Pairing
-alias pair!='ssh -R1337:localhost:22 keith@keith-pair.brilliantfantastic.com'
+# alias pair!='ssh -R1337:localhost:22 keith@keith-pair.brilliantfantastic.com'
+alias pair!='ssh -R1337:localhost:22 keith@198.211.103.25'
 alias jamie-pair='ssh pair@208.68.39.58'
 
 # Ruby REPLs & Pry for Rails
@@ -122,7 +126,7 @@ autoload -U colors && colors
 setopt prompt_subst
 
 # Set default ruby
-chruby 2.0.0-p195
+chruby 2.0.0-p247
 
 # Display Virtualenv cleanly in right column
 function virtualenv_info {

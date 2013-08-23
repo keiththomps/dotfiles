@@ -78,6 +78,7 @@ map <leader><S-c> <C-w><C-w>
 " CtrlP Configuration
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_open_new_file = 'r'
 map <leader>f :CtrlP<cr>
 
 " Simple auto closing backets & parenthesis

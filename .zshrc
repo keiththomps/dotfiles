@@ -16,9 +16,6 @@ export RUBY_FREE_MIN=200000
 # Setup PATH
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
-# Add VMWare Fusion utilities to my path
-export PATH=$PATH:/Applications/VMware\ Fusion.app/Contents/Library/
-
 # Configure chruby
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
@@ -50,7 +47,6 @@ alias be="bundle exec"
 # Git
 alias g='git status -s'
 alias gb='git branch'
-alias gba='git branch -a'
 alias gc='git commit -m'
 alias gca='git commit -am'
 alias gco='git checkout'
@@ -68,17 +64,8 @@ alias switch='tmux switch-session -t'
 alias tmk='tmux kill-session -t'
 alias tls='tmux ls'
 
-# Django
-alias pm='python manage.py'
-alias da='django-admin.py'
-
 # Server fanciness with python
 alias server='open http://localhost:1337/ && python -m SimpleHTTPServer 1337'
-
-# Pairing
-# alias pair!='ssh -R1337:localhost:22 keith@keith-pair.brilliantfantastic.com'
-alias pair!='ssh -R1337:localhost:22 keith@198.211.103.25'
-alias jamie-pair='ssh pair@208.68.39.58'
 
 # Ruby REPLs & Pry for Rails
 alias pryr='pry --simple-prompt -r ./config/environment'
@@ -114,6 +101,11 @@ fi
 
 # Load completions for Ruby, Git, etc.
 autoload compinit && compinit -C
+
+# Make git completions not be ridiculously slow
+__git_files () {
+  _wanted files expl 'local files' _files
+}
 
 # Case insensitive auto-complete
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

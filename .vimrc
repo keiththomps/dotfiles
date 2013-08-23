@@ -181,14 +181,20 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
+    if filereadable("script/features")
+      exec ":!script/features " . a:filename
+    elseif filereadable("Gemfile")
+      exec ":!bundle exec cucumber " . a:filename
+    else
+      exec ":!cucumber " . a:filename
+    end
   else
     if filereadable("script/test")
       exec ":!script/test " . a:filename
     elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec --color ". a:filename
+      exec ":!bundle exec ruby ". a:filename
     else
-      exec ":!rspec --color " . a:filename
+      exec ":!ruby " . a:filename
     end
   end
 endfunction
@@ -206,7 +212,7 @@ function! RunTestFile(...)
   endif
 
   " Run the test for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
   if in_test_file
     call SetTestFile()
   elseif !exists("t:grb_test_file")
@@ -215,24 +221,13 @@ function! RunTestFile(...)
   call RunTests(t:grb_test_file . command_suffix)
 endfunction
 
-function! RunNearestTest()
-  let spec_line_number = line('.')
-  call RunTestFile(":" . spec_line_number . " -b")
-endfunction
-
 " Fix indentation in file
 map <leader>i mmgg=G`m<CR>
 
 " Running Ruby & Cucumber Tests
 map <leader>a :call RunTests('')<cr>
 map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
 map <leader>c :!bundle exec cucumber<cr>
-
-" Python & Django based tests
-map <leader>dt :w\|:!python -m doctest %<cr>
-map <leader>dT :w\|:!pm test %<cr>
-map <leader>h :w\|:!pm harvest<cr>
 
 " Toggle highlighting of search results
 nnoremap <CR> :nohlsearch<cr>

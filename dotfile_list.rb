@@ -15,6 +15,7 @@ $dotfiles = [
   ".tmux.conf",
   ".vim",
   ".vimrc",
+  ".xvimrc",
   ".zlogin",
   ".zshrc",
 ]

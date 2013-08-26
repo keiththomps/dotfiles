@@ -76,10 +76,11 @@ map <leader>x :Kwbd<cr>
 map <leader><S-c> <C-w><C-w>
 
 " CtrlP Configuration
+let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_open_new_file = 'r'
-map <leader>f :CtrlP<cr>
+map <leader>f <c-p>
 
 " Simple auto closing backets & parenthesis
 inoremap (<CR>  (<CR>)<Esc>O

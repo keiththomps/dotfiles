@@ -75,12 +75,8 @@ map <S-Tab> :bp<CR>
 map <leader>x :Kwbd<cr>
 map <leader><S-c> <C-w><C-w>
 
-" CtrlP Configuration
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_open_new_file = 'r'
-map <leader>f <c-p>
+" CommandT Configuration
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 
 " Simple auto closing backets & parenthesis
 inoremap (<CR>  (<CR>)<Esc>O
@@ -257,7 +253,6 @@ if has("autocmd")
   " This automatically removes the trailing whitespace in specific file types
   autocmd BufWritePre *.py,*.feature,*.rb,*.css,*.scss,*.js,*.html :call <SID>StripTrailingWhitespaces()
   autocmd BufWritePre *.erb,*.coffee,*haml,*.md :call <SID>StripTrailingWhitespaces()
-  autocmd! BufWritePre *.js :JSHint<CR>
 
   " Restore cursor position
   autocmd BufReadPost *

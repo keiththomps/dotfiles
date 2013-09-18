@@ -14,7 +14,7 @@ export RUBY_GC_MALLOC_LIMIT=60000000
 export RUBY_FREE_MIN=200000
 
 # Setup PATH
-export PATH=/usr/local/bin:/usr/local/share/python:$PATH
+export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/share/python:$PATH
 
 # Configure chruby
 source /usr/local/share/chruby/chruby.sh

@@ -95,7 +95,7 @@ if which virtualenv > /dev/null;
 then
   VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
   export WORKON_HOME=$HOME/.virtualenvs
-  source /usr/local/share/python/virtualenvwrapper.sh
+  source /usr/local/bin/virtualenvwrapper.sh
   export PIP_VIRTUALENV_BASE=$WORKON_HOME
 fi
 

@@ -97,6 +97,7 @@ inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "'" ? "\<Right>" : "'"
 
 " Turn On FileType Detection
 filetype plugin indent on
+
 " MULTIPURPOSE TAB KEY (taken from Gary Bernhardt)
 " Indent if we're at the beginning of a line. Else, do completion.
 function! InsertTabWrapper()
@@ -110,11 +111,14 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-" DON't USE ARROW KEYS
+" Don't use arrow keys
 map <Left> :echo "no!"<cr>
 map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
+
+" Disabled Keys
+nmap Q <Nop>
 
 " Ctags
 nmap <F4> :!ctags -R .<cr>
@@ -247,12 +251,13 @@ if has("autocmd")
   au BufNewFile,BufRead *.ejs set filetype=jst
   au BufNewFile,BufRead *.json set filetype=json syntax=javascript
   au BufNewFile,BufRead *.md set filetype=markdown
-  au BufNewFile,BufRead Podfile set ft=ruby
+  au BufNewFile,BufRead Podfile,Vagrantfile set ft=ruby
   au BufNewFile,BufRead .git*,.git/* set noet
+  au BufNewFile,BufRead *.hd set ft=handlebars
+  au BufNewFile,BufRead Gruntfile set filetype=javascript
 
-  " This automatically removes the trailing whitespace in specific file types
-  autocmd BufWritePre *.py,*.feature,*.rb,*.css,*.scss,*.js,*.html :call <SID>StripTrailingWhitespaces()
-  autocmd BufWritePre *.erb,*.coffee,*haml,*.md :call <SID>StripTrailingWhitespaces()
+  " Automatically Strip Trailing Whitespace on Save
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
   " Restore cursor position
   autocmd BufReadPost *

@@ -40,10 +40,7 @@ task :vim do
 
   if File.directory?('Command-T')
     FileUtils.cd('Command-T')
-    # Added a sudo here since you should be using system ruby and can't
-    # normally install gems directly to it, this is really only useful
-    # the first time though
-    `sudo bundle install && rake make`
+    `bundle install && rake make`
   end
 end
 

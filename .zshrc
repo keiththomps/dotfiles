@@ -14,7 +14,10 @@ export RUBY_GC_MALLOC_LIMIT=60000000
 export RUBY_FREE_MIN=200000
 
 # Setup PATH
-export PATH=/usr/local/share/npm/bin:/usr/local/bin:/usr/local/share/python:$PATH
+export PATH=/usr/local/share/npm/bin:/usr/local/bin:$PATH
+
+# Add Postgres.app commands to path
+export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
 
 # Configure chruby
 source /usr/local/share/chruby/chruby.sh
@@ -31,9 +34,6 @@ alias dot='cd ~/code/github-projects/dotfiles'
 
 # Brew casks
 alias casks='open /opt/homebrew-cask/Caskroom'
-
-# Sublime Text
-alias e='subl -n . && subl -a .'
 
 # Standard Shell
 alias c='clear'
@@ -58,7 +58,6 @@ alias objc-ignore='cp ~/code/github-projects/gitignore/Objective-C.gitignore .gi
 alias rm-ignore='cp ~/code/github-projects/gitignore/RubyMotion.gitignore .gitignore'
 
 # tmux
-alias start='tmuxinator start'
 alias attach='tmux attach-session -t'
 alias switch='tmux switch-session -t'
 alias tmk='tmux kill-session -t'

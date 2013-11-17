@@ -15,4 +15,7 @@ $git_bundles = [
   "https://github.com/jelera/vim-javascript-syntax.git",
   "https://github.com/Shutnik/jshint2.vim.git",
   "https://github.com/elixir-lang/vim-elixir.git",
+  "https://github.com/nono/vim-handlebars.git",
+  "https://github.com/wting/rust.vim.git",
+  "https://github.com/jnwhiteh/vim-golang.git",
 ]

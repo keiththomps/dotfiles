@@ -13,11 +13,11 @@ export LSCOLOR=""
 export RUBY_GC_MALLOC_LIMIT=60000000
 export RUBY_FREE_MIN=200000
 
-# Setup PATH
+# Add Homebrew and NPM related directories to path
 export PATH=/usr/local/share/npm/bin:/usr/local/bin:$PATH
 
-# Add Postgres.app commands to path
-export PATH=/Applications/Postgres.app/Contents/MacOS/bin:$PATH
+# Configure GOPATH
+export GOPATH=$HOME/code/go
 
 # Configure chruby
 source /usr/local/share/chruby/chruby.sh

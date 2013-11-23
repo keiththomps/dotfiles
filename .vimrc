@@ -69,6 +69,9 @@ let syntastic_enable_signs=1
 let syntastic_check_on_open=1
 let syntastic_quiet_warnings=1
 
+" Airline configuration
+let g:airline_powerline_fonts = 1
+
 " Custom Commands for Switching buffers
 map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>

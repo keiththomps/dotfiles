@@ -3,6 +3,8 @@ $git_bundles = [
   # Vim Customization Plugins
   # Need to install fonts from https://github.com/Lokaltog/powerline-fonts
   "https://github.com/bling/vim-airline.git",
+  # Plugin for generating tmux themes (only needed when regenerating theme file)
+  # "https://github.com/edkolev/tmuxline.vim.git",
   # General Purpose Plugins
   "https://github.com/wincent/Command-T.git",
   "https://github.com/tpope/vim-pathogen.git",

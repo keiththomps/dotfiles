@@ -14,6 +14,8 @@ task :link do
     linked_file = File.join(ENV["HOME"], path)
     if File.symlink?(linked_file)
       File.unlink(linked_file)
+    else
+      File.rm_rf(linked_file)
     end
     File.symlink(File.join(File.dirname(__FILE__), path), linked_file)
   end
@@ -36,6 +38,21 @@ task :vim do
     puts "Unpacking #{url} into #{dir}"
     `git clone #{url} #{dir}`
     FileUtils.rm_rf(File.join(dir, ".git"))
+  end
+
+  # Grab newest version of all themes
+  colors_dir = File.join(File.dirname(__FILE__), '.vim/colors')
+
+  if !File.directory?(colors_dir)
+    Dir.mkdir(colors_dir, 0755)
+  end
+
+  FileUtils.cd(colors_dir)
+  Dir["*"].each {|d| FileUtils.rm_rf d }
+
+  $vim_colors.each do |url|
+    puts "Downloading #{url} into colors directory"
+    `wget #{url}`
   end
 
   if File.directory?('Command-T')

@@ -29,3 +29,11 @@ $git_bundles = [
   "https://github.com/vim-scripts/VimClojure.git",
   "https://github.com/jnwhiteh/vim-golang.git",
 ]
+
+$vim_colors = [
+  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Blue.vim",
+  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Bright.vim",
+  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Eighties.vim",
+  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim",
+  "https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow.vim",
+]

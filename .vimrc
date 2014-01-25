@@ -12,8 +12,9 @@ colorscheme Tomorrow-Night-Eighties " Use Tomorrow-Night Theme
 " }}}
 
 " Leader & General Commands {{{
-inoremap jj <esc>                     " Use 'jj' to esc
-let mapleader= ","                    " Remap Leader to ,
+" Use 'jj' to esc
+inoremap jj <esc>
+let mapleader= "," " Remap Leader to ,
 
 " Fix indentation in file
 map <leader>i mmgg=G`m<CR>

@@ -33,6 +33,6 @@
 [merge]
   tool = vimdiff
 [push]
-	default = matching
+	default = current
 [credential]
 	helper = osxkeychain

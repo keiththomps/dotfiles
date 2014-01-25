@@ -11,13 +11,20 @@ export LSCOLOR=""
 
 # Speed up the rubies
 export RUBY_GC_MALLOC_LIMIT=60000000
-export RUBY_FREE_MIN=200000
+export RUBY_GC_HEAP_FREE_SLOTS=200000
 
-# Add Homebrew and NPM related directories to path
-export PATH=/usr/local/share/npm/bin:/usr/local/bin:$PATH
+# Add sbin, Homebrew, Postgres.app, and NPM related directories to path
+export PATH=/sbin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=/Applications/Postgres93.app/Contents/MacOS/bin:$PATH
+export PATH=/usr/local/share/npm/bin:$PATH
 
-# Configure GOPATH
+# Configure GOPATH and add go/bin to Path
 export GOPATH=$HOME/code/go
+export PATH=$GOPATH/bin:$PATH
+
+# Add GOROOT to PATH for access to godoc
+export PATH=$PATH:/usr/local/Cellar/go/1.2/libexec/bin
 
 # Configure chruby
 source /usr/local/share/chruby/chruby.sh
@@ -55,7 +62,6 @@ alias grpr='git remote prune origin'
 
 # Gitignores
 alias objc-ignore='cp ~/code/github-projects/gitignore/Objective-C.gitignore .gitignore'
-alias rm-ignore='cp ~/code/github-projects/gitignore/RubyMotion.gitignore .gitignore'
 
 # tmux
 alias attach='tmux attach-session -t'
@@ -75,6 +81,9 @@ alias pngcrush='/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.pl
 # Quick way to rebuild the Launch Services database and get rid
 # of duplicates in the Open With submenu.
 alias fixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'
+
+# Flush DNS Cache
+alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 # ZSH CONFIGURATION #
 #####################
@@ -117,7 +126,7 @@ autoload -U colors && colors
 setopt prompt_subst
 
 # Set default ruby
-chruby 2.0.0-p247
+chruby 2.1
 
 # Display Virtualenv cleanly in right column
 function virtualenv_info {

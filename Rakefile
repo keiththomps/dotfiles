@@ -15,7 +15,7 @@ task :link do
     if File.symlink?(linked_file)
       File.unlink(linked_file)
     else
-      File.rm_rf(linked_file)
+      FileUtils.rm_rf(linked_file)
     end
     File.symlink(File.join(File.dirname(__FILE__), path), linked_file)
   end

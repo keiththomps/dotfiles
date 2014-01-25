@@ -12,7 +12,7 @@ $git_bundles = [
   "https://github.com/tpope/vim-fugitive.git",
   "https://github.com/tpope/vim-surround.git",
   "https://github.com/tomtom/tcomment_vim.git",
-  "https://github.com/cespare/vim-bclose.git",
+  "https://github.com/moll/vim-bbye.git",
   "https://github.com/tristen/vim-sparkup.git",
   "https://github.com/rking/ag.vim.git",
   "https://github.com/kien/ctrlp.vim.git",

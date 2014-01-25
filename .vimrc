@@ -112,7 +112,8 @@ map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>
 
 " Kill current buffer without closing splits with ,x
-map <leader>x :Kwbd<cr>
+nnoremap <leader>x :Bdelete<cr>
+
 " Switch windows with ,C
 map <leader><S-c> <C-w><C-w>
 

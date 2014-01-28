@@ -68,13 +68,14 @@ nmap Q <Nop>
 " }}}
 
 " Text {{{
-set encoding=utf-8  " set text ecoding to UTF-8
-set smarttab        " insert and remove tab widths with <Tab> and <Backspace>
-set expandtab       " insert spaces in place of tabs
-set textwidth=0     " do not break lines when pasting
-set tabstop=2       " number of visual spaces per <Tab>
-set softtabstop=2   " number of spaces in <Tab> when editing
-set shiftwidth=2    " how far to shift for new indentation level
+set encoding=utf-8    " set text ecoding to UTF-8
+set smarttab          " insert and remove tab widths with <Tab> and <Backspace>
+set expandtab         " insert spaces in place of tabs
+set textwidth=0       " do not break lines when pasting
+set tabstop=2         " number of visual spaces per <Tab>
+set softtabstop=2     " number of spaces in <Tab> when editing
+set shiftwidth=2      " how far to shift for new indentation level
+set clipboard=unnamed " set system clipboard to the unnamed register, yank to clipboard
 " }}}
 
 " Search {{{

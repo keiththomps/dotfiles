@@ -21,7 +21,6 @@ map <leader>i mmgg=G`m<CR>
 " }}}
 
 " UI {{{
-filetype plugin indent on " enable filetype detection, plugins and indentation
 syntax on           " turn on file syntax highlighting
 set number          " show line numbers
 set ruler           " show cursor position in bottom bar (vim-airline overrides)
@@ -42,26 +41,13 @@ set winheight=999   " active window takes maximum height
 set shell=/bin/bash " use the proper path
 set nocompatible    " make vim behave like vim and not vi
 set list listchars=tab:»\ ,trail:· " set characters for trailing white space and <Tab> characters
+filetype plugin indent on  " enable filetype indentation
 highlight SpecialKey guifg=#FF003F " set color for hidden characters
 let g:airline_powerline_fonts = 1 " Airline configuration
 " set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')} " show kind of token under cursor in status line
 
-" Simple auto closing backets & parenthesis
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-
-" Custom Single and double quote handling, most people
-" probably wouldn't like this
-inoremap ""     ""<Left>
-inoremap """    """<CR>"""<Esc>kA
-inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == '"' ? "\<Right>" : '"'
-inoremap ''     ''<Left>
-inoremap '''    '''<CR>'''<Esc>kA
-inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "'" ? "\<Right>" : "'"
+" Split lines (useful for correct spacing in javascript functions
+imap <C-c> <CR><Esc>O
 
 " Disable Execute Mode
 nmap Q <Nop>
@@ -285,9 +271,8 @@ if has("autocmd")
   au BufNewFile,BufRead *.ejs set filetype=jst
   au BufNewFile,BufRead *.json set filetype=json syntax=javascript
   au BufNewFile,BufRead *.md set filetype=markdown
-  au BufNewFile,BufRead Podfile,Vagrantfile set ft=ruby
-  au BufNewFile,BufRead .git*,.git/* set noet
-  au BufNewFile,BufRead *.hd set ft=handlebars
+  au BufNewFile,BufRead Podfile,Vagrantfile set filetype=ruby
+  au BufNewFile,BufRead Makefile,.git*,.git/* set noexpandtab
   au BufNewFile,BufRead Gruntfile set filetype=javascript
 
   " Automatically Strip Trailing Whitespace on Save

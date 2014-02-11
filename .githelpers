@@ -38,3 +38,8 @@ pretty_git_log() {
         less -FXRS
 }
 
+prune_and_delete_merged() {
+    git pull --rebase
+    git remote prune origin
+    git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+}

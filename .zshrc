@@ -31,7 +31,7 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 # Setup NODE_PATH
-export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+export NODE_PATH=$NODE_PATH:/usr/local/share/npm/lib/node_modules
 
 # ALIASES #
 ###########
@@ -55,6 +55,7 @@ alias be="bundle exec"
 alias g='git status -s'
 alias gb='git branch'
 alias gc='git commit -m'
+alias gp='git pr'
 alias gca='git commit -am'
 alias gco='git checkout'
 alias gcob='git checkout -b'
@@ -92,7 +93,10 @@ alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 bindkey -e
 
 # Source zsh syntax highlighting
-source $HOME/bin/zsh-syntax-highlighting.zsh
+[[ -s $HOME/bin/zsh-syntax-highlighting.zsh ]] && source $HOME/bin/zsh-syntax-highlighting.zsh
+
+# Source Marked.app command line function
+[[ -s $HOME/bin/marked.sh ]] && source $HOME/bin/marked.sh
 
 # Source Tmuxinator if installed
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator

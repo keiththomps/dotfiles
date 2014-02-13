@@ -39,6 +39,7 @@ pretty_git_log() {
 }
 
 prune_and_delete_merged() {
+    git checkout master
     git pull --rebase
     git remote prune origin
     git branch --merged | grep -v "\*" | xargs -n 1 git branch -d

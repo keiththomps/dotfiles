@@ -11,6 +11,9 @@
 *.exe
 *.o
 *.so
+_build
+deps
+node_modules
 
 # Packages #
 ############
@@ -64,7 +67,12 @@ vendor
 
 # Binary #
 ##########
+*.pdf
 *.png
 *.jpg
+*.jpeg
 *.gif
+*.tiff
 *.pdf
+*.screenflow
+*.sketch

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+let port=$1
+lsof -n -i4TCP:$port | grep LISTEN | grep -Eo ' \d+ ' | xargs kill -9
+echo "Killed process listening to port" $port

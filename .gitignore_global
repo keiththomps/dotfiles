@@ -30,6 +30,7 @@
 *.log
 *.sql
 *.sqlite
+dump.rdb
 
 # OS generated files #
 ######################
@@ -39,15 +40,19 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-# Rbenv local config #
-######################
+# Ruby generate files & config #
+################################
 .rbenv-version
 .ruby-version
-
-# RVM local config #
-####################
 .rvmrc
+.guard_history
+.rake_tasks~
 
-# POW #
+# ctags #
+#########
+tags
+
+# ENV #
 #######
-.powrc
+.envrc
+.envrc.secrets

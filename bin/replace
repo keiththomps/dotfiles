@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+query=$1
+replacement=$2
+
+# File counter
+i=0
+
+# Case sensitive search, returning only file names
+for file in $(ag $query ${@:3} -ls); do
+  sed -E "s/$query/$replacement/g" $file > temp.file
+  mv temp.file $file
+  let i++
+  echo "Replaced instances of '$query' in $file with '$replacement'"
+done
+
+echo "Done! Files changed:" $i

@@ -25,8 +25,8 @@ if [[ $GIT_REPO_PATH != '' && $GIT_REPO_PATH != '~' && $GIT_REPO_PATH != "$HOME/
 
   GIT_DIRTY=""
   if [[ "$GIT_REPO_PATH" != '.' && `git ls-files -m` != "" ]]; then
-    GIT_DIRTY=" %{[90m%}✗%{[0m%}"
+    GIT_DIRTY=" %{[1m%}✗%{[0m%}"
   fi
 
-  echo " %{[90m%}$GIT_BRANCH %{[37m%}$GIT_COMMIT_ID%{[0m%}$GIT_MODE$GIT_DIRTY"
+  echo " %{[1m%}$GIT_BRANCH %{[37m%}$GIT_COMMIT_ID%{[0m%}$GIT_MODE$GIT_DIRTY"
 fi

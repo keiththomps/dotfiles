@@ -1,11 +1,15 @@
 [user]
   name = Keith Thompson
-  email = keith@brilliantfantastic.com
+  email = me@keiththomps.com
 [core]
   editor = vim
   excludesfile = ~/.gitignore_global
 [color]
   ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
 [alias]
   st = status
   ci = commit
@@ -22,7 +26,6 @@
   b = branch
   ds = diff --stat=160,120
   dh1 = diff HEAD~1
-
   head = !git l -1
   h = !git head
   hp = "!source ~/.githelpers && show_git_head"
@@ -31,9 +34,12 @@
   l = "!source ~/.githelpers && pretty_git_log"
   la = !git l --all
   pr = "!source ~/.githelpers && prune_and_delete_merged"
+  cleanlocal = "!zsh -c 'BRANCH=`git current`; if [[ ! $BRANCH =~  ^master$ ]];then read \"?Are you sure you want to run while not in master (you run the risk of deleting master)? (y/n) \" choice; if [[ ! $choice =~ ^[Yy]$ ]]; then echo Nothing done; exit 0; fi ; fi; for stale_branch (`git branch --merged $BRANCH | grep -v $BRANCH`) git branch -d $stale_branch'"
+  current = !git rev-parse --abbrev-ref HEAD
+  some = !git checkout master && git pull --rebase && git remote prune origin && git cleanlocal
 [merge]
   tool = vimdiff
 [push]
-	default = current
+  default = current
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain

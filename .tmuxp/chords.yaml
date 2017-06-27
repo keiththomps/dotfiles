@@ -1,0 +1,19 @@
+session_name: chords
+windows:
+- focus: 'true'
+  layout: f2ee,119x32,0,0[119x25,0,0,0,119x6,0,26,1]
+  options:
+    automatic-rename: 'off'
+  panes:
+  - nvim
+  - focus: 'true'
+    shell_command: zsh
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/learn-react/chords
+  window_name: editor
+- layout: b53f,119x32,0,0,2
+  options:
+    automatic-rename: 'off'
+  panes:
+  - pane
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/learn-react/chords
+  window_name: server

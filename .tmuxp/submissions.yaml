@@ -1,0 +1,20 @@
+session_name: submissions
+windows:
+- focus: 'true'
+  layout: 22f1,119x33,0,0[119x26,0,0,0,119x6,0,27,1]
+  options:
+    automatic-rename: 'off'
+  panes:
+  - nvim
+  - focus: 'true'
+    shell_command: zsh
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/submissions
+  window_name: editor
+- layout: b93f,119x33,0,0,2
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: beam.smp
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/submissions
+  window_name: server

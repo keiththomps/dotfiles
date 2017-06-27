@@ -1,0 +1,20 @@
+session_name: lectern
+windows:
+- focus: 'true'
+  layout: 4c3d,119x32,0,0[119x20,0,0,0,119x11,0,21,1]
+  options:
+    automatic-rename: 'off'
+  panes:
+  - nvim
+  - focus: 'true'
+    shell_command: zsh
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/lectern
+  window_name: editor
+- layout: b53f,119x32,0,0,2
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: beam.smp
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/lectern
+  window_name: server

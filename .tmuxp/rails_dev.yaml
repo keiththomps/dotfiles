@@ -1,0 +1,15 @@
+session_name: "${WORKSPACE}"
+start_directory: "${SQMCODE}/${WORKSPACE}"
+before_script: ~/.bin/dc_up $SQMCODE/$WORKSPACE
+windows:
+  - window_name: editor
+    panes:
+      - vim
+      -
+  - window_name: server
+    panes:
+      - docker-compose exec app bash
+  - window_name: docker-logs
+    panes:
+      - docker-compose logs -f -t --tail 10 app
+      - docker-compose logs -f -t --tail 10 jobs

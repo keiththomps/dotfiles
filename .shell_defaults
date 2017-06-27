@@ -4,6 +4,9 @@
 # No brainer, default to Vim
 export EDITOR="vim"
 
+# Tmux auto title
+export DISABLE_AUTO_TITLE="true"
+
 # Color LS output to differentiate between directories and files
 export LS_OPTIONS="--color=auto"
 export CLICOLOR="Yes"
@@ -70,7 +73,7 @@ alias attach='tmux attach-session -t'
 alias switch='tmux switch-session -t'
 alias tmk='tmux kill-session -t'
 alias tls='tmux ls'
-alias start='tmuxp load'
+alias load='tmuxp load'
 
 # Docker
 alias de='docker exec'
@@ -100,3 +103,10 @@ alias dapp='dce app'
 # Flush DNS Cache
 alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
+# Reload SHELL
+alias r='exec $SHELL'
+
+# Tmux project orchestration
+function rdev() {
+  WORKSPACE=$1 tmuxp load ~/.tmuxp/rails_dev.yaml
+}

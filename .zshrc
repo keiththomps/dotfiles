@@ -1,4 +1,4 @@
-source ./.shell_defaults
+source $HOME/.shell_defaults
 
 # ZSH CONFIGURATION #
 #####################
@@ -16,6 +16,15 @@ __git_files () {
 
 # Case insensitive auto-complete
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# WORK STUFF #
+##############
+if [[ -s $HOME/.dotfiles/zsh/shell/projects.zsh ]]; then
+  export TICKET_SYSTEM_BINARY='asana'
+  export SQMCODE=/Volumes/Squaremouth/Code
+  source $HOME/.dotfiles/zsh/shell/projects.zsh
+  source $HOME/.dotfiles/zsh/asana/workflow.zsh
+fi
 
 # PROMPT FUNCTIONS AND SETTINGS #
 #################################

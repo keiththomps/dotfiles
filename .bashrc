@@ -1,4 +1,4 @@
-source ./.shell_defaults
+source $HOME/.shell_defaults
 
 # get current branch in git repo
 function parse_git_branch() {

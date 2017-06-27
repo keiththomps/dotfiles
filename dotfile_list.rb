@@ -13,6 +13,7 @@ $dotfiles = [
   ".railsrc",
   ".shell_defaults",
   ".tmux.conf",
+  ".tmuxp",
   ["init.vim", ".config/nvim"],
   ".zprofile",
   ".zshrc",

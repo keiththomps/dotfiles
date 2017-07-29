@@ -1,0 +1,19 @@
+session_name: lectern-ui
+windows:
+- focus: 'true'
+  layout: 22f1,119x33,0,0[119x26,0,0,0,119x6,0,27,1]
+  options:
+    automatic-rename: 'off'
+  panes:
+  - nvim
+  - focus: 'true'
+    shell_command: $SHELL
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/lectern-ui
+  window_name: frontend-editor
+- layout: b93f,119x33,0,0,2
+  options:
+    automatic-rename: 'off'
+  panes:
+  - yarn start
+  start_directory: /Users/kthompson/Dropbox/code/coderjourney/lectern-ui
+  window_name: frontend-server

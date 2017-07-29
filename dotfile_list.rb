@@ -15,6 +15,7 @@ $dotfiles = [
   ".tmux.conf",
   ".tmuxp",
   ["init.vim", ".config/nvim"],
-  ".zprofile",
-  ".zshrc",
+  ["snippets", ".config/nvim"],
+  # ".zprofile",
+  # ".zshrc",
 ]

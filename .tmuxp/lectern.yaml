@@ -9,12 +9,12 @@ windows:
   - focus: 'true'
     shell_command: zsh
   start_directory: /Users/kthompson/Dropbox/code/coderjourney/lectern
-  window_name: editor
+  window_name: backend-editor
 - layout: b53f,119x32,0,0,2
   options:
     automatic-rename: 'off'
   panes:
   - focus: 'true'
-    shell_command: beam.smp
+    shell_command: iex -S mix phx.server
   start_directory: /Users/kthompson/Dropbox/code/coderjourney/lectern
-  window_name: server
+  window_name: backend-server

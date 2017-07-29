@@ -1,0 +1,183 @@
+# React Component
+snippet react-component
+options head
+  import React, { Component } from 'react'
+
+  class ${1:MyComponent} extends Component {
+    render() {
+      return (
+        ${0:<div></div>}
+      )
+    }
+  }
+
+  export default ${2:$1}
+
+# React Component with PropTypes
+snippet react-component-props
+options head
+  import React, { Component } from 'react'
+  import PropTypes from 'prop-types'
+
+  class ${1:MyComponent} extends Component {
+    static propTypes = {
+      ${1}: PropTypes.${0},
+    }
+
+    render() {
+      return (
+        ${0:<div></div>}
+      )
+    }
+  }
+
+  export default ${2:$1}
+
+# React Component with PropTypes & Styles
+snippet react-component-props-styles
+options head
+  import React, { Component } from 'react'
+  import PropTypes from 'prop-types'
+  import styles from './${2:$1}.css'
+
+  class ${1:MyComponent} extends Component {
+    static propTypes = {
+      ${4}: PropTypes.${0},
+    }
+
+    render() {
+      return (
+        <div className={styles.base}>
+          ${0}
+        </div>
+      )
+    }
+  }
+
+  export default ${3:$1}
+
+# React Constructor
+snippet rcon
+options head
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      ${1}: ${0},
+    }
+  }
+
+# React PropTypes
+snippet rcpt
+options head
+  static propTypes = {
+    ${1}: PropTypes.${0},
+  }
+
+# React Default Props
+snippet rcdp
+options head
+  static defaultProps = {
+    ${1}: ${0},
+  }
+
+# Presentational Component
+snippet rcom
+options head
+  props => {
+    return (
+      ${0:<div></div>}
+    )
+  }
+
+# Proptypes for Presentational component
+snippet rpt
+options head
+  ${1}.propTypes = {
+    ${2}: PropTypes.${0},
+  }
+
+# Default props for Presentational component
+snippet rdp
+options head
+  ${1}.defaultProps = {
+    ${2}: ${0},
+  }
+
+# React componentDidMount
+snippet rcdm
+options head
+  componentDidMount() {
+    ${0:${VISUAL}}
+  }
+
+# React componentDidUnmount
+snippet rcdum
+options head
+  componentDidUnount() {
+    ${0:${VISUAL}}
+  }
+
+# React componentWillMount
+snippet rcwm
+options head
+  componentWillMount() {
+    ${0:${VISUAL}}
+  }
+
+# React componentWillUnmount
+snippet rcwum
+options head
+  componentWillUnount() {
+    ${0:${VISUAL}}
+  }
+
+# React componentWillReceiveProps
+snippet rcwrp
+options head
+  componentWillReceiveProps(nextProps) {
+    ${0:${VISUAL}}
+  }
+
+# React shouldComponentUpdate
+snippet rscup
+options head
+  shouldComponentUpdate(nextProps, nextState) {
+    ${0:${VISUAL}}
+  }
+
+# React componentWillUpdate
+snippet rcwup
+options head
+  componentWillUpdate(nextProps, nextState) {
+    ${0:${VISUAL}}
+  }
+
+# React componentDidUpdate
+snippet rcdup
+options head
+  componentDidUpdate(prevProps, prevState) {
+    ${0:${VISUAL}}
+  }
+
+# React setState
+snippet rsst
+options head
+  this.setState({
+    ${1}: ${0},
+  })
+
+# React State
+snippet rtst
+options head
+  this.state.${0}
+
+# React Props
+snippet rp
+options head
+  props.${0}
+
+# React Props on This
+snippet rtp
+options head
+  this.props.${0}

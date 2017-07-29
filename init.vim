@@ -3,14 +3,12 @@
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote'), 'tag': '*' }
+" Autocomplete
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/python-support.nvim'
+Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' } " JavaScript completion
 
-let g:deoplete#enable_at_startup = 1
-
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'c-brenn/phoenix.vim'
@@ -22,12 +20,13 @@ Plug 'junegunn/vader.vim'
 Plug 'lambdatoast/elm.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'robertbasic/vim-hugo-helper'
 Plug 'mattn/emmet-vim'
+
+" Async linting
 
 " Vim, Tmux, and Airline theming
 Plug 'vim-airline/vim-airline'
@@ -44,12 +43,6 @@ Plug 'slashmili/alchemist.vim'
 
 " Install polyglot for language plugins
 Plug 'sheerun/vim-polyglot'
-
-" Plug 'neomake/neomake'
-
-" let g:neomake_ruby_enabled_makers = []
-" let g:neomake_open_list = 2
-" let g:neomake_highlight_columns = 1
 
 call plug#end()
 " }}}
@@ -166,6 +159,33 @@ nnoremap ; :BufExplorer<cr>
 nnoremap guq :%s/\v[“”]/"/g<cr>
 " }}}
 
+" language-server {{{
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server.stdio.js'],
+    \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" }}}
+
+" python-support {{{
+" for python completions
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
+" language specific completions on markdown file
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
+
+" utils, optional
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
+" }}}
+
 " emmet-vim {{{
 let g:user_emmet_settings = {
 \  'javascript' : {
@@ -211,6 +231,10 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 " }}}
 
+" vim-polyglot {{{
+let g:jsx_ext_required = 0
+" }}}
+
 " Completion & Snippets {{{
 
 " Plugin key-mappings.
@@ -222,13 +246,23 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
 " }}}
 
-" silver-searcher {{{
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -U'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp' " Persist the CtrlP cache
-let g:ctrlp_use_caching = 1                     " Enable CtrlP caching
+" Ctrlp {{{
+
 let g:ctrlp_match_window = "bottom,order:btt"   " Order file matches from bottom to top
 let g:ctrlp_dont_split = 'netrw'                " Prevent from opening a new window
 let g:ctrlp_working_path_mode = 0               " Don't change working directory based on current buffer
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+else
+  " Use the silver search if ripgrep is missing
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -U'
+  let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp' " Persist the CtrlP cache
+  let g:ctrlp_use_caching = 1                     " Enable CtrlP caching
+endif
+
 " }}}
 
 " Auto-commands {{{

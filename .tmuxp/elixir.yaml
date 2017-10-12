@@ -1,0 +1,11 @@
+session_name: elixir
+windows:
+- focus: 'true'
+  layout: f2ee,119x32,0,0[119x25,0,0,0,119x6,0,26,1]
+  options: {}
+  panes:
+  - nvim
+  - focus: 'true'
+    shell_command: zsh
+  start_directory: /Users/kthompson/Dropbox/code/elixir
+  window_name: zsh

@@ -1,5 +1,3 @@
-" vim:foldmethod=marker:foldlevel=0
-
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
 
@@ -17,7 +15,7 @@ Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vader.vim'
-Plug 'lambdatoast/elm.vim'
+Plug 'elmcast/elm-vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -27,6 +25,7 @@ Plug 'robertbasic/vim-hugo-helper'
 Plug 'mattn/emmet-vim'
 
 " Async linting
+Plug 'neomake/neomake'
 
 " Vim, Tmux, and Airline theming
 Plug 'vim-airline/vim-airline'
@@ -186,6 +185,12 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
 " }}}
 
+" neomake {{{
+let g:neomake_elixir_enabled_makers = ['credo']
+let g:neomake_go_enabled_makers = ['go']
+let g:neomake_ruby_enabled_makers = ['mri']
+" }}}
+
 " emmet-vim {{{
 let g:user_emmet_settings = {
 \  'javascript' : {
@@ -271,7 +276,7 @@ if has("autocmd")
   autocmd BufWinEnter,WinEnter term://* startinsert
 
   " Execute NeoMake makers
-  " autocmd BufWritePost * Neomake
+  autocmd BufWritePost * Neomake
   " autocmd BufReadPost * Neomake
 
   " StripTrailingWhitespaces
@@ -303,12 +308,6 @@ if has("autocmd")
 
   " Set Elixir specific settings
   au FileType elixir nmap <leader>bp orequire IEx; IEx.pry<esc>^
-
-  " Set Elm specific mappings
-  au FileType elm nmap <leader>m :ElmMakeMain<cr>
-  au FileType elm nmap <leader>r :ElmRepl<cr>
-  au FileType elm set formatprg=elm-format\ --stdin
-  au BufWritePre *.elm exe "normal! gggqG\<C-o>\<C-o>"
 
   " Set Go specific mappings
   au FileType go set ai ts=2 sw=2 sts=2 noet nolist autowrite

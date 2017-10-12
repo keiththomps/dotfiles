@@ -4,15 +4,15 @@ windows:
   layout: d63b,130x41,0,0[130x30,0,0,0,130x10,0,31,1]
   options: {}
   panes:
-  - nvim
-  - focus: 'true'
-    shell_command: zsh
+    - nvim
+    - focus: 'true'
+      shell_command: $SHELL
   start_directory: /Users/kthompson/code/coderjourney/coderjourney.com
   window_name: editor
 - options:
     automatic-rename: 'off'
   panes:
-  - hugo server
-  - npm run theme:watch
+    - hugo server --buildDrafts
+    - npm run theme:watch
   start_directory: /Users/kthompson/code/coderjourney/coderjourney.com
   window_name: watchers

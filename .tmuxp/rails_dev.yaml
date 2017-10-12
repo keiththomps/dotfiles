@@ -11,5 +11,5 @@ windows:
       - docker-compose exec app bash
   - window_name: docker-logs
     panes:
-      - docker-compose logs -f -t --tail 10 app
-      - docker-compose logs -f -t --tail 10 jobs
+      - 'docker-compose logs -f -t --tail=10 app | grep -v "/status"'
+      - docker-compose logs -f -t --tail=10 jobs

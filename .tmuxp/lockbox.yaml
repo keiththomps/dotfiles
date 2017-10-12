@@ -7,7 +7,7 @@ windows:
   - nvim
   - focus: 'true'
     shell_command: zsh
-  start_directory: /Users/kthompson/Dropbox/code/go/src/github.com/sqm/lockbox-cli
+  start_directory: /Volumes/Squaremouth/Code/lockbox-cli
   window_name: cli
 - layout: a2f5,119x33,0,0[119x26,0,0,1,119x6,0,27,2]
   options: {}
@@ -17,3 +17,9 @@ windows:
     shell_command: dc up -d
   start_directory: /Volumes/Squaremouth/Code/lockbox
   window_name: server
+- options: {}
+  panes:
+  - focus: 'true'
+    shell_command: dc logs -f app | grep -v "/status"
+  start_directory: /Volumes/Squaremouth/Code/lockbox
+  window_name: logs

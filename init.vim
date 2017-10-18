@@ -5,10 +5,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/python-support.nvim'
-Plug 'roxma/nvim-cm-tern',  { 'do': 'npm install' } " JavaScript completion
 
-Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'c-brenn/phoenix.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go'
@@ -21,7 +20,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'robertbasic/vim-hugo-helper'
 Plug 'mattn/emmet-vim'
 
 " Async linting
@@ -29,13 +27,7 @@ Plug 'neomake/neomake'
 
 " Vim, Tmux, and Airline theming
 Plug 'vim-airline/vim-airline'
-" Plug 'itchyny/lightline.vim'
-" Plug 'edkolev/tmuxline.vim'
 Plug 'dracula/vim'
-
-" Configure scratch buffers
-Plug 'mtth/scratch.vim'
-let g:scratch_autohide = 0
 
 " Configure alchemist for Elixir development
 Plug 'slashmili/alchemist.vim'

@@ -6,6 +6,13 @@ desc 'Ensure dependencies (vim-plug, etc) are installed'
 task :deps do
   `curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
+
+  # Install homebrew dependencies
+  `brew bundle`
+
+  # Install python dependencies
+  `pip install virtualenv tmuxp`
+  `pip3 install virtualenv`
 end
 
 desc 'Setup/update dotfile symbolic links'
@@ -37,8 +44,9 @@ end
 desc 'Update vim plugins'
 task :vim do
   puts "Updating vim plugins"
-  `nvim +PlugUpgrade +PlugUpdate +q +q`
+  `nvim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q`
+  `nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +q +q`
 end
 
 desc 'Link dotfiles and setup vim'
-task :default => [:link, :vim]
+task :default => [:deps, :link, :vim]

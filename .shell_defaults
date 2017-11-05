@@ -28,7 +28,9 @@ alias gosrc="cd $GOPATH/src"
 
 # Add Rust/Cargo to the path
 export PATH="$HOME/.cargo/bin:$PATH"
-source $HOME/.cargo/env
+if [[ -s $HOME/.cargo/env ]] ; then
+  source $HOME/.cargo/env
+fi
 
 # Configure chruby
 if [[ -s /usr/local/share/chruby/chruby.sh ]] ; then

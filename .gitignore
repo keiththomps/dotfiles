@@ -4,3 +4,4 @@
 .vim/bundle
 .vim/colors
 .rbenv-version
+.tmuxp

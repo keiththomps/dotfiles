@@ -8,6 +8,7 @@ $dotfiles = [
   ".gitconfig",
   ".githelpers",
   ".gitignore_global",
+  ".inputrc",
   ".irbrc",
   ".pryrc",
   ".railsrc",

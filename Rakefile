@@ -45,7 +45,7 @@ desc 'Update vim plugins'
 task :vim do
   puts "Updating vim plugins"
   `nvim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q`
-  `nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +q +q`
+  `nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +'normal <cr>' +qa`
 end
 
 desc 'Link dotfiles and setup vim'

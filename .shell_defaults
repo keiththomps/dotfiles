@@ -1,3 +1,4 @@
+# vim: ft=sh
 # ENVIRONMENT VARIABLES #
 #########################
 
@@ -16,7 +17,7 @@ export LSCOLOR=""
 export PATH=$HOME/.bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
 
 # GOPATH
-export GOPATH=$HOME/code/go
+export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export GODIR=$GOPATH/src/github.com/keiththomps
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
@@ -48,9 +49,11 @@ eval "$(direnv hook $SHELL)"
 
 # Standard Shell
 alias c='clear'
-alias l='ls -l'
-alias la='ls -al'
+alias l='ls -al'
 alias bloat='du -k | sort -nr | more'
+alias brokensym='find . -type l ! -exec test -e {} \; -print'
+alias bsym='brokensym'
+alias rbsym='find . -type l ! -exec test -e {} \; -print | xargs rm'
 
 # Alias Vim to Neovim
 alias vim='nvim'
@@ -101,6 +104,11 @@ dce() {
 }
 
 alias dapp='dce app'
+
+# Expose Docker environment variables by default if `default` machine is running
+if [ "$(docker-machine status default)" == "Running" ]; then
+  eval $(docker-machine env default)
+fi
 
 # Flush DNS Cache
 alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'

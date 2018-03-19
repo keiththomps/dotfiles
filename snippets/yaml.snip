@@ -1,0 +1,31 @@
+snippet     quiz
+abbr        Linux Academy Quiz Question
+options     head
+  - question: ${1:Question}
+    uploaded: false
+    tags:
+      - ${0:Tag1}
+    answers:
+      - text: ${0:Answer 1}
+        correct: true
+        explanation: |
+          ${0:Reason 1}
+      - text: ${0:Answer 2}
+        correct: false
+        explanation: |
+          ${0:Reason 2}
+      - text: ${0:Answer 3}
+        correct: false
+        explanation: |
+          ${0:Reason 3}
+      - text: ${0:Answer 4}
+        correct: false
+        explanation: |
+          ${0:Reason 4}
+
+snippet     flash
+abbr        Linux Academy Flash Card
+options     head
+  - front: ${1:Question}
+    back: ${2:Answer}
+    uploaded: false

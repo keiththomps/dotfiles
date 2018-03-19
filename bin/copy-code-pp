@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pygmentize -f rtf $1 | pbcopy

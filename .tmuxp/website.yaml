@@ -7,12 +7,12 @@ windows:
     - nvim
     - focus: 'true'
       shell_command: $SHELL
-  start_directory: /Users/kthompson/code/coderjourney/coderjourney.com
+  start_directory: $HOME/code/coderjourney/coderjourney.com
   window_name: editor
 - options:
     automatic-rename: 'off'
   panes:
     - hugo server --buildDrafts
     - npm run theme:watch
-  start_directory: /Users/kthompson/code/coderjourney/coderjourney.com
+  start_directory: $HOME/code/coderjourney/coderjourney.com
   window_name: watchers

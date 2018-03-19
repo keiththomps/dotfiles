@@ -1,5 +1,8 @@
 source $HOME/.shell_defaults
 
+# enable bash-completion (installed via homebrew)
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
 # get current branch in git repo
 function parse_git_branch() {
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`

@@ -50,7 +50,7 @@ filetype plugin indent on
 
 set ttyfast
 
-set laststatus=2
+set laststatus=1
 set encoding=utf-8              " Set default encoding to UTF-8
 set autoread                    " Automatically reread changed files without asking me anything
 set autoindent

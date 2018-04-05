@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sed -e "/^#/d" \
+  -e "/^\s*$/d" \
+  -e 's/^\(.*\)$/"\1\\n",/g' \
+  $1 | pbcopy
+

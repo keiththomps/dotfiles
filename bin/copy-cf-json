@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
+# 1. Remove comments
+# 2. Remove empty lines
+# 3. Escape slashes
+# 4. Escape double quotes
+# 5. Wrap lines in double quotes and add trailing comma
 sed -e "/^#/d" \
-  -e "/^\s*$/d" \
+  -e '/^\s*$/d' \
+  -e 's/\\/\\\\/g' \
+  -e 's/"/\\"/g' \
   -e 's/^\(.*\)$/"\1\\n",/g' \
   $1 | pbcopy
 

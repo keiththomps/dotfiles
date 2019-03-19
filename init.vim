@@ -1,18 +1,13 @@
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
 
-" Autocomplete
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/python-support.nvim'
-
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'c-brenn/phoenix.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go'
 Plug 'janko-m/vim-test'
-Plug 'jlanzarotta/bufexplorer'
 Plug 'junegunn/vader.vim'
 Plug 'elmcast/elm-vim'
 Plug 'plasticboy/vim-markdown'
@@ -29,11 +24,11 @@ Plug 'neomake/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'dracula/vim'
 
+" Language support
+Plug 'sheerun/vim-polyglot'
+
 " Configure alchemist for Elixir development
 Plug 'slashmili/alchemist.vim'
-
-" Install polyglot for language plugins
-Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 " }}}
@@ -82,6 +77,9 @@ set list listchars=tab:»\ ,trail:·
 nmap <silent> <leader>p :set spell!<CR>
 set spelllang=en_us
 
+" Customize completion menu
+set completeopt=noinsert,menuone,noselect
+
 " Set leader to comma
 let mapleader = ","
 
@@ -98,11 +96,20 @@ cnoremap \>s/ \>s/\v
 tnoremap <Esc> <C-\><C-n>
 " }}}
 
+" Enable deoplete for autocompletion {{{
+let g:deoplete#enable_at_startup = 1
+" }}}
+
 " Helper Functions and Mappings {{{
 " Easily manage quick fix windows
 map <silent> <C-n> :cnext<CR>
 map <silent> <C-m> :cprevious<CR>
 nnoremap <silent> <leader>q :cclose<CR>
+
+" Tab between buffers
+nnoremap <silent> <Tab> :bn<CR>
+nnoremap <silent> <S-Tab> :bp<CR>
+nnoremap <silent> <leader>x :bp\|bd #<CR>
 
 " Capture current file path into clipboard
 function! CaptureFile()
@@ -143,42 +150,13 @@ map <leader>i mmgg=G`m<CR>
 " Toggle highlighting of search results
 nnoremap <leader><space> :nohlsearch<cr>
 
-" Open Buffer explorer
-nnoremap ; :BufExplorer<cr>
-
 " Unsmart Quotes
-nnoremap guq :%s/\v[“”]/"/g<cr>
-" }}}
-
-" language-server {{{
-" Required for operations modifying multiple buffers like rename.
-set hidden
-
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['/usr/local/lib/node_modules/javascript-typescript-langserver/lib/language-server.stdio.js'],
-    \ }
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-" }}}
-
-" python-support {{{
-" for python completions
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'jedi')
-" language specific completions on markdown file
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'mistune')
-
-" utils, optional
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'psutil')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'setproctitle')
+nnoremap gudq :%s/\v[“”]/"/g<cr>
+nnoremap gusq :%s/\v[‘’]/'/g<cr>
 " }}}
 
 " neomake {{{
-let g:neomake_elixir_enabled_makers = ['credo']
+let g:neomake_elixir_enabled_makers = []
 let g:neomake_go_enabled_makers = ['go']
 let g:neomake_ruby_enabled_makers = ['mri']
 " }}}
@@ -189,6 +167,17 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
+" }}}
+
+" HTML Escaping {{{
+nnoremap <Leader>h :'[,']call HtmlEscape()<CR>
+vnoremap <Leader>h :call HtmlEscape()<CR>
+
+function HtmlEscape()
+  silent s/&/\&amp;/eg
+  silent s/</\&lt;/eg
+  silent s/>/\&gt;/eg
+endfunction
 " }}}
 
 " vim-markdown {{{
@@ -269,7 +258,6 @@ if has("autocmd")
 
   " Execute NeoMake makers
   autocmd BufWritePost * Neomake
-  " autocmd BufReadPost * Neomake
 
   " StripTrailingWhitespaces
   autocmd BufWritePre * Stripwhitespace
@@ -285,6 +273,7 @@ if has("autocmd")
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType javascript nnoremap gp :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote<CR>
 
   " Set Syntax Highlighting for odd file types
   augroup filetypedetect

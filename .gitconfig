@@ -1,6 +1,6 @@
 [user]
   name = Keith Thompson
-  email = me@keiththomps.com
+	email = me@keiththomps.com
 [core]
   editor = vim
   excludesfile = ~/.gitignore_global
@@ -40,6 +40,6 @@
 [merge]
   tool = vimdiff
 [push]
-  default = current
+	default = current
 [credential]
   helper = osxkeychain

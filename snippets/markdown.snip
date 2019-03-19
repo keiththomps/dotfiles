@@ -1,6 +1,28 @@
+snippet one-on-one
+abbr    One-on-One Outline
+options head
+  +++
+  date: ${0:Date}
+  person: ${1:Person}
+  +++
+
+  ## What was accomplished over the last two weeks?
+
+  ## What do I plan on accomplishing over the next two weeks?
+
+  ## What went well?
+
+  ## What didn't go well?
+
+  ## What can we change to make things go better?
+
+  ## If any, what are my blockers?
+
 snippet outline
 abbr    Linux Academy Video Outline
 options head
+  <!-- tags: ${0:Tags} -->
+
   ${1:Intro}
 
   ${0:*Note:* the commands in this video are run as the \`root\` user.}
@@ -16,3 +38,23 @@ options head
 
   [1]: ${0:Link 1}
   [2]: ${0:Link 2}
+
+snippet liveenv
+alias   livenv
+abbr    Linux Academy Live Environment Information
+options head
+  ## Live Env Name
+
+  ${1:Name}
+
+  ## Description
+
+  ## Scenario
+
+  ## Image Type
+
+  ## Custom Additions to Image
+
+  ## Tests
+
+  ## Notes

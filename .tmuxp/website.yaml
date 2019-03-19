@@ -4,7 +4,7 @@ windows:
   layout: d63b,130x41,0,0[130x30,0,0,0,130x10,0,31,1]
   options: {}
   panes:
-    - nvim
+    - vim
     - focus: 'true'
       shell_command: $SHELL
   start_directory: $HOME/code/coderjourney/coderjourney.com

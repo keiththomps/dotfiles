@@ -1,3 +1,4 @@
 #!/bin/bash
+# usage: copy-code-pp path/to/code.py
 
-pygmentize -f rtf $1 | pbcopy
+pygmentize -f rtf -P "style=monokai" -P "fontface=Menlo" "$@" | pbcopy

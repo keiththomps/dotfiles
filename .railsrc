@@ -1,7 +1,8 @@
+--skip-bootsnap
 --skip-action-cable
 --skip-coffee
 --skip-listen
 --skip-spring
 --skip-turbolinks
---skip-test-unit
+--skip-test
 --skip-bundle

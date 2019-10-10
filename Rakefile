@@ -2,17 +2,16 @@ require 'fileutils'
 
 require_relative 'dotfile_list'
 
-desc 'Ensure dependencies (vim-plug, etc) are installed'
+desc 'Ensure dependencies are installed'
 task :deps do
-  `curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
-
-  # Install homebrew dependencies
-  `brew bundle`
+  if RUBY_PLATFORM.downcase.include?('darwin')
+    # Install mac specific dependencies and apply configuration
+    # `brew bundle`
+    `./macos_defaults.sh`
+  end
 
   # Install python dependencies
-  `pip install virtualenv tmuxp`
-  `pip3 install virtualenv`
+  `pip3 install --user virtualenv`
 end
 
 desc 'Setup/update dotfile symbolic links'
@@ -43,10 +42,13 @@ end
 
 desc 'Update vim plugins'
 task :vim do
+  `curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
+
   puts "Updating vim plugins"
   `nvim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q`
   `nvim +PythonSupportInitPython2 +PythonSupportInitPython3 +'normal <cr>' +qa`
 end
 
 desc 'Link dotfiles and setup vim'
-task :default => [:deps, :link, :vim]
+task :default => [:deps, :link]

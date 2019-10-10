@@ -3,7 +3,6 @@
 #########################
 
 # No brainer, default to Vim
-alias vim="nvim"
 export EDITOR="vim"
 export VIMCONFIG="$HOME/.vim"
 export VIMDATA="$HOME/.vim"
@@ -106,9 +105,9 @@ dce() {
 alias dapp='dce app'
 
 # Expose Docker environment variables by default if `default` machine is running
-if [ "$(docker-machine status default)" == "Running" ]; then
-  eval $(docker-machine env default)
-fi
+# if [ "$(docker-machine status default)" == "Running" ]; then
+#   eval $(docker-machine env default)
+# fi
 
 # Flush DNS Cache
 alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'

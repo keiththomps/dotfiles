@@ -6,12 +6,6 @@
 
 cask_args appdir: "/Applications"
 
-# set up `brew cask` to install desktop apps
-tap "caskroom/cask"
-
-# audio libraries
-brew "lame" # file will be located in /usr/local/Cellar/lame/VERSION/lib/
-brew "ffmpeg" # file will be located in /usr/local/Cellar/ffmpeg/VERSION/lib/
 
 # install software packages and CLIs
 brew "git"
@@ -35,12 +29,15 @@ brew "pandoc"
 brew "kubectl"
 brew "bash-completion"
 
+# audio libraries
+brew "lame" # file will be located in /usr/local/Cellar/lame/VERSION/lib/
+brew "ffmpeg" # file will be located in /usr/local/Cellar/ffmpeg/VERSION/lib/
+
 # install desktop apps
 cask "google-chrome"
 cask "dropbox"
 cask "skype"
 cask "handbrake"
-cask "evernote"
 cask "virtualbox"
 cask "screenflow"
 cask "grammarly"
@@ -48,6 +45,5 @@ cask "virtualbox"
 cask "vlc"
 cask "cloudapp"
 cask "dash"
-cask "cyberduck"
 cask "minikube"
 cask "postman"

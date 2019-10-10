@@ -2,6 +2,9 @@
 # ENVIRONMENT VARIABLES #
 #########################
 
+# Prevent macOS > 10.15 default interactive shell message
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # No brainer, default to Vim
 export EDITOR="vim"
 export VIMCONFIG="$HOME/.vim"

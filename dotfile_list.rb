@@ -1,6 +1,7 @@
 # The list of dotfile you would like linked
 $dotfiles = [
   ".agignore",
+  ".bash_profile",
   ".bashrc",
   "bin",
   ".ctags",

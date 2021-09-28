@@ -1,24 +1,34 @@
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'c-brenn/phoenix.vim'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go'
-Plug 'janko-m/vim-test'
+Plug 'vim-test/vim-test'
 Plug 'junegunn/vader.vim'
-Plug 'elmcast/elm-vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
+Plug 'jlanzarotta/bufexplorer'
+
+" LSP and Treesitter (nvim 0.5.0 enhancements)
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'hrsh7th/nvim-cmp' " -- Autocompletion plugin
+Plug 'hrsh7th/cmp-nvim-lsp' " -- LSP source for nvim-cmp
+Plug 'saadparwaiz1/cmp_luasnip' " -- Snippets source for nvim-cmp
+Plug 'L3MON4D3/LuaSnip' " -- Snippets plugin
+
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Async linting
-Plug 'neomake/neomake'
+Plug 'dense-analysis/ale'
 
 " Vim, Tmux, and Airline theming
 Plug 'vim-airline/vim-airline'
@@ -29,6 +39,10 @@ Plug 'sheerun/vim-polyglot'
 
 " Configure alchemist for Elixir development
 Plug 'slashmili/alchemist.vim'
+
+" Shopify Specific Plugins
+Plug 'Shopify/vim-devilish'
+Plug 'Shopify/shadowenv.vim'
 
 call plug#end()
 " }}}
@@ -96,17 +110,14 @@ cnoremap \>s/ \>s/\v
 tnoremap <Esc> <C-\><C-n>
 " }}}
 
-" Enable deoplete for autocompletion {{{
-let g:deoplete#enable_at_startup = 1
-" }}}
-
 " Helper Functions and Mappings {{{
 " Easily manage quick fix windows
 map <silent> <C-n> :cnext<CR>
 map <silent> <C-m> :cprevious<CR>
 nnoremap <silent> <leader>q :cclose<CR>
 
-" Tab between buffers
+" Buffer Navigation
+nnoremap <silent> ; :BufExplorer<CR>
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
 nnoremap <silent> <leader>x :bp\|bd #<CR>
@@ -156,9 +167,9 @@ nnoremap gusq :%s/\v[‘’]/'/g<cr>
 " }}}
 
 " neomake {{{
-let g:neomake_elixir_enabled_makers = []
-let g:neomake_go_enabled_makers = ['go']
-let g:neomake_ruby_enabled_makers = ['mri']
+" let g:neomake_elixir_enabled_makers = []
+" let g:neomake_go_enabled_makers = ['go']
+" let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
 " }}}
 
 " emmet-vim {{{
@@ -224,32 +235,195 @@ let g:jsx_ext_required = 0
 " Completion & Snippets {{{
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Load personal snippets
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" " Use <c-space> to trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
+
+" " Use <c-space> to trigger completion.
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
+
+" " Use `[g` and `]g` to navigate diagnostics
+" " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" " GoTo code navigation.
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   elseif (coc#rpc#ready())
+"     call CocActionAsync('doHover')
+"   else
+"     execute '!' . &keywordprg . " " . expand('<cword>')
+"   endif
+" endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+" nmap <leader>rn <Plug>(coc-rename)
+" }}}
+
+" Snippets {{{
+" Use <C-l> for trigger snippet expand.
+" imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+" vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+" let g:coc_snippet_next = '<c-j>'
+
+" " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+" let g:coc_snippet_prev = '<c-k>'
+
+" " Use <C-j> for both expand and jump (make expand higher priority.)
+" imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+" xmap <leader>x  <Plug>(coc-convert-snippet)
 " }}}
 
 " Ctrlp {{{
 
-let g:ctrlp_match_window = "bottom,order:btt"   " Order file matches from bottom to top
-let g:ctrlp_dont_split = 'netrw'                " Prevent from opening a new window
-let g:ctrlp_working_path_mode = 0               " Don't change working directory based on current buffer
+" let g:ctrlp_match_window = "bottom,order:btt"   " Order file matches from bottom to top
+" let g:ctrlp_dont_split = 'netrw'                " Prevent from opening a new window
+" let g:ctrlp_working_path_mode = 0               " Don't change working directory based on current buffer
 
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-else
-  " Use the silver search if ripgrep is missing
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -U'
-  let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp' " Persist the CtrlP cache
-  let g:ctrlp_use_caching = 1                     " Enable CtrlP caching
-endif
+" if executable('rg')
+"   set grepprg=rg\ --color=never
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"   let g:ctrlp_use_caching = 0
+" else
+"   " Use the silver search if ripgrep is missing
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -U'
+"   let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp' " Persist the CtrlP cache
+"   let g:ctrlp_use_caching = 1                     " Enable CtrlP caching
+" endif
 
 " }}}
+
+" LSP, Autocomplete, Snippets
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  },
+}
+
+-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+local servers = { 'clangd', 'solargraph', 'sorbet', 'tsserver' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    -- on_attach = my_custom_on_attach,
+    capabilities = capabilities,
+  }
+end
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      elseif luasnip.expand_or_jumpable() then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
+EOF
+
+" }}}
+
+
+" Telescope {{{
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <c-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua require('telescope').load_extension('fzf')
+" }}}
+
 
 " Auto-commands {{{
 if has("autocmd")
@@ -257,7 +431,7 @@ if has("autocmd")
   autocmd BufWinEnter,WinEnter term://* startinsert
 
   " Execute NeoMake makers
-  autocmd BufWritePost * Neomake
+  " autocmd BufWritePost * Neomake
 
   " StripTrailingWhitespaces
   autocmd BufWritePre * Stripwhitespace

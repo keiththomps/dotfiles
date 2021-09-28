@@ -46,3 +46,5 @@ ${command_status} %{$reset_color%} '
 
 # Show ruby, branch, sha, and repo dirty status on right side
 RPROMPT='%{$fg[white]%}$(ruby_info)$(prompt_char)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }

@@ -7,7 +7,7 @@ task :deps do
   if RUBY_PLATFORM.downcase.include?('darwin')
     # Install mac specific dependencies and apply configuration
     # `brew bundle`
-    `./macos_defaults.sh`
+    # `./macos_defaults.sh`
   end
 
   # Install python dependencies
@@ -51,4 +51,4 @@ task :vim do
 end
 
 desc 'Link dotfiles and setup vim'
-task :default => [:deps, :link]
+task :default => [:deps, :link, :vim]

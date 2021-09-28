@@ -2,10 +2,8 @@
 # ENVIRONMENT VARIABLES #
 #########################
 
-# Prevent macOS > 10.15 default interactive shell message
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
 # No brainer, default to Vim
+alias vim="nvim"
 export EDITOR="vim"
 export VIMCONFIG="$HOME/.vim"
 export VIMDATA="$HOME/.vim"
@@ -21,33 +19,11 @@ export LSCOLOR=""
 # Set Path
 export PATH=$HOME/.bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
 
-# GOPATH
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export GODIR=$GOPATH/src/github.com/keiththomps
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export PATH=$GOBIN:$PATH
-
-alias gopath="cd $GOPATH"
-alias godir="cd $GODIR"
-alias gosrc="cd $GOPATH/src"
-
 # Add Rust/Cargo to the path
 export PATH="$HOME/.cargo/bin:$PATH"
 if [[ -s $HOME/.cargo/env ]] ; then
   source $HOME/.cargo/env
 fi
-
-# Configure chruby
-if [[ -s /usr/local/share/chruby/chruby.sh ]] ; then
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-
-  chruby $(cat $HOME/.ruby-version)
-fi
-
-# Configure direnv
-eval "$(direnv hook $SHELL)"
 
 # ALIASES #
 ###########
@@ -56,16 +32,13 @@ eval "$(direnv hook $SHELL)"
 alias c='clear'
 alias l='ls -al'
 alias bloat='du -k | sort -nr | more'
-alias brokensym='find . -type l ! -exec test -e {} \; -print'
-alias bsym='brokensym'
-alias rbsym='find . -type l ! -exec test -e {} \; -print | xargs rm'
 
 # Bundle Exec
 alias be="bundle exec"
 
 # Git
 alias g='git status -s'
-alias ga='git add'
+alias ga='git add --all'
 alias gb='git branch'
 alias gc='git commit -m'
 alias gca='git commit -am'
@@ -96,22 +69,6 @@ alias dc='docker-compose'
 alias dcu='docker-compose up'
 alias dcr='docker-compose run --rm'
 
-# Docker Machine
-alias dm='docker-machine'
-
-# Quickly enter docker-compose container
-dce() {
-  WORKSPACE=${PWD##*/}
-  docker exec -it $(echo $WORKSPACE | tr -d _ | tr -d -)_${1}_1 bash
-}
-
-alias dapp='dce app'
-
-# Expose Docker environment variables by default if `default` machine is running
-# if [ "$(docker-machine status default)" == "Running" ]; then
-#   eval $(docker-machine env default)
-# fi
-
 # Flush DNS Cache
 alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
@@ -122,3 +79,12 @@ alias r='exec $SHELL'
 function rdev() {
   WORKSPACE=$1 tmuxp load ~/.tmuxp/rails_dev.yaml
 }
+
+# Dev setup
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+# Nix setup
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# Chruby setup
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } 

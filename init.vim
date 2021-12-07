@@ -21,6 +21,7 @@ Plug 'hrsh7th/nvim-cmp' " -- Autocompletion plugin
 Plug 'hrsh7th/cmp-nvim-lsp' " -- LSP source for nvim-cmp
 Plug 'saadparwaiz1/cmp_luasnip' " -- Snippets source for nvim-cmp
 Plug 'L3MON4D3/LuaSnip' " -- Snippets plugin
+Plug 'mrjones2014/dash.nvim' " -- Dash Integration
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -41,7 +42,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim'
 
 " Shopify Specific Plugins
-Plug 'Shopify/vim-devilish'
 Plug 'Shopify/shadowenv.vim'
 
 call plug#end()
@@ -447,7 +447,7 @@ if has("autocmd")
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType javascript nnoremap gp :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote<CR>
+  " autocmd FileType javascript nnoremap gp :silent %!prettier --stdin --stdin-filepath % --trailing-comma all --single-quote<CR>
 
   " Set Syntax Highlighting for odd file types
   augroup filetypedetect

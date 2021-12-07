@@ -48,3 +48,6 @@ ${command_status} %{$reset_color%} '
 RPROMPT='%{$fg[white]%}$(ruby_info)$(prompt_char)$(~/bin/git-cwd-info.sh)%{$reset_colors%}'
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+if [ -e /Users/keith/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/keith/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)

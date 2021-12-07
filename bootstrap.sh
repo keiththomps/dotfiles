@@ -6,7 +6,7 @@ dotfiles=(
   ".bashrc"
   "bin"
   ".gemrc"
-  # ".gitconfig"
+  ".gitconfig"
   ".githelpers"
   ".inputrc"
   ".irbrc"
@@ -48,7 +48,7 @@ done
 # Install Dependencies
 
 if [ $SPIN ]; then
-  apt-get install -y \
+  sudo apt-get install -y \
     neovim \
     python-neovim \
     python3-neovim \

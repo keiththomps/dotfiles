@@ -1,9 +1,7 @@
 [user]
   name = Keith Thompson
-	email = me@keiththomps.com
 [core]
   editor = vim
-  excludesfile = ~/.gitignore_global
 [color]
   ui = auto
   diff = auto
@@ -41,5 +39,3 @@
   tool = vimdiff
 [push]
 	default = current
-[credential]
-  helper = osxkeychain

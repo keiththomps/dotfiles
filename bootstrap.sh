@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 dotfiles=(
   ".agignore"
@@ -13,7 +13,6 @@ dotfiles=(
   ".pryrc"
   ".shell_defaults"
   ".tmux.conf"
-  # ".tmuxp"
   "init.vim|.config/nvim"
   ".zprofile"
   ".zshrc"
@@ -39,6 +38,9 @@ for file in ${dotfiles[@]}; do
   if [[ -L $linkedFile ]]; then
     echo "Unlinking $linkedFile"
     rm $linkedFile
+  elif [[ -f $lnkedFile ]]; then
+    echo "Removing existing $linkedFile"
+    rm -r $linkedFile
   fi
 
   echo "Linking $linkedFile"

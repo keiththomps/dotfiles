@@ -1,14 +1,9 @@
-Prerequisites
--------------
-* NeoVim (`brew install neovim`)
-* Ruby with Bundler and Rake installed
-
 Installation
 ------------
 1. Clone using `git clone https://github.com/keiththomps/dotfiles.git`
-3. Modify the dotfiles you'd like to link in _dotfile_list.rb_
-4. Run `rake`
-5. Enjoy your new fangled environment!
+1. Modify the dotfiles you'd like to link in _dotfile_list.rb_
+1. Run `./bootstrap.sh`
+1. Enjoy your new fangled environment!
 
 Additional Vim Info
 -------------------

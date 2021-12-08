@@ -38,7 +38,7 @@ for file in ${dotfiles[@]}; do
   if [[ -L $linkedFile ]]; then
     echo "Unlinking $linkedFile"
     rm -rf $linkedFile
-  elif [[ -f $lnkedFile ]]; then
+  elif [[ -f $linkedFile ]]; then
     echo "Removing existing $linkedFile"
     rm -rf $linkedFile
   fi
@@ -83,6 +83,7 @@ if [ $SPIN ]; then
   fi
 fi
 
+# Add darwin steps here
 
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
   # Install Plug for NeoVim Plugins

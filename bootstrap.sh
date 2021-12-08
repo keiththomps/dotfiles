@@ -58,7 +58,7 @@ if [ $SPIN ]; then
     ripgrep \
     tree \
     tmux \
-    the_silver_searcher \
+    the_silver_searcher
 fi
 
 
@@ -68,4 +68,3 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 echo "Updating NeoVim Plugins"
 nvim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
-

@@ -21,7 +21,6 @@ Plug 'hrsh7th/nvim-cmp' " -- Autocompletion plugin
 Plug 'hrsh7th/cmp-nvim-lsp' " -- LSP source for nvim-cmp
 Plug 'saadparwaiz1/cmp_luasnip' " -- Snippets source for nvim-cmp
 Plug 'L3MON4D3/LuaSnip' " -- Snippets plugin
-Plug 'mrjones2014/dash.nvim' " -- Dash Integration
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'

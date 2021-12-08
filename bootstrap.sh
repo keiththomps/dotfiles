@@ -37,10 +37,10 @@ for file in ${dotfiles[@]}; do
 
   if [[ -L $linkedFile ]]; then
     echo "Unlinking $linkedFile"
-    rm $linkedFile
+    rm -rf $linkedFile
   elif [[ -f $lnkedFile ]]; then
     echo "Removing existing $linkedFile"
-    rm -r $linkedFile
+    rm -rf $linkedFile
   fi
 
   echo "Linking $linkedFile"
@@ -51,10 +51,10 @@ done
 
 if [ $SPIN ]; then
   sudo apt-get install -y \
-    python3-neovim \
-    ruby-neovim \
+    python3-pip \
     ripgrep \
     tree \
+    fzf \
     tmux
 
   # Fetch App Image for NeoVim
@@ -67,12 +67,24 @@ if [ $SPIN ]; then
   ./nvim.appimage --appimage-extract
   sudo rm -f /usr/local/bin/nvim
   sudo ln -s $PWD/squashfs-root/usr/bin/nvim /usr/local/bin/nvim
+
+  python3.9 -m pip install neovim
+  sudo gem install neovim
+  npm -g install neovim
+
+  if [[ ! -f /usr/local/bin/tree-sitter ]]; then
+    # Install Tree-Sitter
+    TS_VERSION="v0.20.1"
+    wget "https://github.com/tree-sitter/tree-sitter/releases/download/{$TS_VERSION}/tree-sitter-linux-x64.gz"
+    gunzip tree-sitter-linux-x64.gz
+    chmod u+x tree-sitter-linux-x64
+    sudo mv tree-sitter-linux-x64 /usr/local/bin/tree-sitter
+  fi
 fi
 
 
-# Set up NeoVim pluggins
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-echo "Updating NeoVim Plugins"
-nvim +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
+if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
+  # Install Plug for NeoVim Plugins
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi

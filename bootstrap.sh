@@ -63,6 +63,7 @@ if [ $SPIN ]; then
   cd $HOME/dotfiles/tmp
   rm -rf nvim.appimage squashfs-root
   wget "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
+  chmod u+x nvim.appimage
   ./nvim.appimage --appimage-extract
   sudo rm -f /usr/local/bin/nvim
   sudo ln -s $PWD/squashfs-root/usr/bin/nvim /usr/local/bin/nvim

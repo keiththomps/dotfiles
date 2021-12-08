@@ -50,6 +50,7 @@ done
 # Install Dependencies
 
 if [ $SPIN ]; then
+  sudo apt-get remove -y neovim
   sudo apt-get install -y \
     python3-pip \
     ripgrep \

@@ -51,14 +51,21 @@ done
 
 if [ $SPIN ]; then
   sudo apt-get install -y \
-    neovim \
-    python-neovim \
     python3-neovim \
     ruby-neovim \
     ripgrep \
     tree \
-    tmux \
-    the_silver_searcher
+    tmux
+
+  # Fetch App Image for NeoVim
+  NVIM_VERSION="v0.6.0"
+  mkdir -p $HOME/dotfiles/tmp
+  cd $HOME/dotfiles/tmp
+  rm -rf nvim.appimage squashfs-root
+  wget "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
+  ./nvim.appimage --appimage-extract
+  sudo rm -f /usr/local/bin/nvim
+  sudo ln -s $PWD/squashfs-root/usr/bin/nvim /usr/local/bin/nvim
 fi
 
 

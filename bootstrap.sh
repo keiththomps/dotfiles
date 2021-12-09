@@ -6,7 +6,7 @@ dotfiles=(
   ".bashrc"
   "bin"
   ".gemrc"
-  ".gitconfig"
+  # ".gitconfig"
   ".githelpers"
   ".inputrc"
   ".irbrc"

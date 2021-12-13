@@ -32,6 +32,8 @@ fi
 alias c='clear'
 alias l='ls -al'
 alias bloat='du -k | sort -nr | more'
+alias sc='systemctl'
+alias jc='journalctl'
 
 # Bundle Exec
 alias be="bundle exec"

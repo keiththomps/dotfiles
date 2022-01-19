@@ -59,7 +59,7 @@ if [ $SPIN ]; then
     tmux
 
   # Fetch App Image for NeoVim
-  NVIM_VERSION="v0.6.0"
+  NVIM_VERSION="v0.6.1"
   mkdir -p $HOME/dotfiles/tmp
   cd $HOME/dotfiles/tmp
   rm -rf nvim.appimage squashfs-root
@@ -76,11 +76,13 @@ if [ $SPIN ]; then
   if [[ ! -f /usr/local/bin/tree-sitter ]]; then
     # Install Tree-Sitter
     TS_VERSION="v0.20.1"
-    wget "https://github.com/tree-sitter/tree-sitter/releases/download/{$TS_VERSION}/tree-sitter-linux-x64.gz"
+    wget "https://github.com/tree-sitter/tree-sitter/releases/download/${TS_VERSION}/tree-sitter-linux-x64.gz"
     gunzip tree-sitter-linux-x64.gz
     chmod u+x tree-sitter-linux-x64
     sudo mv tree-sitter-linux-x64 /usr/local/bin/tree-sitter
   fi
+
+  rm -rf $HOME/dotfiles/tmp
 fi
 
 # Add darwin steps here
@@ -89,7 +91,10 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
   # Install Plug for NeoVim Plugins
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-  # Install and Upgrade NeoVim Plugins
-  nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
 fi
+
+# Install and Upgrade NeoVim Plugins
+nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
+
+# Install global gems for NeoVim
+gem install solargraph sorbet

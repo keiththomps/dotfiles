@@ -82,6 +82,7 @@ if [ $SPIN ]; then
     sudo mv tree-sitter-linux-x64 /usr/local/bin/tree-sitter
   fi
 
+  cd $HOME/dotfiles
   rm -rf $HOME/dotfiles/tmp
 fi
 
@@ -97,4 +98,4 @@ fi
 nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
 
 # Install global gems for NeoVim
-gem install solargraph sorbet
+sudo gem install solargraph sorbet

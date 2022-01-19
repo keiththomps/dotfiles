@@ -89,4 +89,7 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
   # Install Plug for NeoVim Plugins
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  # Install and Upgrade NeoVim Plugins
+  nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
 fi

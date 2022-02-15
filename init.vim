@@ -97,7 +97,21 @@ set completeopt=noinsert,menuone,noselect
 let mapleader = ","
 
 " Send all vim registers to the mac clipboard
-set clipboard=unnamed
+set clipboard+=unnamedplus
+if executable("pbcopy") && executable("pbpaste")
+  let g:clipboard = {
+    \   'name': 'hasPbCopy',
+    \   'copy': {
+    \      '+': ['pbcopy'],
+    \      '*': ['pbcopy'],
+    \    },
+    \   'paste': {
+    \      '+': ['pbpaste'],
+    \      '*': ['pbpaste'],
+    \   },
+    \   'cache_enabled': 1,
+    \ }
+endif
 
 " Default to magic mode when using substitution
 cnoremap %s/ %s/\v

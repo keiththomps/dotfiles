@@ -94,7 +94,7 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-if [[ which nvim ]]; then
+if [[ -n $(command -v nvim) ]]; then
   # Install and Upgrade NeoVim Plugins
   nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
 fi

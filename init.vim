@@ -1,23 +1,21 @@
 " Plug {{{
 call plug#begin('~/.config/nvim/plugged')
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'c-brenn/phoenix.vim'
-Plug 'fatih/vim-go'
 Plug 'vim-test/vim-test'
-Plug 'junegunn/vader.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
 
 " LSP and Treesitter (nvim 0.5.0 enhancements)
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'hrsh7th/nvim-cmp' " -- Autocompletion plugin
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/cmp-nvim-lsp' " -- LSP source for nvim-cmp
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp' " -- Autocompletion plugin
 Plug 'saadparwaiz1/cmp_luasnip' " -- Snippets source for nvim-cmp
 Plug 'L3MON4D3/LuaSnip' " -- Snippets plugin
 Plug 'rafamadriz/friendly-snippets' " -- Snippet library
@@ -31,7 +29,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'dense-analysis/ale'
 
 " Vim, Tmux, and Airline theming
-Plug 'vim-airline/vim-airline'
 Plug 'dracula/vim'
 
 " Language support
@@ -178,14 +175,6 @@ nnoremap gudq :%s/\v[“”]/"/g<cr>
 nnoremap gusq :%s/\v[‘’]/'/g<cr>
 " }}}
 
-" emmet-vim {{{
-let g:user_emmet_settings = {
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\}
-" }}}
-
 " HTML Escaping {{{
 nnoremap <Leader>h :'[,']call HtmlEscape()<CR>
 vnoremap <Leader>h :call HtmlEscape()<CR>
@@ -200,27 +189,6 @@ endfunction
 " vim-markdown {{{
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
-" }}}
-
-" vim-go {{{
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_list_type = "quickfix"
-let g:go_fmt_command = "goimports"
-let g:go_snippet_engine = "neosnippet"
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_extra_types = 1
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
-" }}}
-
-" vim-json {{{
-let g:vim_json_syntax_conceal = 0
 " }}}
 
 " vim-test {{{
@@ -245,10 +213,12 @@ local ok1, nvim_lsp = pcall(require, 'lspconfig')
 local ok2, luasnip = pcall(require, 'luasnip')
 local ok3, cmp = pcall(require, 'cmp')
 
+
 if ok1 and ok2 and ok3 then
   luasnip.filetype_extend("ruby", {"rails"})
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -352,6 +322,21 @@ if ok1 and ok2 and ok3 then
   }
 end
 
+local ok, _ = pcall(require, 'nvim-treesitter.configs')
+
+if ok then
+  require('nvim-treesitter.configs').setup {
+    -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = "maintained",
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+  }
+end
+
 EOF
 
 " }}}
@@ -369,6 +354,13 @@ if exists('*Telescope')
 endif
 " }}}
 
+" Ale config {{{
+let g:ale_fixers = {
+  \ 'ruby': ['rubocop', 'sorbet'],
+  \ }
+
+let g:ale_fix_on_save = 1
+" }}}
 
 " Auto-commands {{{
 if has("autocmd")

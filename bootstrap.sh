@@ -94,8 +94,10 @@ if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-# Install and Upgrade NeoVim Plugins
-nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
+if [[ which nvim ]]; then
+  # Install and Upgrade NeoVim Plugins
+  nvim +silent +PlugUpgrade +PlugInstall +PlugUpdate +PlugClean +q +q
+fi
 
 # Install global gems for NeoVim
-sudo gem install solargraph sorbet
+sudo gem install sorbet

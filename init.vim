@@ -23,13 +23,15 @@ Plug 'rafamadriz/friendly-snippets' " -- Snippet library
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make' }
 
 " Async linting
 Plug 'dense-analysis/ale'
 
 " Vim, Tmux, and Airline theming
-Plug 'dracula/vim'
+Plug 'Mofiqul/dracula.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Language support
 Plug 'sheerun/vim-polyglot'
@@ -206,6 +208,23 @@ nmap <silent> <leader>g :TestVisit<CR>
 let g:jsx_ext_required = 0
 " }}}
 
+" LuaLine {{{
+lua << EOF
+
+local ok, lualine = pcall(require, 'lualine')
+local ok2, icons = pcall(require, 'nvim-web-devicons')
+
+if ok and ok2 then
+  icons.setup()
+  lualine.setup {
+    options = {
+      theme = 'dracula-nvim'
+    }
+  }
+end
+EOF
+" }}}
+
 " LSP, Autocomplete, Snippets
 
 lua << EOF
@@ -325,9 +344,15 @@ end
 local ok, _ = pcall(require, 'nvim-treesitter.configs')
 
 if ok then
+  if vim.env.SPIN then
+    ensure_installed = {'ruby', 'typescript', 'javascript', 'css', 'lua', 'vim', 'go', 'bash', 'graphql', 'html', 'yaml', 'dockerfile'}
+  else
+    ensure_installed = 'maintained'
+  end
+
   require('nvim-treesitter.configs').setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "maintained",
+    ensure_installed = ensure_installed,
     highlight = {
       enable = true,
     },
@@ -355,8 +380,6 @@ local ok, telescope = pcall(require, 'telescope')
 
 if ok then
   local actions = require('telescope.actions')
-
-  telescope.load_extension('fzf')
 
   telescope.setup{
     defaults = {

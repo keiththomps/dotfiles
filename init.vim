@@ -373,6 +373,8 @@ EOF
 " }}}
 
 " Ale config {{{
+let g:ale_ruby_sorbet_executable='bundle'
+let g:ale_ruby_rubocop_executable='bundle'
 let g:ale_fixers = {
   \ 'ruby': ['rubocop', 'sorbet'],
   \ }

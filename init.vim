@@ -349,9 +349,27 @@ nnoremap <leader>lg <cmd>Telescope live_grep<cr>
 nnoremap <silent>; <cmd>Telescope buffers<cr>
 nnoremap <leader>lh <cmd>Telescope help_tags<cr>
 
-if exists('*Telescope')
-  lua require('telescope').load_extension('fzf')
-endif
+lua << EOF
+
+local ok, telescope = pcall(require, 'telescope')
+
+if ok then
+  local actions = require('telescope.actions')
+
+  telescope.load_extension('fzf')
+
+  telescope.setup{
+    defaults = {
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close
+        }
+      }
+    }
+  }
+end
+
+EOF
 " }}}
 
 " Ale config {{{

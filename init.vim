@@ -402,7 +402,7 @@ let g:ale_fixers = {
   \ 'ruby': ['rubocop', 'sorbet'],
   \ }
 
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 " }}}
 
 " Auto-commands {{{

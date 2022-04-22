@@ -17,7 +17,7 @@ export CLICOLOR="Yes"
 export LSCOLOR=""
 
 # Set Path
-export PATH=$HOME/.bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
+export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
 
 # Add Rust/Cargo to the path
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -76,6 +76,9 @@ alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
 # Reload SHELL
 alias r='exec $SHELL'
+
+# Ripgrep as Silver Searcher
+if ! command -v ag &> /dev/null; then alias ag=rg; fi
 
 # Tmux project orchestration
 function rdev() {

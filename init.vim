@@ -10,7 +10,6 @@ Plug 'tpope/vim-surround'
 
 " LSP and Treesitter (nvim 0.5.0 enhancements)
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'hrsh7th/cmp-nvim-lsp' " -- LSP source for nvim-cmp
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -23,7 +22,6 @@ Plug 'rafamadriz/friendly-snippets' " -- Snippet library
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make' }
 
 " Async linting
 Plug 'dense-analysis/ale'
@@ -40,7 +38,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim'
 
 " Shopify Specific Plugins
-Plug 'Shopify/shadowenv.vim'
+if !empty($SPIN)
+  Plug 'Shopify/shadowenv.vim'
+endif
 
 call plug#end()
 " }}}
@@ -97,20 +97,20 @@ let mapleader = ","
 
 " Send all vim registers to the mac clipboard
 set clipboard+=unnamedplus
-if executable("pbcopy") && executable("pbpaste")
-  let g:clipboard = {
-    \   'name': 'hasPbCopy',
-    \   'copy': {
-    \      '+': ['pbcopy'],
-    \      '*': ['pbcopy'],
-    \    },
-    \   'paste': {
-    \      '+': ['pbpaste'],
-    \      '*': ['pbpaste'],
-    \   },
-    \   'cache_enabled': 1,
-    \ }
-endif
+" if executable("pbcopy") && executable("pbpaste")
+"   let g:clipboard = {
+"     \   'name': 'hasPbCopy',
+"     \   'copy': {
+"     \      '+': ['pbcopy'],
+"     \      '*': ['pbcopy'],
+"     \    },
+"     \   'paste': {
+"     \      '+': ['pbpaste'],
+"     \      '*': ['pbpaste'],
+"     \   },
+"     \   'cache_enabled': 1,
+"     \ }
+" endif
 
 " Default to magic mode when using substitution
 cnoremap %s/ %s/\v
@@ -338,27 +338,6 @@ if ok1 and ok2 and ok3 then
     }, {
       { name = 'buffer' },
     }),
-  }
-end
-
-local ok, _ = pcall(require, 'nvim-treesitter.configs')
-
-if ok then
-  if vim.env.SPIN then
-    ensure_installed = {'ruby', 'typescript', 'javascript', 'css', 'lua', 'vim', 'go', 'bash', 'graphql', 'html', 'yaml', 'dockerfile'}
-  else
-    ensure_installed = 'maintained'
-  end
-
-  require('nvim-treesitter.configs').setup {
-    -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = ensure_installed,
-    highlight = {
-      enable = true,
-    },
-    indent = {
-      enable = true,
-    },
   }
 end
 

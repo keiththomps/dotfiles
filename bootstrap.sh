@@ -6,7 +6,6 @@ dotfiles=(
   ".bashrc"
   "bin|.local"
   ".gemrc"
-  # ".gitconfig"
   ".githelpers"
   ".inputrc"
   ".irbrc"
@@ -18,8 +17,19 @@ dotfiles=(
   ".zshrc"
 )
 
+spin_excluded=(
+  ".gitconfig"
+)
+
+# Check for zero length $SPIN
+if [[ -z "${SPIN}" ]]; then
+  all_dotfiles=("${dotfiles[@]}" "${spin_excluded[@]}");
+else
+  all_dotfiles=$dotfiles
+fi
+
 # Link all dotfiles
-for file in ${dotfiles[@]}; do
+for file in ${all_dotfiles[@]}; do
   if [[ $file == *"|"* ]]; then
     localFile=`echo $file | cut -d "|" -f1`
     destinationDir=$HOME/`echo $file | cut -d "|" -f2`
@@ -47,7 +57,7 @@ for file in ${dotfiles[@]}; do
   ln -s $localPath $linkedFile
 done
 
-# Install Dependencies
+# Install Dependencies in Spin
 
 if [ $SPIN ]; then
   sudo apt-get remove -y neovim
@@ -73,23 +83,24 @@ if [ $SPIN ]; then
   sudo gem install neovim
   npm -g install neovim
 
-  if [[ ! -f /usr/local/bin/tree-sitter ]]; then
-    mkdir -p $HOME/dotfiles/tmp
-    cd $HOME/dotfiles/tmp
-
-    # Install Tree-Sitter
-    TS_VERSION="v0.20.6"
-    wget "https://github.com/tree-sitter/tree-sitter/releases/download/${TS_VERSION}/tree-sitter-linux-x64.gz"
-    gunzip tree-sitter-linux-x64.gz
-    chmod u+x tree-sitter-linux-x64
-    sudo mv tree-sitter-linux-x64 /usr/local/bin/tree-sitter
-  fi
-
   cd $HOME/dotfiles
   rm -rf $HOME/dotfiles/tmp
 fi
 
 # Add darwin steps here
+if [[ $OSTYPE == 'darwin'* ]]; then
+  echo "Installing MacOS specifics"
+
+  # Install homebrew
+  if [[ -n $(command -v brew) ]]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  else
+    brew update && brew upgrade
+  fi
+
+  # Install packages via homebrew
+  /usr/local/bin/brew bundle
+fi
 
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
   # Install Plug for NeoVim Plugins

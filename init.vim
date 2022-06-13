@@ -169,7 +169,7 @@ nnoremap gudq :%s/\v[“”]/"/g<cr>
 nnoremap gusq :%s/\v[‘’]/'/g<cr>
 
 " Markdown Preview
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_echo_preview_url = 1
 let g:mkdp_open_to_the_world = 1
 
@@ -430,6 +430,9 @@ if has("autocmd")
 
   " Set ERB specific settings
   au FileType eruby nmap <leader>bp o<% require "pry"; binding.pry %><esc>^
+
+  " Set markdown specific settings
+  au FileType markdown nmap <leader>m :MarkdownPreview<cr>
 
   " Restore cursor position
   autocmd BufReadPost *

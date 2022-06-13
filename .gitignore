@@ -5,3 +5,5 @@
 .vim/colors
 .rbenv-version
 .tmuxp
+node_modules/
+yarn.lock

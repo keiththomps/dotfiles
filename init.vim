@@ -175,7 +175,7 @@ let g:mkdp_open_to_the_world = 1
 
 " Function to Open URL
 fun! Open(url)
-  exec '!open' . ' ' . a:url
+  silent exec '!open' . ' ' . a:url
 endfun
 
 let g:mkdp_browserfunc = 'Open'

@@ -25,7 +25,7 @@ spin_excluded=(
 if [[ -z "${SPIN}" ]]; then
   all_dotfiles=("${dotfiles[@]}" "${spin_excluded[@]}");
 else
-  all_dotfiles=$dotfiles
+  all_dotfiles=("${dotfiles[@]}");
 fi
 
 # Link all dotfiles

@@ -19,6 +19,9 @@ Plug 'saadparwaiz1/cmp_luasnip' " -- Snippets source for nvim-cmp
 Plug 'L3MON4D3/LuaSnip' " -- Snippets plugin
 Plug 'rafamadriz/friendly-snippets' " -- Snippet library
 
+" Markdown Preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -97,20 +100,6 @@ let mapleader = ","
 
 " Send all vim registers to the mac clipboard
 set clipboard+=unnamedplus
-" if executable("pbcopy") && executable("pbpaste")
-"   let g:clipboard = {
-"     \   'name': 'hasPbCopy',
-"     \   'copy': {
-"     \      '+': ['pbcopy'],
-"     \      '*': ['pbcopy'],
-"     \    },
-"     \   'paste': {
-"     \      '+': ['pbpaste'],
-"     \      '*': ['pbpaste'],
-"     \   },
-"     \   'cache_enabled': 1,
-"     \ }
-" endif
 
 " Default to magic mode when using substitution
 cnoremap %s/ %s/\v
@@ -132,6 +121,9 @@ nnoremap <silent> <leader>q :cclose<CR>
 nnoremap <silent> <Tab> :bn<CR>
 nnoremap <silent> <S-Tab> :bp<CR>
 nnoremap <silent> <leader>x :bp\|bd #<CR>
+
+" Improve experience with ErgoDox
+inoremap <C-\> <Esc>
 
 " Capture current file path into clipboard
 function! CaptureFile()
@@ -175,6 +167,18 @@ nnoremap <leader><space> :nohlsearch<cr>
 " Unsmart Quotes
 nnoremap gudq :%s/\v[“”]/"/g<cr>
 nnoremap gusq :%s/\v[‘’]/'/g<cr>
+
+" Markdown Preview
+let g:mkdp_auto_start = 1
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_open_to_the_world = 1
+
+" Function to Open URL
+fun! Open(url)
+  exec '!open' . ' ' . a:url
+endfun
+
+let g:mkdp_browserfunc = 'Open'
 " }}}
 
 " HTML Escaping {{{

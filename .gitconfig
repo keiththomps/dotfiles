@@ -1,5 +1,6 @@
 [user]
   name = Keith Thompson
+  email = keiththomps@hey.com
 [core]
   editor = vim
 [color]

@@ -1,6 +1,6 @@
 [user]
   name = Keith Thompson
-  email = keiththomps@hey.com
+  email = keith.thompson@shopify.com
 [core]
   editor = vim
 [color]
@@ -40,3 +40,5 @@
   tool = vimdiff
 [push]
 	default = current
+[include]
+	path = /Users/keith/.config/dev/gitconfig

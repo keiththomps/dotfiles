@@ -8,8 +8,10 @@ cask_args appdir: "/Applications"
 
 # install software packages and CLIs
 brew "go"
+brew "node"
 brew "python3"
 brew "ripgrep"
 brew "tree"
 brew "reattach-to-user-namespace"
 brew "tmux"
+brew "yarn"

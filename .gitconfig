@@ -1,6 +1,7 @@
 [user]
   name = Keith Thompson
   email = keith.thompson@shopify.com
+	signingkey = B40C3204C9480666
 [core]
   editor = vim
 [color]
@@ -42,3 +43,5 @@
 	default = current
 [include]
 	path = /Users/keith/.config/dev/gitconfig
+[commit]
+	gpgsign = true

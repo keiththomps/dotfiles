@@ -99,7 +99,12 @@ set completeopt=noinsert,menuone,noselect
 let mapleader = ","
 
 " Send all vim registers to the mac clipboard
-set clipboard+=unnamedplus
+if $SPIN == 1
+  let g:clipboard = { 'name': 'pbcopy', 'copy': {'+': 'pbcopy', '*': 'pbcopy'}, 'paste': {'+': 'pbpaste', '*': 'pbpaste'}, 'cache_enabled': 1 }
+else
+  set clipboard+=unnamedplus
+endif
+
 
 " Default to magic mode when using substitution
 cnoremap %s/ %s/\v
@@ -124,6 +129,7 @@ nnoremap <silent> <leader>x :bp\|bd #<CR>
 
 " Improve experience with ErgoDox
 inoremap <C-\> <Esc>
+nnoremap <C-\> <Nop>
 
 " Capture current file path into clipboard
 function! CaptureFile()

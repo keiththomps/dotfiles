@@ -60,6 +60,8 @@ done
 # Install Dependencies in Spin
 
 if [ $SPIN ]; then
+  git config --global commit.gpgsign true
+
   sudo apt-get remove -y neovim
   sudo apt-get install -y \
     python3-pip \

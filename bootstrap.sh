@@ -71,7 +71,7 @@ if [ $SPIN ]; then
     tmux
 
   # Fetch App Image for NeoVim
-  NVIM_VERSION="v0.8.0"
+  NVIM_VERSION="v0.7.0"
   mkdir -p $HOME/dotfiles/tmp
   cd /usr/local/src
   rm -rf nvim.appimage squashfs-root

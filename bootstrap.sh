@@ -70,11 +70,13 @@ if [ $SPIN ]; then
     fzf \
     tmux
 
+  sudo apt autoremove -yqq
+
   # Fetch App Image for NeoVim
-  NVIM_VERSION="v0.7.0"
+  NVIM_VERSION="v0.8.0"
   mkdir -p $HOME/dotfiles/tmp
   cd /usr/local/src
-  rm -rf nvim.appimage squashfs-root
+  sudo rm -rf nvim.appimage squashfs-root
   sudo wget "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
   sudo chmod u+x nvim.appimage
   sudo ./nvim.appimage --appimage-extract

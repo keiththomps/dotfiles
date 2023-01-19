@@ -4,7 +4,7 @@ dotfiles=(
   ".agignore"
   ".bash_profile"
   ".bashrc"
-  "bin|.local"
+  ".bin"
   ".gemrc"
   ".githelpers"
   ".inputrc"

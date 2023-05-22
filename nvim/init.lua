@@ -56,22 +56,22 @@ vim.keymap.set('c', "%s/", "%s/\\v", { noremap = true })
 vim.keymap.set('c', "\\>s/", "\\>s/\\v", { noremap = true })
 
 -- Terminal Mode Mappings
-vim.cmd.tnoremap("<Esc> <C-\\><C-n>")
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 
 -- Helper Functions and Mappings {{{
 -- Easily manage quick fix windows
-vim.cmd.map("<silent> <C-n> :cnext<CR>")
-vim.cmd.map("<silent> <C-m> :cprevious<CR>")
-vim.cmd.nnoremap("<silent> <leader>q :cclose<CR>")
+vim.keymap.set('n', '<C-n>', ':cnext<cr>', { silent = true })
+vim.keymap.set('n', '<C-m>', ':cprevious<cr>', { silent = true })
+vim.keymap.set('n', '<leader>q', ':cclose<cr>', { noremap = true, silent = true })
 
 -- Buffer Navigation
-vim.cmd.nnoremap("<silent> <Tab> :bn<CR>")
-vim.cmd.nnoremap("<silent> <S-Tab> :bp<CR>")
-vim.cmd.nnoremap("<silent> <leader>x :bp\\|bd #<CR>")
+vim.keymap.set('n', '<Tab>', ':bn<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-Tab>', ':bp<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>x', ':bp | bd #<cr>', { noremap = true, silent = true })
 
 -- Improve experience with ErgoDox
-vim.cmd.inoremap("<C-\\> <Esc>")
-vim.cmd.nnoremap("<C-\\> <Nop>")
+vim.keymap.set('i', '<C-\\>', '<Esc>', { noremap = true })
+vim.keymap.set('n', '<C-\\>', '<Nop>', { noremap = true })
 
 -- Capture current file path into clipboard
 vim.keymap.set('n', '<leader>f', function()
@@ -100,5 +100,14 @@ vim.keymap.set('n', '<leader>i', 'mmgg-G`m<CR>')
 vim.keymap.set('n', '<leader><space>', ':nohlsearch<cr>', { noremap = true })
 
 -- Unsmart Quotes
-vim.cmd.nnoremap('gudq :%s/\\v[“”]/"/g<cr>')
-vim.cmd.nnoremap("gusq :%s/\\v[‘’]/'/g<cr>")
+vim.keymap.set('n', 'gudq', ':%s/\\v[“”]/"/g<cr>')
+vim.keymap.set('n', 'gusq', ":%s/\\v[‘’]/'/g<cr>")
+
+-- vim-test configs
+vim.g['test#strategy'] = 'neovim'
+
+vim.keymap.set('n', '<leader>t', ':TestFile<CR>', { silent = true })
+vim.keymap.set('n', '<leader>T', ':TestNearest<CR>', { silent = true })
+vim.keymap.set('n', '<leader>a', ':TestSuite<CR>', { silent = true })
+vim.keymap.set('n', '<leader>l', ':TestLast<CR>', { silent = true })
+vim.keymap.set('n', '<leader>g', ':TestVisit<CR>', { silent = true })

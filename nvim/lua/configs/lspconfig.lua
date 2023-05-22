@@ -1,22 +1,19 @@
 require("mason").setup()
 require("mason-lspconfig").setup {
   ensure_installed = {
-    'ruby_ls',
-    'sorbet',
-    'sumneko_lua'
+    'lua_ls',
   }
 }
+
 require("mason-null-ls").setup {
   ensure_installed = {
     'stylua',
-    'rubocop',
-    'erb_lint'
   },
-  automatic_setup = true,
-  automatic_installation = false
+  automatic_installation = false,
+  handlers = {}
 }
+
 require("null-ls").setup()
-require("mason-null-ls").setup_handlers()
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

@@ -11,6 +11,9 @@ export VIMDATA="$HOME/.vim"
 # Tmux auto title
 export DISABLE_AUTO_TITLE="true"
 
+# GPG Configuration
+export GPG_TTY=$(tty)
+
 # Color LS output to differentiate between directories and files
 export LS_OPTIONS="--color=auto"
 export CLICOLOR="Yes"
@@ -88,8 +91,23 @@ function rdev() {
 # Dev setup
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
+# Keychain loader if present
+type keychain >/dev/null 2>&1 && eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
+
+# asdf setup
+if [ -e $HOME/.asdf/asdf.sh ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
+
 # Nix setup
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # Chruby setup
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+
+# Nvm setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

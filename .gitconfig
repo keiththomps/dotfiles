@@ -1,7 +1,7 @@
 [user]
   name = Keith Thompson
   email = keith.thompson@shopify.com
-	signingkey = B40C3204C9480666
+	signingkey = B472A96FC330B20F
 [core]
   editor = vim
 [color]

@@ -67,8 +67,11 @@ done
 
 # Install Dependencies in Spin
 
-if [ $SPIN ]; then
-  git config --global commit.gpgsign true
+if [[ $OSTYPE == 'linux'* ]]; then
+  echo "Installing Linux specifics"
+  if [ $SPIN ]; then
+    git config --global commit.gpgsign true
+  fi
 
   sudo apt-get remove -y neovim
   sudo apt-get install -y \
@@ -81,7 +84,7 @@ if [ $SPIN ]; then
   sudo apt autoremove -yqq
 
   # Fetch App Image for NeoVim
-  NVIM_VERSION="v0.8.3"
+  NVIM_VERSION="v0.9.0"
   mkdir -p $HOME/dotfiles/tmp
   cd /usr/local/src
   sudo rm -rf nvim.appimage squashfs-root
@@ -91,9 +94,18 @@ if [ $SPIN ]; then
   sudo rm -f /usr/local/bin/nvim
   sudo ln -s $PWD/squashfs-root/usr/bin/nvim /usr/local/bin/nvim
 
-  python3.9 -m pip install neovim
-  sudo gem install neovim
-  npm -g install neovim
+
+  if [[ -n $(command -v python3.9) ]]; then
+    python3.9 -m pip install neovim
+  fi
+
+  if [[ -n $(command -v gem) ]]; then
+    sudo gem install neovim
+  fi
+
+  if [[ -n $(command -v gem) ]]; then
+    npm -g install neovim
+  fi
 
   cd $HOME/dotfiles
   rm -rf $HOME/dotfiles/tmp
@@ -114,10 +126,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   /usr/local/bin/brew bundle
 fi
 
-# if [[ -n $(command -v nvim) ]]; then
-#   # Install Packer and Plugins
-#   nvim --headless -c 'autocmd User PackerComplete quitall' -c 'Mason' -c 'PackerSync'
-# fi
-
 # Install global gems for NeoVim
-sudo gem install sorbet
+if [ $SPIN ]; then
+  sudo gem install sorbet
+fi

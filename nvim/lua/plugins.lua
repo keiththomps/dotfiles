@@ -19,7 +19,10 @@ return require('packer').startup(function(use)
   use 'vim-test/vim-test'
 
   -- LSP, Telescope, Treesitter
-  use 'williamboman/mason.nvim'
+  use {
+    'williamboman/mason.nvim',
+    run = ":MasonUpdate"
+  }
   use 'jose-elias-alvarez/null-ls.nvim'
   use 'williamboman/mason-lspconfig.nvim'
   use 'jay-babu/mason-null-ls.nvim'
@@ -33,26 +36,25 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
+  
+  -- Snippets
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
+  use 'saadparwaiz1/cmp_luasnip'
 
   -- Autocomplete
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
   use { 'hrsh7th/cmp-path' }
   use { 'hrsh7th/cmp-cmdline' }
-  use { 
-    'hrsh7th/nvim-cmp',
-    after = { 'luasnip' },
-    config = function() require('configs.cmp') end
-  }
-
-  -- Snippets
-  use 'L3MON4D3/LuaSnip'
-  use 'rafamadriz/friendly-snippets'
-  use 'saadparwaiz1/cmp_luasnip'
+  use { 'hrsh7th/nvim-cmp', config = function() require('configs.cmp') end }
 
   -- Indent detection
   use { 'Darazaki/indent-o-matic', config = function() require('indent-o-matic').setup {} end }
   use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup {} end }
+
+  -- Copilot
+  use { 'github/copilot.vim', branche = 'release' }
 
   -- Appearance
   use { 'Mofiqul/dracula.nvim', as = 'dracula' }

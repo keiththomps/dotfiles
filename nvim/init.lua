@@ -80,7 +80,7 @@ vim.keymap.set("n", "<leader>f", function() vim.fn.setreg("+", vim.fn.expand "%"
 vim.keymap.set("n", "<leader>n", function()
   local old_name = vim.fn.expand "%"
 
-  vim.ui.input({ prompt = "New file name: " }, function(new_name)
+  vim.ui.input({ prompt = "New file name: ", default = old_name }, function(new_name)
     if new_name ~= "" and new_name ~= old_name then
       vim.fn.execute(":saveas " .. new_name)
       vim.fn.execute(":silent !rm " .. old_name)

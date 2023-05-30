@@ -37,6 +37,13 @@ return require("packer").startup(function(use)
     run = "make",
   }
 
+  -- Treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function() require "configs.treesitter" end,
+  }
+
   -- Copilot
   use {
     "zbirenbaum/copilot.lua",

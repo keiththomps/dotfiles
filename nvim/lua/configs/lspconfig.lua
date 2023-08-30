@@ -5,36 +5,6 @@ require("mason-lspconfig").setup {
   },
 }
 
-require("mason-null-ls").setup {
-  ensure_installed = {
-    "stylua",
-  },
-  automatic_installation = false,
-  handlers = {},
-}
-
-local null_ls = require "null-ls"
-
-local conditional = function(fn)
-  local utils = require("null-ls.utils").make_conditional_utils()
-  return fn(utils)
-end
-
-null_ls.setup {
-  sources = {
-    conditional(
-      function(utils)
-        return utils.root_has_file "Gemfile"
-            and null_ls.builtins.formatting.rubocop.with {
-              command = "bundle",
-              args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.formatting.rubocop._opts.args),
-            }
-          or null_ls.builtins.formatting.rubocop
-      end
-    ),
-  },
-}
-
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }

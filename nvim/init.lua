@@ -8,7 +8,7 @@ vim.cmd.colorscheme "dracula"
 -- Configure Settings
 vim.cmd.filetype "off"
 vim.cmd.filetype "plugin indent on"
-vim.o.nocompatible = true
+vim.o.compatible = false
 vim.o.ttyfast = true
 vim.o.laststats = 1
 vim.o.encoding = "utf-8"
@@ -20,9 +20,9 @@ vim.o.hlsearch = true
 vim.o.hidden = true
 vim.o.visualbell = true
 vim.o.number = true
-vim.o.nobackup = true
-vim.o.noswapfile = true
-vim.o.noshowmode = true
+vim.o.backup = false
+vim.o.swapfile = false
+vim.o.showmode = false
 vim.o.title = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2

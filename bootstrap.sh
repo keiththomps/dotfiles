@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 dotfiles=(
+  ".agent-bridge.sh"
   ".agignore"
   ".bash_profile"
   ".bashrc"
@@ -79,12 +80,13 @@ if [[ $OSTYPE == 'linux'* ]]; then
     ripgrep \
     tree \
     fzf \
+    socat \
     tmux
 
   sudo apt autoremove -yqq
 
   # Fetch App Image for NeoVim
-  NVIM_VERSION="v0.9.0"
+  NVIM_VERSION="v0.9.2"
   mkdir -p $HOME/dotfiles/tmp
   cd /usr/local/src
   sudo rm -rf nvim.appimage squashfs-root
@@ -130,3 +132,5 @@ fi
 if [ $SPIN ]; then
   sudo gem install sorbet
 fi
+
+mkdir -p $HOME/.1password

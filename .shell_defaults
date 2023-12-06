@@ -112,8 +112,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # 1Password SSH Management in WSL
-if [ -e $HOME/.agent-bridge.sh ]; then
-  source $HOME/.agent-bridge.sh
+if [[ $OSTYPE == 'linux'* ]]; then
+  if [ -e $HOME/.agent-bridge.sh ]; then
+    source $HOME/.agent-bridge.sh
+  fi
 fi
 
 # Fly.io setup

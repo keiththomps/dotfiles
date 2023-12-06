@@ -15,6 +15,7 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
   -- Baseline Configuration
+  use "tpope/vim-fugitive"
   use "tpope/vim-commentary"
   use "vim-test/vim-test"
 

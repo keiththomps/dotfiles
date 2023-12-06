@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 dotfiles=(
-  ".agent-bridge.sh"
   ".agignore"
   ".bash_profile"
   ".bashrc"
@@ -24,6 +23,7 @@ shopify_config=(
 
 personal_config=(
   ".gitconfig"
+  ".agent-bridge.sh"
 )
 
 function local_file_name() {

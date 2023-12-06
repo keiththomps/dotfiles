@@ -18,13 +18,39 @@ dotfiles=(
   ".zshrc"
 )
 
-spin_excluded=(
+shopify_config=(
+  ".gitconfig_shopify@.gitconfig"
+)
+
+personal_config=(
   ".gitconfig"
 )
 
+function local_file_name() {
+  IFS='@' read -ra ADDR <<< "$1"
+  if [ ${#ADDR[@]} -gt 1 ]; then
+    echo "${ADDR[0]}"
+  else
+    echo "$1"
+  fi
+}
+
+function desired_file_name() {
+  IFS='@' read -ra ADDR <<< "$1"
+  if [ ${#ADDR[@]} -gt 1 ]; then
+    echo "${ADDR[1]}"
+  else
+    echo "$1"
+  fi
+}
+
 # Check for zero length $SPIN
 if [[ -z "${SPIN}" ]]; then
-  all_dotfiles=("${dotfiles[@]}" "${spin_excluded[@]}");
+  if [[ "${SHOPIFY}" == "true" ]]; then
+    all_dotfiles=("${dotfiles[@]}" "${shopify_config[@]}");
+  else
+    all_dotfiles=("${dotfiles[@]}" "${personal_config[@]}");
+  fi
 else
   all_dotfiles=("${dotfiles[@]}");
 fi
@@ -32,9 +58,11 @@ fi
 # Link all dotfiles
 for file in ${all_dotfiles[@]}; do
   if [[ $file == *"|"* ]]; then
-    localFile=`echo $file | cut -d "|" -f1`
+    filePortion=`echo $file | cut -d "|" -f1`
+    localFile=`local_file_name $filePortion`
+    destinationFile=`desired_file_name $filePortion`
     destinationDir=$HOME/`echo $file | cut -d "|" -f2`
-    linkedFile="${destinationDir}/${localFile}"
+    linkedFile="${destinationDir}/${destinationFile}"
     if [[ -L $linkedFile ]]; then
       echo "Unlinking $linkedFile"
       rm -rf $linkedFile
@@ -49,8 +77,9 @@ for file in ${all_dotfiles[@]}; do
     fi
   else
     destinationDir=$HOME
-    localFile=$file
-    linkedFile="${destinationDir}/${localFile}"
+    localFile=`local_file_name $file`
+    destinationFile=`desired_file_name $file`
+    linkedFile="${destinationDir}/${destinationFile}"
     if [[ -L $linkedFile ]]; then
       echo "Unlinking $linkedFile"
       rm -rf $linkedFile
@@ -125,7 +154,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   fi
 
   # Install packages via homebrew
-  /usr/local/bin/brew bundle
+  brew bundle
 fi
 
 # Install global gems for NeoVim

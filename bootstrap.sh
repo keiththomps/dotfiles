@@ -140,6 +140,11 @@ if [[ $OSTYPE == 'linux'* ]]; then
 
   cd $HOME/dotfiles
   rm -rf $HOME/dotfiles/tmp
+
+  if [ -f /etc/spin/secrets/copilot-credentials ]; then
+    mkdir -p "${HOME}/.config/github-copilot"
+    cp /etc/spin/secrets/copilot-credentials "${HOME}/.config/github-copilot/hosts.json"
+  fi
 fi
 
 # Add darwin steps here

@@ -54,11 +54,19 @@ alias gl='git log --oneline --graph'
 alias gla='git log --oneline --graph --all'
 
 # tmux
-alias attach='tmux attach-session -t'
 alias switch='tmux switch-session -t'
 alias tmk='tmux kill-session -t'
 alias tls='tmux ls'
 alias load='tmuxp load'
+
+attach() {
+  if [ -z "$1" ]
+  then
+    tmux attach-session -t 0
+  else
+    tmux attach-session -t "$1"
+  fi
+}
 
 # Docker
 alias de='docker exec'

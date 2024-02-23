@@ -111,4 +111,4 @@ vim.keymap.set("n", "<leader>g", ":TestVisit<CR>", { silent = true })
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 -- Debugger insert
-vim.cmd [[autocmd FileType ruby nnoremap <leader>bp orequire "debug"; binding.break<esc>]]
+vim.cmd [[autocmd FileType ruby nnoremap <leader>bp orequire "pry"; binding.pry<esc>]]

@@ -1,7 +1,16 @@
+local lsp_to_install
+
+if os.getenv("SPIN") then
+  lsp_to_install = { "ruby_ls", "erb-lint" }
+else
+  lsp_to_install = { "elixirls" }
+end
+
 require("mason").setup()
 require("mason-lspconfig").setup {
   ensure_installed = {
     "lua_ls",
+    unpack(lsp_to_install),
   },
 }
 
@@ -35,6 +44,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "gf", function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  if client.resolved_capabilities.document_formatting then
+    for _, filetype in ipairs(client.config.filetypes) do
+      vim.cmd(string.format(
+        "autocmd FileType %s autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)", filetype))
+    end
+  end
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -46,23 +62,14 @@ local lsp_flags = {
 
 local lspconfig = require "lspconfig"
 
-lspconfig["ruby_ls"].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-lspconfig["sorbet"].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-lspconfig["luau_lsp"].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-lspconfig["tsserver"].setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+local lsps = { "ruby_ls", "lua_ls", "elixirls", "sorbet", "luau_lsp", "tsserver" }
+
+for _, lsp in ipairs(lsps) do
+  if lspconfig[lsp] then
+    lspconfig[lsp].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      flags = lsp_flags,
+    }
+  end
+end

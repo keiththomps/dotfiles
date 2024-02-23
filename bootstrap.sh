@@ -103,7 +103,6 @@ if [[ $OSTYPE == 'linux'* ]]; then
     git config --global commit.gpgsign true
   fi
 
-  sudo apt-get remove -y neovim
   sudo apt-get install -y \
     python3-pip \
     ripgrep \
@@ -113,17 +112,6 @@ if [[ $OSTYPE == 'linux'* ]]; then
     tmux
 
   sudo apt autoremove -yqq
-
-  # # Fetch App Image for NeoVim
-  # NVIM_VERSION="v0.9.2"
-  # mkdir -p $HOME/dotfiles/tmp
-  # cd /usr/local/src
-  # sudo rm -rf nvim.appimage squashfs-root
-  # sudo wget "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
-  # sudo chmod u+x nvim.appimage
-  # sudo ./nvim.appimage --appimage-extract
-  # sudo rm -f /usr/local/bin/nvim
-  # sudo ln -s $PWD/squashfs-root/usr/bin/nvim /usr/local/bin/nvim
 
   if [[ -n $(command -v python3.9) ]]; then
     python3.9 -m pip install neovim
@@ -146,7 +134,7 @@ if [[ $OSTYPE == 'linux'* ]]; then
   fi
 
   # Install Neovim packages
-  nvim -n -u nvim/lua/plugins.lua -c 'PackerInstall' -c 'qa'
+  nvim -n -u $HOME/dotfiles/nvim/lua/plugins.lua -c 'PackerSync' -c 'qa'
 fi
 
 # Add darwin steps here

@@ -72,23 +72,19 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+if pcall(require, "cmp_nvim_lsp") then
+  local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
+  local lspconfig = require "lspconfig"
 
-local lspconfig = require "lspconfig"
+  local lsps = { "ruby_ls", "lua_ls", "elixirls", "sorbet", "luau_lsp", "tsserver" }
 
-local lsps = { "ruby_ls", "lua_ls", "elixirls", "sorbet", "luau_lsp", "tsserver" }
-
-for _, lsp in ipairs(lsps) do
-  if lspconfig[lsp] then
-    lspconfig[lsp].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      flags = lsp_flags,
-    }
+  for _, lsp in ipairs(lsps) do
+    if lspconfig[lsp] then
+      lspconfig[lsp].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+    end
   end
 end

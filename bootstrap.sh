@@ -134,7 +134,7 @@ if [[ $OSTYPE == 'linux'* ]]; then
   fi
 
   # Install Neovim packages
-  nvim -n -u $HOME/dotfiles/nvim/lua/plugins.lua -c 'PackerSync' -c 'qa'
+  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 fi
 
 # Add darwin steps here

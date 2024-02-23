@@ -24,6 +24,10 @@ return require("packer").startup(function(use)
     "williamboman/mason.nvim",
     run = ":MasonUpdate",
   }
+  use {
+    "mfussenegger/nvim-lint",
+    "rshkarin/mason-nvim-lint",
+  }
   use "williamboman/mason-lspconfig.nvim"
   use { "neovim/nvim-lspconfig" }
   use {

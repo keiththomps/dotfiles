@@ -1,18 +1,37 @@
 local lsp_to_install
+local linters_by_ft
 
 if os.getenv("SPIN") then
-  lsp_to_install = { "ruby_ls", "erb-lint" }
+  lsp_to_install = { "ruby_ls" }
+  linters_by_ft = {
+    ruby = { "rubocop" },
+    eruby = { "erb_lint" },
+  }
 else
   lsp_to_install = { "elixirls" }
+  linters_by_ft = {}
 end
 
-require("mason").setup()
-require("mason-lspconfig").setup {
-  ensure_installed = {
-    "lua_ls",
-    unpack(lsp_to_install),
-  },
-}
+if pcall(require, "mason") then
+  require("mason").setup()
+end
+
+if pcall(require, "mason-lspconfig") then
+  require("mason-lspconfig").setup {
+    ensure_installed = {
+      "lua_ls",
+      unpack(lsp_to_install),
+    },
+  }
+end
+
+if pcall(require, "lint") then
+  require("lint").linters_by_ft = linters_by_ft
+end
+
+if pcall(require, "mason-nvim-lint") then
+  require("mason-nvim-lint").setup()
+end
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

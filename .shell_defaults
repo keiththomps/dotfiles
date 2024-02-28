@@ -49,9 +49,7 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias grpr='git remote prune origin'
-alias gl='git log --oneline --graph'
-alias gla='git log --oneline --graph --all'
+alias gl='git l'
 
 # tmux
 alias switch='tmux switch-session -t'

@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+#
+# See https://tuple.app/triggers/docs/api-reference#participant-joined for more information on this trigger.
+
+echo TUPLE_TRIGGER_EMAIL $TUPLE_TRIGGER_EMAIL
+echo TUPLE_TRIGGER_FULL_NAME $TUPLE_TRIGGER_FULL_NAME

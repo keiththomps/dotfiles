@@ -7,11 +7,13 @@ dotfiles=(
   ".bin"
   ".gemrc"
   ".githelpers"
+  ".gitmessage"
   ".inputrc"
   ".irbrc"
   ".pryrc"
   ".shell_defaults"
   ".tmux.conf"
+  ".tuple"
   "nvim|.config"
   ".zprofile"
   ".zshrc"
@@ -25,10 +27,6 @@ if [[ -v WSL_DISTRO_NAME ]]; then
   personal_config=(
     ".gitconfig_wsl@.gitconfig"
     ".agent-bridge.sh"
-  )
-else
-  personal_config=(
-    ".gitconfig_wsl@.gitconfig"
   )
 fi
 

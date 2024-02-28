@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+#
+# See https://tuple.app/triggers/docs/api-reference#call-ended for more information on this trigger.
+
+echo TUPLE_TRIGGER_CALL_LENGTH $TUPLE_TRIGGER_CALL_LENGTH

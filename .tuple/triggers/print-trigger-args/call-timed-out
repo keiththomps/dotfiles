@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+#
+# See https://tuple.app/triggers/docs/api-reference#call-timed-out for more information on this trigger.
+
+echo TUPLE_TRIGGER_CALLEE_EMAIL $TUPLE_TRIGGER_CALLEE_EMAIL
+echo TUPLE_TRIGGER_CALLEE_FULL_NAME $TUPLE_TRIGGER_CALLEE_FULL_NAME

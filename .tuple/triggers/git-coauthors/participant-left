@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+# This trigger requires that you have git configured to use a commit message template located at ~/.gitmessage
+# [commit]
+#  template = ~/.gitmessage
+
+email = ENV.fetch("TUPLE_TRIGGER_EMAIL")
+name = ENV.fetch("TUPLE_TRIGGER_FULL_NAME")
+template_path = "~/.gitmessage"
+line = "Co-Authored-By: #{name} <#{email}>"
+
+# Local co-author removal
+if !File.exists?(template_path)
+  exit 0
+else
+  content = File.read(template_path).split("\n")
+  filtered = content.reject { |l| l.include?(line) }
+
+  File.open(template_path, "w") do |f|
+    f.puts(filtered)
+  end
+end
+
+# Spin co-author removal
+spin_instances = JSON.parse(`/usr/local/bin/spin list -H -o "name,status" --json`)
+
+spin_instances.each do |instance|
+  # Only consider live spin instances
+  next if instance["status"] != "available"
+
+  commit_msg = `/usr/local/bin/spin shell #{instance["name"]} -- cat #{template_path}`
+  exists = !commit_msg.include?("cat: #{template_path}: No such file or directory")
+
+  # Only remove co-author line if the git message template exists and it has the co-author already
+  if exists && commit_msg.include?(line)
+    new_commit_msg = commit_msg.split("\n").reject do |l|
+      l.include?(line)
+    end.join("\n")
+
+    `/usr/local/bin/spin shell #{instance["name"]} -- echo "'#{new_commit_msg}' > '#{template_path}'"`
+  end
+end

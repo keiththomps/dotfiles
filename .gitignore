@@ -7,3 +7,4 @@
 .tmuxp
 node_modules/
 yarn.lock
+.tuple/triggers/triggers.log*

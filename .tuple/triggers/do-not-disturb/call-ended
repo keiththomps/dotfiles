@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# # This trigger requires there to be a "shortcut" in Shortcuts.app named "dnd-off" which disables Do Not Disturb.
+# shortcuts run "dnd-off"

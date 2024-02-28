@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# See https://tuple.app/triggers/docs/api-reference#room-joined for more information on this trigger.
+
+echo TUPLE_TRIGGER_IS_SELF $TUPLE_TRIGGER_IS_SELF
+echo TUPLE_TRIGGER_EMAIL $TUPLE_TRIGGER_EMAIL
+echo TUPLE_TRIGGER_FULL_NAME $TUPLE_TRIGGER_FULL_NAME
+echo TUPLE_TRIGGER_ROOM_NAME $TUPLE_TRIGGER_ROOM_NAME

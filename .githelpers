@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Log output:
 #
@@ -27,11 +27,11 @@ show_git_head() {
 }
 
 pretty_git_log() {
-    git log --graph --pretty="tformat:${FORMAT}" $* |
+    git log --graph --color --pretty="tformat:${FORMAT}" $* |
         # Replace (2 years ago) with (2 years)
-        sed -Ee 's/(^[^<]*) ago)/\1)/' |
+        sed -Ee 's/(^[^<]*) ago\)/\1)/' |
         # Replace (2 years, 5 months) with (2 years)
-        sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?)/\1)/' |
+        sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
         # Line columns up based on } delimiter
         column -s '}' -t |
         # Page only if we need to
@@ -39,8 +39,23 @@ pretty_git_log() {
 }
 
 prune_and_delete_merged() {
-    git checkout master
+    git checkout main
     git pull --rebase
     git remote prune origin
     git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
 }
+
+clean_local() {
+    BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    if [ "$BRANCH" != "main" ]; then
+        read -p "Are you sure you want to run while not in main (you run the risk of deleting main)? (y/n) " choice
+        if [ "$choice" != "Y" ] && [ "$choice" != "y" ]; then
+            echo "Nothing done"
+            exit 0
+        fi
+    fi
+    for stale_branch in $(git branch --merged $BRANCH | grep -v $BRANCH); do
+        git branch -d $stale_branch
+    done
+}
+

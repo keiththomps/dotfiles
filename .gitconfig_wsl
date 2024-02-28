@@ -7,6 +7,6 @@
 [gpg "ssh"]
   program = "/mnt/c/Users/Keith/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
 [credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
+  helper = !/usr/bin/gh auth git-credential
 [include]
   path = ~/dotfiles/gitconfig_common

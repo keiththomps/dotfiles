@@ -21,10 +21,16 @@ shopify_config=(
   ".gitconfig_shopify@.gitconfig"
 )
 
-personal_config=(
-  ".gitconfig"
-  ".agent-bridge.sh"
-)
+if [[ -v WSL_DISTRO_NAME ]]; then
+  personal_config=(
+    ".gitconfig_wsl@.gitconfig"
+    ".agent-bridge.sh"
+  )
+else
+  personal_config=(
+    ".gitconfig_wsl@.gitconfig"
+  )
+fi
 
 function local_file_name() {
   IFS='@' read -ra ADDR <<< "$1"

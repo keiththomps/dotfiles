@@ -138,9 +138,6 @@ if [[ $OSTYPE == 'linux'* ]]; then
     mkdir -p "${HOME}/.config/github-copilot"
     cp /etc/spin/secrets/copilot-credentials "${HOME}/.config/github-copilot/hosts.json"
   fi
-
-  # Install Neovim packages
-  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 fi
 
 # Add darwin steps here

@@ -20,12 +20,12 @@ dotfiles=(
 )
 
 shopify_config=(
-  ".gitconfig_shopify@.gitconfig"
+  "gitconfig_shopify@.gitconfig"
 )
 
 if [[ -v WSL_DISTRO_NAME ]]; then
   personal_config=(
-    ".gitconfig_wsl@.gitconfig"
+    "gitconfig_wsl@.gitconfig"
     ".agent-bridge.sh"
   )
 fi

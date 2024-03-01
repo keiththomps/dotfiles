@@ -105,6 +105,7 @@ if [[ $OSTYPE == 'linux'* ]]; then
   echo "Installing Linux specifics"
   if [ $SPIN ]; then
     git config --global commit.gpgsign true
+    git config --global include.path "~/dotfiles/gitconfig_common"
   fi
 
   sudo apt-get install -y \

@@ -136,6 +136,12 @@ if [[ $OSTYPE == 'linux'* ]]; then
     mkdir -p "${HOME}/.config/github-copilot"
     cp /etc/spin/secrets/copilot-credentials "${HOME}/.config/github-copilot/hosts.json"
   fi
+
+  sudo mkdir -p /opt/ejson/keys
+
+  for ejson_file in /etc/spin/secrets/ejson-*; do
+    sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})"
+  done
 fi
 
 # Add darwin steps here

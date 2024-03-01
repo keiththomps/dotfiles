@@ -12,16 +12,18 @@ else
   linters_by_ft = {}
 end
 
+local lsps = {
+  "lua_ls",
+  unpack(lsp_to_install),
+}
+
 if pcall(require, "mason") then
   require("mason").setup()
 end
 
 if pcall(require, "mason-lspconfig") then
   require("mason-lspconfig").setup {
-    ensure_installed = {
-      "lua_ls",
-      unpack(lsp_to_install),
-    },
+    ensure_installed = lsps,
   }
 end
 
@@ -76,8 +78,6 @@ if pcall(require, "cmp_nvim_lsp") then
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   local lspconfig = require "lspconfig"
-
-  local lsps = { "ruby_ls", "lua_ls", "elixirls", "sorbet", "luau_lsp", "tsserver" }
 
   for _, lsp in ipairs(lsps) do
     if lspconfig[lsp] then

@@ -8,15 +8,17 @@ require 'json'
 
 email = ENV.fetch("TUPLE_TRIGGER_EMAIL")
 name = ENV.fetch("TUPLE_TRIGGER_FULL_NAME")
-template_path = "/home/spin/.gitmessage"
+message_file = ".gitmessage"
+local_template_path = File.expand_path("~/#{message_file}")
+spin_template_path = "/home/spin/#{message_file}"
 line = "Co-Authored-By: #{name} <#{email}>"
 
 # Set up local co-author
-exists = File.exists?(template_path)
-local_contents = File.read(template_path) if exists
+exists = File.exists?(local_template_path)
+local_contents = File.read(local_template_path) if exists
 
 if local_contents && local_contents.exclude?(line)
-  File.open(template_path, "a") do |f|
+  File.open(local_template_path, "a") do |f|
     f.puts(line)
   end
 end
@@ -28,13 +30,13 @@ spin_instances.each do |instance|
   # Only consider live spin instances
   next if instance["status"] != "available"
 
-  commit_msg = `/usr/local/bin/spin shell #{instance["name"]} -- cat #{template_path}`
-  exists = !commit_msg.include?("cat: #{template_path}: No such file or directory")
+  commit_msg = `/usr/local/bin/spin shell #{instance["name"]} -- cat #{spin_template_path}`
+  exists = !commit_msg.include?("cat: #{spin_template_path}: No such file or directory")
 
   # Only add co-author line if the git message template exists and it doesn't have the co-author already
   if exists && !commit_msg.include?(line)
     new_commit_msg = commit_msg + line
 
-    `/usr/local/bin/spin shell #{instance["name"]} -- echo "'#{new_commit_msg}' > '#{template_path}'"`
+    `/usr/local/bin/spin shell #{instance["name"]} -- echo "'#{new_commit_msg}' > '#{spin_template_path}'"`
   end
 end

@@ -6,12 +6,10 @@ require 'json'
 # [commit]
 #  template = ~/.gitmessage
 
-email = ENV.fetch("TUPLE_TRIGGER_EMAIL")
-name = ENV.fetch("TUPLE_TRIGGER_FULL_NAME")
 message_file = ".gitmessage"
 local_template_path = File.expand_path("~/#{message_file}")
 spin_template_path = "/home/spin/#{message_file}"
-line = "Co-Authored-By: #{name} <#{email}>"
+line = "Co-Authored-By:"
 
 # Local co-author removal
 if !File.exists?(local_template_path)

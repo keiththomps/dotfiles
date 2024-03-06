@@ -118,8 +118,8 @@ if [[ $OSTYPE == 'linux'* ]]; then
 
   sudo apt autoremove -yqq
 
-  if [[ -n $(command -v python3.9) ]]; then
-    python3.9 -m pip install neovim
+  if [[ -n $(command -v python3) ]]; then
+    python3 -m pip install neovim shell-gpt
   fi
 
   if [[ -n $(command -v gem) ]]; then

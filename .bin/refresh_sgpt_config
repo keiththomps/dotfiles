@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [ $SPIN ]; then
+  OPENAI_API_KEY=$(cat /etc/spin/secrets/openai-api-key)
+  BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
+
+  # Specify the file name
+  FILE_NAME="~/.config/shell_gpt/.sgptrc"
+
+  # Use sed to remove lines starting with OPENAI_API_KEY= and BASE_URL=
+  sed -i '/^OPENAI_API_KEY=/d' $FILE_NAME
+  sed -i '/^BASE_URL=/d' $FILE_NAME
+
+  # Append the lines to the file
+  echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> $FILE_NAME
+  echo "BASE_URL=${BASE_URL}" >> $FILE_NAME
+fi

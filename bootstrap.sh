@@ -12,6 +12,7 @@ dotfiles=(
   ".irbrc"
   ".pryrc"
   ".shell_defaults"
+  "shell_gpt|.config"
   ".tmux.conf"
   ".tuple"
   "nvim|.config"
@@ -143,6 +144,13 @@ if [[ $OSTYPE == 'linux'* ]]; then
   for ejson_file in /etc/spin/secrets/ejson-*; do
     sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})"
   done
+
+  OPENAI_API_KEY=$(cat /etc/spin/secrets/openai-api-key)
+  BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
+
+  # Append the lines to the file
+  echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> ~/.config/shell_gpt/.sgptrc
+  echo "BASE_URL=${BASE_URL}" >> ~/.config/shell_gpt/.sgptrc
 fi
 
 # Add darwin steps here

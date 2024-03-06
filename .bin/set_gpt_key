@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+spin secrets destroy openai-api-key
+spin secrets create openai-api-key

@@ -145,12 +145,8 @@ if [[ $OSTYPE == 'linux'* ]]; then
     sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})"
   done
 
-  OPENAI_API_KEY=$(cat /etc/spin/secrets/openai-api-key)
-  BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
-
-  # Append the lines to the file
-  echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> ~/.config/shell_gpt/.sgptrc
-  echo "BASE_URL=${BASE_URL}" >> ~/.config/shell_gpt/.sgptrc
+  # Correct shell_gpt config for spin
+  sed -i "s/\/Users\/keith/\/home\/spin/g" /home/spin/.config/shell_gpt/.sgptrc
 fi
 
 # Add darwin steps here
@@ -160,8 +156,6 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   # Install homebrew
   if [[ -n $(command -v brew) ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  else
-    brew update && brew upgrade
   fi
 
   # Install packages via homebrew

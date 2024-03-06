@@ -1,1 +1,16 @@
-
+CHAT_CACHE_PATH=/var/folders/xx/n1f62ds14z74ynt1wg36v_380000gn/T/chat_cache
+CACHE_PATH=/var/folders/xx/n1f62ds14z74ynt1wg36v_380000gn/T/cache
+CHAT_CACHE_LENGTH=100
+CACHE_LENGTH=100
+REQUEST_TIMEOUT=60
+DEFAULT_MODEL=gpt-4-1106-preview
+DEFAULT_COLOR=magenta
+ROLE_STORAGE_PATH=/Users/keith/.config/shell_gpt/roles
+DEFAULT_EXECUTE_SHELL_CMD=false
+DISABLE_STREAMING=false
+CODE_THEME=dracula
+OPENAI_FUNCTIONS_PATH=/Users/keith/.config/shell_gpt/functions
+OPENAI_USE_FUNCTIONS=true
+SHOW_FUNCTIONS_OUTPUT=false
+PRETTIFY_MARKDOWN=true
+USE_LITELLM=false

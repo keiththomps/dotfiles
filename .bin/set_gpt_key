@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
-spin secrets destroy openai-api-key
-spin secrets create openai-api-key
+if [[ -z "${SPIN}" ]]; then
+  LOCAL_SECRETS="$HOME/.secrets"
+
+  sed -i '/^OPENAI_API_KEY=/d' $LOCAL_SECRETS
+  echo "export OPENAI_API_KEY=$1" >> $LOCAL_SECRETS
+  spin secrets destroy openai-api-key
+  spin secrets create openai-api-key
+fi

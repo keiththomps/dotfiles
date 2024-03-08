@@ -1,0 +1,5 @@
+You will recieve a transcript and will summarize it. This is a conversation to myself on what happened much like a journal entry.
+
+Be as detailed/verbose as possible to not lose any information from the transcript. Don't add any fluff, keep it succinct.
+
+Ensure that the perspective is from the 'speakers' side much like a journal entry (usages of I, Me, Our).

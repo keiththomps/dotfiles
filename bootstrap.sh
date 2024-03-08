@@ -11,6 +11,7 @@ dotfiles=(
   ".inputrc"
   ".irbrc"
   ".pryrc"
+  "prompts@.prompts"
   ".shell_defaults"
   "shell_gpt|.config"
   ".tmux.conf"
@@ -99,6 +100,10 @@ for file in ${all_dotfiles[@]}; do
   echo "Linking $linkedFile"
   ln -s $localPath $linkedFile
 done
+
+if [ $LINK_ONLY ]; then
+  exit 0
+fi
 
 # Install Dependencies in Spin
 

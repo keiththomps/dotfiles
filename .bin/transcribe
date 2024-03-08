@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Leverages `ffmpeg`, `jq` and `gum` to record audio and convert it to text (after passing through a GPT prompt).
+
+style_text() {
+  local text="$1"
+  gum style --border rounded --align center --width 50 --margin "0 0" --padding "0 6" --bold "$text"
+}
+
+prompt_selection() {
+  prompt_template=$(ls $HOME/.prompts | gum choose)
+  printf '%s\n' "$prompt_template" | gum format
+}
+
+model_selection() {
+  gpt_model=$(gum choose "gpt-3.5-turbo" "gpt-4" "gpt-3.5-turbo-16k" "gpt-4-32k")
+  printf '%s\n' "$gpt_model" | gum format
+}
+
+record_audio() {
+  ffmpeg -y -f avfoundation -i ":0" -ar 16000 /tmp/audio-transcript-output.mp3 > /dev/null 2>&1
+}
+
+transcribe() {
+  gum spin --spinner meter --show-output --title "OpenAI's Whisper at work..." -- \
+    curl "$OPENAI_API_HOST/v1/audio/transcriptions" \
+      -H "Authorization: Bearer $OPENAI_API_KEY" \
+      -H "Content-Type: multipart/form-data" \
+      -F file="@/tmp/audio-transcript-output.mp3" \
+      -F language="en" \
+      -F response_format=text \
+      -F model="whisper-1" > /tmp/audio-transcript-output.txt
+
+  cat /tmp/audio-transcript-output.txt | pbcopy
+  pbpaste | gum format
+}
+
+prompt_with_transcript() {
+  chat_prompt="$(cat $HOME/.prompts/${prompt_template})\n\n$(cat /tmp/audio-transcript-output.txt)"
+
+  json=$(jq -n --arg content "$chat_prompt" --arg model "$gpt_model" '
+  {
+    "model": $model,
+    "messages": [
+      { "role": "system", "content": "You are a helpful assistant." },
+      { "role": "user", "content": $content }
+    ]
+  }')
+
+  result=$(gum spin --spinner meter --show-output --title "OpenAI's Chat Completion at work..." -- \
+    curl "$OPENAI_API_HOST/v1/chat/completions" \
+      -H "Authorization: Bearer $OPENAI_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d "$json" | jq -r '.choices[0].message.content')
+
+  printf '%s\n' "$result" | pbcopy
+  pbpaste | gum format
+}
+
+clear
+
+style_text 'What prompt would you like to use?'
+prompt_selection
+
+style_text 'What model would you like to use?'
+model_selection
+
+style_text 'Recording Audio... (press 'q' to stop)'
+record_audio
+
+style_text 'Transcribing Audio...'
+transcribe
+
+style_text 'Prompting with Transcript...'
+prompt_with_transcript
+
+style_text 'Done! Output is in clipboard.'

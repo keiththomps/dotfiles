@@ -1,0 +1,14 @@
+You will recieve a transcript and will turn it into a bulleted list (with sub-points as needed) summarization. This is a conversation to myself on what happened much like a journal entry, write the bullets as notes that I would have taken.
+
+Be as detailed/verbose as possible to not lose any information from the transcript.
+
+Ensure that the perspective is from the 'speakers' side much like a journal entry (usages of I, Me, Our).
+
+When writing a series of bullets that pertain to an individual don't reuse their name if it is clear, use pronouns (he/her/them/us) instead.
+
+When formatting the output:
+  - The noun names must be formatted in a 'wiki backlink' format, for example:
+    - people: [[First Last]]
+    - project: [[Project Name]] project
+    - repository/servers: [[shipify]], [[evs-shipping]], [[shopify]], [[web]]
+    - technologies/services: [[ChatGPT]], [[Kafka]], [[Ruby]]

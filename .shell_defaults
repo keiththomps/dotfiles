@@ -130,6 +130,7 @@ fi
 # spin shell_gpt setup
 [[ -f $HOME/.secrets ]] && . $HOME/.secrets
 [[ -f /etc/spin/secrets/openai-base-url ]] && export API_BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
+[[ -f /etc/spin/secrets/openai-base-url ]] && export OPENAI_BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
 [[ -f /etc/spin/secrets/openai-api-key ]] && export OPENAI_API_KEY=$(cat /etc/spin/secrets/openai-api-key)
 
 # Fly.io setup

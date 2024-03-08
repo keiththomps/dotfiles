@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+source_file=$(realpath "$1")
+
+prompt="$source_file\n\n$(cat $source_file)"
+
+# Run the command and store the output
+echo "Generating response..."
+output=$(sgpt --role test_writer "$prompt")
+
+# Read the output line by line
+readarray -t lines <<< "$output"
+
+# The first line is assumed to be the filename
+filename="${lines[0]}"
+
+# Remove the first line (filename) from the array
+unset lines[0]
+
+echo "Writing to $filename"
+# Write the remaining lines to the file
+printf "%s\n" "${lines[@]}" > "$filename"

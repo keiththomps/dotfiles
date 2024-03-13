@@ -23,7 +23,7 @@ record_audio() {
 
 transcribe() {
   gum spin --spinner meter --show-output --title "OpenAI's Whisper at work..." -- \
-    curl "$OPENAI_API_HOST/v1/audio/transcriptions" \
+    curl "$OPENAI_BASE_URL/audio/transcriptions" \
       -H "Authorization: Bearer $OPENAI_API_KEY" \
       -H "Content-Type: multipart/form-data" \
       -F file="@/tmp/audio-transcript-output.mp3" \
@@ -48,7 +48,7 @@ prompt_with_transcript() {
   }')
 
   result=$(gum spin --spinner meter --show-output --title "OpenAI's Chat Completion at work..." -- \
-    curl "$OPENAI_API_HOST/v1/chat/completions" \
+    curl "$OPENAI_BASE_URL/chat/completions" \
       -H "Authorization: Bearer $OPENAI_API_KEY" \
       -H "Content-Type: application/json" \
       -d "$json" | jq -r '.choices[0].message.content')

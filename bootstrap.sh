@@ -144,11 +144,11 @@ if [[ $OSTYPE == 'linux'* ]]; then
     cp /etc/spin/secrets/copilot-credentials "${HOME}/.config/github-copilot/hosts.json"
   fi
 
-#   sudo mkdir -p /opt/ejson/keys
+  sudo mkdir -p /opt/ejson/keys
 
-#   for ejson_file in /etc/spin/secrets/ejson-*; do
-#     sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})"
-#   done
+  for ejson_file in /etc/spin/secrets/ejson-*; do
+    sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})"
+  done
 
   # Correct shell_gpt config for spin
   sed -i "s/\/Users\/keith/\/home\/spin/g" /home/spin/.config/shell_gpt/.sgptrc

@@ -165,6 +165,9 @@ if [[ $OSTYPE == 'darwin'* ]]; then
 
   # Install packages via homebrew
   brew bundle
+
+  echo "Setting macOS defaults"
+  ./macos_defaults.sh
 fi
 
 # Install global gems for NeoVim

@@ -1,83 +1,73 @@
 #!/usr/bin/env bash
 
-dotfiles=(
-  ".agignore"
-  ".bash_profile"
-  ".bashrc"
-  ".bin"
-  ".gemrc"
-  ".githelpers"
-  ".gitmessage"
-  ".inputrc"
-  ".irbrc"
-  ".pryrc"
-  "prompts@.prompts"
-  ".shell_defaults"
-  "shell_gpt|.config"
-  ".tmux.conf"
-  ".tuple"
-  "nvim|.config"
-  ".zprofile"
-  ".zshrc"
-)
+dotfiles="
+  .agignore
+  .bash_profile
+  .bashrc
+  .bin
+  .gemrc
+  .githelpers
+  .gitmessage
+  .inputrc
+  .irbrc
+  .pryrc
+  prompts@.prompts
+  .shell_defaults
+  shell_gpt|.config
+  .tmux.conf
+  .tuple
+  nvim|.config
+  .zprofile
+  .zshrc
+"
 
-shopify_config=(
-  "gitconfig_shopify@.gitconfig"
-)
+shopify_config="
+  gitconfig_shopify@.gitconfig
+"
 
-if [[ -v WSL_DISTRO_NAME ]]; then
-  personal_config=(
-    "gitconfig_wsl@.gitconfig"
-    ".agent-bridge.sh"
-  )
+if [ ! -z "$WSL_DISTRO_NAME" ]; then
+  personal_config="
+    gitconfig_wsl@.gitconfig
+    .agent-bridge.sh
+  "
 fi
 
 function local_file_name() {
-  IFS='@' read -ra ADDR <<< "$1"
-  if [ ${#ADDR[@]} -gt 1 ]; then
-    echo "${ADDR[0]}"
-  else
-    echo "$1"
-  fi
+  echo "$1" | awk -F'@' '{print $1}'
 }
 
 function desired_file_name() {
-  IFS='@' read -ra ADDR <<< "$1"
-  if [ ${#ADDR[@]} -gt 1 ]; then
-    echo "${ADDR[1]}"
-  else
-    echo "$1"
-  fi
+  echo "$1" | awk -F'@' '{print $2}'
 }
 
 # Check for zero length $SPIN
-if [[ -z "${SPIN}" ]]; then
-  if [[ "${SHOPIFY}" == "true" ]]; then
-    all_dotfiles=("${dotfiles[@]}" "${shopify_config[@]}");
+if [ -z "$SPIN" ]; then
+  if [ "$SHOPIFY" == "true" ]; then
+    all_dotfiles="$dotfiles $shopify_config"
   else
-    all_dotfiles=("${dotfiles[@]}" "${personal_config[@]}");
+    all_dotfiles="$dotfiles $personal_config"
   fi
 else
-  all_dotfiles=("${dotfiles[@]}");
+  all_dotfiles="$dotfiles"
 fi
 
 # Link all dotfiles
-for file in ${all_dotfiles[@]}; do
+for file in $all_dotfiles; do
   if [[ $file == *"|"* ]]; then
     filePortion=`echo $file | cut -d "|" -f1`
     localFile=`local_file_name $filePortion`
     destinationFile=`desired_file_name $filePortion`
     destinationDir=$HOME/`echo $file | cut -d "|" -f2`
     linkedFile="${destinationDir}/${destinationFile}"
-    if [[ -L $linkedFile ]]; then
+    if [ -L $linkedFile ]; then
       echo "Unlinking $linkedFile"
       rm -rf $linkedFile
-    elif [[ -f $linkedFile ]]; then
+    elif [ -f $linkedFile ]; then
       echo "Removing existing $linkedFile"
       rm -rf $linkedFile
     fi
 
-    if [[ ! -d $destinationDir ]]; then
+    if [ ! -d $destinationDir ]; then
       echo "Creating ${destinationDir}"
       mkdir -p $destinationDir
     fi
@@ -86,10 +76,10 @@ for file in ${all_dotfiles[@]}; do
     localFile=`local_file_name $file`
     destinationFile=`desired_file_name $file`
     linkedFile="${destinationDir}/${destinationFile}"
-    if [[ -L $linkedFile ]]; then
+    if [ -L $linkedFile ]; then
       echo "Unlinking $linkedFile"
       rm -rf $linkedFile
-    elif [[ -f $linkedFile ]]; then
+    elif [ -f $linkedFile ]; then
       echo "Removing existing $linkedFile"
       rm -rf $linkedFile
     fi

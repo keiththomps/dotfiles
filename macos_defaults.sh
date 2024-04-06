@@ -66,9 +66,6 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
-# Setup default shell of user
-chsh -s /usr/local/bin/bash
-
 # Disable Safari’s thumbnail cache for History and Top Sites
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 

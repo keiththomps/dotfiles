@@ -138,7 +138,7 @@ if [[ $OSTYPE == 'linux'* ]]; then
   sudo mkdir -p /opt/ejson/keys
 
   for ejson_file in /etc/spin/secrets/ejson-*; do
-    sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})"
+    sudo ln -s "$ejson_file" "/opt/ejson/keys/$(basename ${ejson_file#*/ejson-})" > /dev/null 2>&1 || true
   done
 
   # Correct shell_gpt config for spin

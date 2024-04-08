@@ -2,6 +2,8 @@
   name = Keith Thompson
   email = keiththomps@hey.com
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBpbvjt2LnQmMtgWAEmgc89z8p+4dqMD7UjuCoSHCz9
+[commit]
+  gpgsign = true
 [gpg]
   format = ssh
 [gpg "ssh"]

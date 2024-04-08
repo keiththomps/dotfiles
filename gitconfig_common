@@ -38,5 +38,4 @@
 [push]
 	default = current
 [commit]
-	gpgsign = true
   template = ~/.gitmessage

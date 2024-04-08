@@ -1,59 +1,68 @@
 #!/usr/bin/env bash
 
-dotfiles="
-  .agignore
-  .bash_profile
-  .bashrc
-  .bin
-  .gemrc
-  .githelpers
-  .gitmessage
-  .inputrc
-  .irbrc
-  .pryrc
-  prompts@.prompts
-  .shell_defaults
-  shell_gpt|.config
-  .tmux.conf
-  .tuple
-  nvim|.config
-  .wezterm.lua
-  .zprofile
-  .zshrc
-"
+dotfiles=(
+  ".agignore"
+  ".bash_profile"
+  ".bashrc"
+  ".bin"
+  ".gemrc"
+  ".githelpers"
+  ".gitmessage"
+  ".inputrc"
+  ".irbrc"
+  ".pryrc"
+  "prompts@.prompts"
+  ".shell_defaults"
+  "shell_gpt|.config"
+  ".tmux.conf"
+  ".tuple"
+  "nvim|.config"
+  ".zprofile"
+  ".zshrc"
+)
 
-shopify_config="
-  gitconfig_shopify@.gitconfig
-"
+shopify_config=(
+  "gitconfig_shopify@.gitconfig"
+)
 
 if [ ! -z "$WSL_DISTRO_NAME" ]; then
-  personal_config="
-    gitconfig_wsl@.gitconfig
-    .agent-bridge.sh
-  "
+  personal_config=(
+    "gitconfig_wsl@.gitconfig"
+    ".agent-bridge.sh"
+  )
 fi
 
 function local_file_name() {
-  echo "$1" | awk -F'@' '{print $1}'
+  IFS='@' read -ra ADDR <<< "$1"
+  if [ ${#ADDR[@]} -gt 1 ]; then
+    echo "${ADDR[0]}"
+  else
+    echo "$1"
+  fi
 }
 
 function desired_file_name() {
-  echo "$1" | awk -F'@' '{print $2}'
+  IFS='@' read -ra ADDR <<< "$1"
+  if [ ${#ADDR[@]} -gt 1 ]; then
+    echo "${ADDR[1]}"
+  else
+    echo "$1"
+  fi
 }
 
 # Check for zero length $SPIN
-if [ -z "$SPIN" ]; then
+if [ -z "${SPIN}" ]; then
   if [ "$SHOPIFY" == "true" ]; then
-    all_dotfiles="$dotfiles $shopify_config"
+    all_dotfiles=("${dotfiles[@]}" "${shopify_config[@]}");
   else
-    all_dotfiles="$dotfiles $personal_config"
+    all_dotfiles=("${dotfiles[@]}" "${personal_config[@]}");
   fi
 else
-  all_dotfiles="$dotfiles"
+  all_dotfiles=("${dotfiles[@]}");
 fi
 
 # Link all dotfiles
-for file in $all_dotfiles; do
+for file in ${all_dotfiles[@]}; do
   if [[ $file == *"|"* ]]; then
     filePortion=`echo $file | cut -d "|" -f1`
     localFile=`local_file_name $filePortion`

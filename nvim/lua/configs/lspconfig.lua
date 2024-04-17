@@ -1,21 +1,20 @@
 local lsp_to_install
+local lsp_to_configure
 local linters_by_ft
 
 if os.getenv("SPIN") then
-  lsp_to_install = { "ruby_ls" }
+  lsp_to_install = { "lua_ls", "ruby_ls" }
+  lsp_to_configure = { "lua_ls", "ruby_ls" }
+
   linters_by_ft = {
     ruby = { "rubocop" },
     eruby = { "erb_lint" },
   }
 else
-  lsp_to_install = { "elixirls" }
+  lsp_to_install = { "lua_ls", "elixirls" }
+  lsp_to_configure = lsp_to_install
   linters_by_ft = {}
 end
-
-local lsps = {
-  "lua_ls",
-  unpack(lsp_to_install),
-}
 
 if pcall(require, "mason") then
   require("mason").setup()
@@ -23,7 +22,7 @@ end
 
 if pcall(require, "mason-lspconfig") then
   require("mason-lspconfig").setup {
-    ensure_installed = lsps,
+    ensure_installed = lsp_to_install,
   }
 end
 
@@ -79,8 +78,8 @@ if pcall(require, "cmp_nvim_lsp") then
 
   local lspconfig = require "lspconfig"
 
-  for _, lsp in ipairs(lsps) do
-    if lspconfig[lsp] then
+  for _, lsp in ipairs(lsp_to_configure) do
+    if lspconfig[lsp] and lspconfig[lsp]['setup'] then
       lspconfig[lsp].setup {
         capabilities = capabilities,
         on_attach = on_attach,

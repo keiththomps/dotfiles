@@ -49,7 +49,7 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias gl='git l'
+alias gl='git log --oneline'
 
 # tmux
 alias switch='tmux switch-session -t'

@@ -22,6 +22,9 @@ export LSCOLOR=""
 # Set Path
 export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
 
+# Add Gcloud to the path
+export PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
+
 # Add Rust/Cargo to the path
 export PATH="$HOME/.cargo/bin:$PATH"
 if [[ -s $HOME/.cargo/env ]] ; then
@@ -113,7 +116,7 @@ if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
 
 # Direnv setup
-type direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
+type direnv >/dev/null 2>&1 && eval "$(direnv hook $SHELL)"
 
 # Nvm setup
 export NVM_DIR="$HOME/.nvm"

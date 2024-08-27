@@ -7,11 +7,12 @@ replacement=$2
 i=0
 
 # Case sensitive search, returning only file names
-for file in $(rg $query ${@:3} -ls); do
-  sed -E "s/$query/$replacement/g" $file > temp.file
-  mv temp.file $file
+for file in $(rg "${query}" ${@:3} -ls); do
+  # Use double quotes to ensure variables are expanded correctly
+  perl -pe "s/${query}/${replacement}/g" "$file" > temp.file
+  mv temp.file "$file"
   let i++
   echo "Replaced instances of '$query' in $file with '$replacement'"
 done
 
-echo "Done! Files changed:" $i
+echo "Done! Files changed: $i"

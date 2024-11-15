@@ -179,22 +179,32 @@ mkdir -p $HOME/.1password
 
 # Determine OS and set Cursor path
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    CURSOR_PATH="$HOME/Library/Application Support/Cursor/User"
+  CURSOR_PATH="$HOME/Library/Application Support/Cursor/User"
+  CURSOR_EXTENSIONS_PATH="$HOME/.cursor/extensions"
+elif [[ "$WSL_DISTRO_NAME" ]]; then
+  CURSOR_PATH="/mnt/c/Users/keith/AppData/Roaming/Cursor/User"
+  CURSOR_EXTENSIONS_PATH="/mnt/c/Users/keith/.cursor/extensions"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    CURSOR_PATH="$HOME/.config/Cursor/User"
+  CURSOR_PATH="$HOME/.config/Cursor/User"
+  CURSOR_EXTENSIONS_PATH="$HOME/.cursor/extensions"
 else
-    CURSOR_PATH="$APPDATA/Cursor/User"
+  CURSOR_PATH="/mnt/c/Users/keith/AppData/Roaming/Cursor/User"
+  CURSOR_EXTENSIONS_PATH="/mnt/c/Users/keith/.cursor/extensions"
 fi
 
-CURSOR_EXTENSIONS_PATH="$HOME/.cursor/extensions"
-
 # Install Cursor settings
-ln -s $PWD/cursor/settings.json $CURSOR_PATH/settings.json
-ln -s $PWD/cursor/keybindings.json $CURSOR_PATH/keybindings.json
+if [[ "$WSL_DISTRO_NAME" ]]; then
+  # Copy settings and keybindings to Cursor path instead of symlinking
+  cp $PWD/cursor/settings.json $CURSOR_PATH/settings.json
+  cp $PWD/cursor/keybindings.json $CURSOR_PATH/keybindings.json
+else
+  ln -s $PWD/cursor/settings.json $CURSOR_PATH/settings.json
+  ln -s $PWD/cursor/keybindings.json $CURSOR_PATH/keybindings.json
+fi
 
 # Install Cursor extensions
 while read -r extension; do
-  cursor --install-extension --force $extension
+  cursor --install-extension $extension
 done < "$PWD/cursor/extensions.txt"
 
 # Install custom Cursor extensions
@@ -202,6 +212,11 @@ for extension_dir in $PWD/cursor/extensions/*; do
   if [ -d "$extension_dir" ]; then
     extension_name=$(basename "$extension_dir")
     mkdir -p "$CURSOR_EXTENSIONS_PATH"
-    ln -s "$extension_dir" "$CURSOR_EXTENSIONS_PATH/$extension_name"
+    rm -rf "$CURSOR_EXTENSIONS_PATH/$extension_name"
+    if [[ "$WSL_DISTRO_NAME" ]]; then
+      cp -r "$extension_dir" "$CURSOR_EXTENSIONS_PATH/$extension_name"
+    else
+      ln -s "$extension_dir" "$CURSOR_EXTENSIONS_PATH/$extension_name"
+    fi
   fi
 done

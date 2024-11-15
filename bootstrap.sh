@@ -176,3 +176,32 @@ if [ $SPIN ]; then
 fi
 
 mkdir -p $HOME/.1password
+
+# Determine OS and set Cursor path
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    CURSOR_PATH="$HOME/Library/Application Support/Cursor/User"
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    CURSOR_PATH="$HOME/.config/Cursor/User"
+else
+    CURSOR_PATH="$APPDATA/Cursor/User"
+fi
+
+CURSOR_EXTENSIONS_PATH="$HOME/.cursor/extensions"
+
+# Install Cursor settings
+ln -s $PWD/cursor/settings.json $CURSOR_PATH/settings.json
+ln -s $PWD/cursor/keybindings.json $CURSOR_PATH/keybindings.json
+
+# Install Cursor extensions
+while read -r extension; do
+  cursor --install-extension --force $extension
+done < "$PWD/cursor/extensions.txt"
+
+# Install custom Cursor extensions
+for extension_dir in $PWD/cursor/extensions/*; do
+  if [ -d "$extension_dir" ]; then
+    extension_name=$(basename "$extension_dir")
+    mkdir -p "$CURSOR_EXTENSIONS_PATH"
+    ln -s "$extension_dir" "$CURSOR_EXTENSIONS_PATH/$extension_name"
+  fi
+done

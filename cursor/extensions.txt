@@ -1,0 +1,14 @@
+bung87.vscode-gemfile
+dbaeumer.vscode-eslint
+dracula-theme.theme-dracula
+koichisasada.vscode-rdbg
+mrmlnc.vscode-scss
+ms-vscode-remote.remote-containers
+pomdtr.excalidraw-editor
+shopify.ruby-extensions-pack
+shopify.ruby-lsp
+shopify.vscode-shopify-internal
+simonsiefke.svg-preview
+sorbet.sorbet-vscode-extension
+vscodevim.vim
+zignd.html-css-class-completion

@@ -113,7 +113,18 @@ fi
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 # Chruby setup
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+if [[ -f /usr/local/share/chruby/chruby.sh ]]; then
+  source /usr/local/share/chruby/chruby.sh
+elif [[ -f /opt/dev/sh/chruby/chruby.sh ]]; then
+  source /opt/dev/sh/chruby/chruby.sh
+else
+  echo "Chruby not found"
+fi
+
+# Load proper Ruby version
+if [[ -f $HOME/.ruby-version ]]; then
+  chruby $(cat $HOME/.ruby-version)
+fi
 
 # Direnv setup
 type direnv >/dev/null 2>&1 && eval "$(direnv hook $SHELL)"

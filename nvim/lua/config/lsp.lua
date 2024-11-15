@@ -2,16 +2,16 @@ local lsp_to_install
 local lsp_to_configure
 local linters_by_ft
 
-if os.getenv("SPIN") then
-  lsp_to_install = { "lua_ls", "ruby_ls" }
-  lsp_to_configure = { "lua_ls", "ruby_ls" }
+if os.getenv("SHOPIFY") then
+  lsp_to_install = { "ruby_lsp" }
+  lsp_to_configure = { "ruby_lsp" }
 
   linters_by_ft = {
     ruby = { "rubocop" },
     eruby = { "erb_lint" },
   }
 else
-  lsp_to_install = { "lua_ls", "elixirls" }
+  lsp_to_install = { "lua_ls", "elixirls", "ruby_lsp" }
   lsp_to_configure = lsp_to_install
   linters_by_ft = {}
 end
@@ -21,9 +21,7 @@ if pcall(require, "mason") then
 end
 
 if pcall(require, "mason-lspconfig") then
-  require("mason-lspconfig").setup {
-    ensure_installed = lsp_to_install,
-  }
+  require("mason-lspconfig").setup()
 end
 
 if pcall(require, "lint") then
@@ -65,10 +63,10 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
   vim.keymap.set("n", "gf", function() vim.lsp.buf.format { async = true } end, bufopts)
 
-  if client.resolved_capabilities.document_formatting then
-    for _, filetype in ipairs(client.config.filetypes) do
+  if client.server_capabilities.documentFormattingProvider then
+    for _, filetype in ipairs(client.config.filetypes or {}) do
       vim.cmd(string.format(
-        "autocmd FileType %s autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)", filetype))
+        "autocmd FileType %s autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false, timeout_ms = 1000 })", filetype))
     end
   end
 end

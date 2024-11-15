@@ -7,7 +7,6 @@ vim.cmd.filetype "off"
 vim.cmd.filetype "plugin indent on"
 vim.o.compatible = false
 vim.o.ttyfast = true
-vim.o.laststats = 1
 vim.o.encoding = "utf-8"
 vim.o.autoread = true
 vim.o.autoindent = true

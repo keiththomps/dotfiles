@@ -7,9 +7,9 @@
 [gpg]
   format = ssh
 [gpg "ssh"]
-  program = "/mnt/c/Users/Keith/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+  program = "/opt/1Password/op-ssh-sign"
 [credential "https://github.com"]
-  helper = !/usr/bin/gh auth git-credential
+  helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
 [include]
   path = ~/dotfiles/gitconfig_common
 [init]

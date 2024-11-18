@@ -3,6 +3,8 @@ source $HOME/.shell_defaults
 # enable bash-completion (installed via homebrew)
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
+bind '"\C-l": clear-screen'
+
 # get current branch in git repo
 function parse_git_branch() {
   BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
@@ -57,3 +59,6 @@ export PS1="\[\e[36m\]\W\[\e[m\]\[\e[32m\]\`parse_git_branch\`\[\e[m\] -> "
 [[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
 
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+### bling.sh source start
+test -f /usr/share/ublue-os/bluefin-cli/bling.sh && source /usr/share/ublue-os/bluefin-cli/bling.sh
+### bling.sh source end

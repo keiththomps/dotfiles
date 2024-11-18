@@ -20,7 +20,7 @@ export CLICOLOR="Yes"
 export LSCOLOR=""
 
 # Set Path
-export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
+export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:/usr/lib64/ccache:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
 
 # Add Gcloud to the path
 export PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
@@ -117,12 +117,13 @@ if [[ -f /usr/local/share/chruby/chruby.sh ]]; then
   source /usr/local/share/chruby/chruby.sh
 elif [[ -f /opt/dev/sh/chruby/chruby.sh ]]; then
   source /opt/dev/sh/chruby/chruby.sh
-else
-  echo "Chruby not found"
+elif [[ -f /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/chruby.sh ]]; then
+  source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/chruby.sh
+  source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/auto.sh
 fi
 
 # Load proper Ruby version
-if [[ -f $HOME/.ruby-version ]]; then
+if command -v chruby >/dev/null 2>&1 && [[ -f $HOME/.ruby-version ]]; then
   chruby $(cat $HOME/.ruby-version)
 fi
 
@@ -150,3 +151,6 @@ fi
 # Fly.io setup
 export FLYCTL_INSTALL="$HOME/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# Bluefin bling
+test -f /usr/share/ublue-os/bluefin-cli/bling.sh && source /usr/share/ublue-os/bluefin-cli/bling.sh

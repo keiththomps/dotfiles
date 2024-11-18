@@ -33,7 +33,11 @@ function prompt_char {
 
 # Display current ruby version
 function ruby_info {
-  echo "$(ruby -v | sed 's/.* \([0-9p\.]*\) .*/\1/')"
+  if command -v ruby &> /dev/null; then
+    echo "$(ruby -v | sed 's/.* \([0-9p\.]*\) .*/\1/')"
+  else
+    echo ""
+  fi
 }
 
 # Show previous command status

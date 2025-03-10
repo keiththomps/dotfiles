@@ -25,6 +25,9 @@ export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:/usr/lib64/cc
 # Add Gcloud to the path
 export PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
 
+# Add custom global npm direcotry to PATH
+export PATH="$HOME/.npm-global/bin:$PATH"
+
 # Add Rust/Cargo to the path
 export PATH="$HOME/.cargo/bin:$PATH"
 if [[ -s $HOME/.cargo/env ]] ; then
@@ -142,7 +145,7 @@ if [[ $OSTYPE == 'linux'* ]]; then
   fi
 fi
 
-# spin shell_gpt setup
+# Global secrets setup
 [[ -f $HOME/.secrets ]] && . $HOME/.secrets
 [[ -f /etc/spin/secrets/openai-base-url ]] && export API_BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
 [[ -f /etc/spin/secrets/openai-base-url ]] && export OPENAI_BASE_URL=$(cat /etc/spin/secrets/openai-base-url)

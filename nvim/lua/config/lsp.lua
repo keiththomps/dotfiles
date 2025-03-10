@@ -2,7 +2,7 @@ local lsp_to_install
 local lsp_to_configure
 local linters_by_ft
 
-if os.getenv("SHOPIFY") then
+if vim.fn.executable("ruby") == 1 then
   lsp_to_install = { "ruby_lsp" }
   lsp_to_configure = { "ruby_lsp" }
 
@@ -11,7 +11,7 @@ if os.getenv("SHOPIFY") then
     eruby = { "erb_lint" },
   }
 else
-  lsp_to_install = { "lua_ls", "elixirls", "ruby_lsp" }
+  lsp_to_install = {}
   lsp_to_configure = lsp_to_install
   linters_by_ft = {}
 end

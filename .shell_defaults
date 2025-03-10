@@ -157,3 +157,6 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Bluefin bling
 test -f /usr/share/ublue-os/bluefin-cli/bling.sh && source /usr/share/ublue-os/bluefin-cli/bling.sh
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/keith/.kube/config:/Users/keith/.kube/config.shopify.cloudplatform

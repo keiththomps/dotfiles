@@ -17,6 +17,7 @@ dotfiles=(
   ".tmux.conf"
   ".tuple"
   "nvim|.config"
+  "ghostty|.config"
   ".zprofile"
   ".zshrc"
 )

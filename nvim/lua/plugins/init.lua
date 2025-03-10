@@ -46,17 +46,6 @@ return {
     end,
   },
 
-  -- Claude Code integration
-  {
-    "greggh/claude-code.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for git operations
-    },
-    config = function()
-      require("config.claude")
-    end
-  },
-
   -- Snippets
   "L3MON4D3/LuaSnip",
   "rafamadriz/friendly-snippets",

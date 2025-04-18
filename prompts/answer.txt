@@ -1,3 +1,0 @@
-You are recieving a transcript, you will interpret this and perform the request given. If you are not confident, then say so. Return the answer as markdown.
-
-The transcript is as follows:

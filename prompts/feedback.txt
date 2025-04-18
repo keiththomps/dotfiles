@@ -1,1 +1,0 @@
-Act as a peer who can give me critical, candid and actionable feedback. The following is a "whisper" transcript that you will analyze and provide feedback to me. Limit the output to 3 pieces of feedback formatted in markdown.

@@ -33,6 +33,72 @@
   cleanlocal = "! . ~/.githelpers && clean_local"
   current = !git rev-parse --abbrev-ref HEAD
   some = !git checkout main && git pull --rebase && git remote prune origin && git cleanlocal
+
+  # Create a new worktree with a new branch and direnv setup
+  wt-new = "!f() { \
+      BRANCH_NAME=$1; \
+      WORKTREE_PATH=\"../$(basename $(pwd))-$BRANCH_NAME\"; \
+      git worktree add -b \"$BRANCH_NAME\" \"$WORKTREE_PATH\"; \
+      echo \"Worktree created at $WORKTREE_PATH\"; \
+      \
+      # Create a custom .envrc file for this worktree \
+      echo \"Creating direnv configuration...\"; \
+      if [ -f .envrc ]; then \
+          cp .envrc \"$WORKTREE_PATH/.envrc\"; \
+      else \
+          touch \"$WORKTREE_PATH/.envrc\"; \
+      fi; \
+      \
+      # Add worktree-specific environment variables \
+      echo \"\\n# Worktree-specific settings\" >> \"$WORKTREE_PATH/.envrc\"; \
+      echo \"export RAILS_WORKTREE_SUFFIX=\\\"${BRANCH_NAME//[-\\/]/_}\\\"\" >> \"$WORKTREE_PATH/.envrc\"; \
+      echo \"export PORT=\\\"$(( 3000 + $(echo $BRANCH_NAME | md5sum | tr -d -c 0-9 | cut -c 1-4) % 1000 ))\\\"\" >> \"$WORKTREE_PATH/.envrc\"; \
+      \
+      # Allow the new .envrc file \
+      (cd \"$WORKTREE_PATH\" && direnv allow); \
+      \
+      echo \"Setting up Rails environment...\"; \
+      (cd \"$WORKTREE_PATH\" && direnv exec . bundle install && direnv exec . bin/rails db:setup); \
+      \
+      echo \"\\nWorktree ready! To start the server:\\n  cd $WORKTREE_PATH\\n  bin/rails server # Will use PORT=$PORT from .envrc\"; \
+  }; f"
+
+  # Other aliases remain the same as before
+  wt-list = "worktree list"
+  
+  wt-remove = "!f() { \
+      WORKTREE_PATH=\"../$(basename $(pwd))-$1\"; \
+      git worktree remove \"$WORKTREE_PATH\"; \
+  }; f"
+  
+  wt-cleanup = "!f() { \
+      echo \"Cleaning up worktrees for merged branches...\"; \
+      MAIN_BRANCH=\"main\"; \
+      if git show-ref --verify --quiet refs/heads/master; then \
+          MAIN_BRANCH=\"master\"; \
+      fi; \
+      for worktree in $(git worktree list | grep -v \"$(git rev-parse --show-toplevel)\" | awk '{print $1}'); do \
+          BRANCH=$(cd $worktree && git symbolic-ref --short HEAD 2>/dev/null); \
+          if [ -n \"$BRANCH\" ] && [ \"$BRANCH\" != \"$MAIN_BRANCH\" ]; then \
+              if git merge-base --is-ancestor $BRANCH $MAIN_BRANCH; then \
+                  echo \"Removing worktree for merged branch: $BRANCH at $worktree\"; \
+                  git worktree remove --force \"$worktree\"; \
+                  git branch -d \"$BRANCH\"; \
+              fi; \
+          fi; \
+      done; \
+      git worktree prune; \
+      echo \"Cleanup complete.\"; \
+  }; f"
+  
+  wt-code = "!f() { \
+      WORKTREE_PATH=\"../$(basename $(pwd))-$1\"; \
+      if [ -d \"$WORKTREE_PATH\" ]; then \
+          code \"$WORKTREE_PATH\"; \
+      else \
+          echo \"Worktree $WORKTREE_PATH does not exist\"; \
+      fi; \
+  }; f"
 [merge]
   tool = vimdiff
 [push]

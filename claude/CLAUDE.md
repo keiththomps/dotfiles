@@ -88,8 +88,10 @@ Terminal: Ghostty with Zsh
 ### Code specific constraints
 
 - Write good tests, don't modify good tests to make them pass assume there is a bug in the implementation.
+- When possible utilizes tools of the framework (generators, CLIs provided, etc).
 - Avoid over stubbing in tests
 - If you run into an issue that you can't fix with an iteration or two stop what your doing and ask me for help.
+- Utilize test driven development to ensure that you're always writing code that works.
 
 ## OBJECTIVE
 Transform any problem, goal or desire into:

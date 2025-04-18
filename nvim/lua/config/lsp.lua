@@ -2,6 +2,10 @@ local lsp_to_install
 local lsp_to_configure
 local linters_by_ft
 
+lsp_to_install = { "ts_ls" }
+lsp_to_configure = lsp_to_install
+linters_by_ft = {}
+
 if vim.fn.executable("ruby") == 1 then
   lsp_to_install = { "ruby_lsp" }
   lsp_to_configure = { "ruby_lsp" }
@@ -10,10 +14,6 @@ if vim.fn.executable("ruby") == 1 then
     ruby = { "rubocop" },
     eruby = { "erb_lint" },
   }
-else
-  lsp_to_install = {}
-  lsp_to_configure = lsp_to_install
-  linters_by_ft = {}
 end
 
 if pcall(require, "mason") then
@@ -21,7 +21,9 @@ if pcall(require, "mason") then
 end
 
 if pcall(require, "mason-lspconfig") then
-  require("mason-lspconfig").setup()
+  require("mason-lspconfig").setup(
+    ensure_installed
+  )
 end
 
 if pcall(require, "lint") then

@@ -4,7 +4,8 @@ return {
   "tpope/vim-commentary",
   "vim-test/vim-test",
 
-  -- LSP, Telescope, Treesitter, Avante
+
+  -- LSP, Telescope, Treesitter
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",

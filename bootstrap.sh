@@ -12,6 +12,7 @@ dotfiles=(
   ".irbrc"
   ".pryrc"
   "prompts@.prompts"
+  ".cargo"
   "claude@.claude"
   ".shell_defaults"
   "shell_gpt|.config"

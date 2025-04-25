@@ -4,29 +4,21 @@ return {
   "tpope/vim-commentary",
   "vim-test/vim-test",
 
-
   -- LSP, Telescope, Treesitter
   {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "mfussenegger/nvim-lint",
-    dependencies = { "rshkarin/mason-nvim-lint" },
-    config = function()
-      require("config.linting")
-    end,
-  },
-  "neovim/nvim-lspconfig",
-  {
-    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    event = "BufReadPre",  -- load before opening files
+    dependencies = {
+      "williamboman/mason.nvim",
+      -- Optional mason extensions:
+      "williamboman/mason-lspconfig.nvim",  -- bridges Mason with lspconfig
+      "nvimtools/none-ls.nvim",   -- bridges Mason with null-ls
+    },
     config = function()
       require("config.lsp")
     end,
   },
+
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -47,19 +39,30 @@ return {
     end,
   },
 
-  -- Snippets
-  "L3MON4D3/LuaSnip",
-  "rafamadriz/friendly-snippets",
-  "saadparwaiz1/cmp_luasnip",
+  -- Linting
+  {
+    "nvimtools/none-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim", "williamboman/mason.nvim", "jay-babu/mason-null-ls.nvim" },
+    config = function()
+      require("config.linting")
+    end,
+  },
 
-  -- Autocomplete
-  "onsails/lspkind.nvim",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
+  -- Snippets & Autocomplete
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "onsails/lspkind.nvim",
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+      "saadparwaiz1/cmp_luasnip",
+    },
     config = function()
       require("config.cmp")
     end,

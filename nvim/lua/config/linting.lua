@@ -1,13 +1,11 @@
-local linters_by_ft
+-- require("mason-null-ls").setup({ ensure_installed = { "biome" } })
 
-if vim.env.SPIN then
-  linters_by_ft = {
-    ruby = { "rubocop" },
-    eruby = { "erb_lint" },
-  }
-else
-  linters_by_ft = {}
-end
+-- local null_ls = require("null-ls")
 
-require("lint").linters_by_ft = linters_by_ft
-require("mason-nvim-lint").setup()
+-- null_ls.setup({
+--   sources = {
+--     -- Biome for JS/TS:
+--     null_ls.builtins.diagnostics.biome,
+--     null_ls.builtins.formatting.biome,
+--   },
+-- })

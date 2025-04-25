@@ -22,6 +22,9 @@ export LSCOLOR=""
 # Set Path
 export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:/usr/lib64/ccache:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
 
+# Add linux neovim to path if present
+test -d /opt/nvim-linux-x86_64/bin && export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
 # Add Gcloud to the path
 export PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
 

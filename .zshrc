@@ -72,3 +72,6 @@ esac
 # Task Master aliases added on 4/14/2025
 alias tm='task-master'
 alias taskmaster='task-master'
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/keith/.kube/config:/Users/keith/.kube/config.shopify.cloudplatform

@@ -1,13 +1,44 @@
 #!/usr/bin/env bash
 
-query=$1
-replacement=$2
+# Initialize variables
+query=""
+replacement=""
+rg_flags=()
+target_args=()
+found_pattern=false
+found_replacement=false
+
+# Parse arguments
+for arg in "$@"; do
+  if [[ "$arg" == -* ]]; then
+    # This is a flag, add it to rg_flags
+    rg_flags+=("$arg")
+  else
+    # This is a positional argument
+    if [ "$found_pattern" = false ]; then
+      query="$arg"
+      found_pattern=true
+    elif [ "$found_replacement" = false ]; then
+      replacement="$arg"
+      found_replacement=true
+    else
+      # This is a target path
+      target_args+=("$arg")
+    fi
+  fi
+done
+
+# Validate that we have the required arguments
+if [ -z "$query" ] || [ -z "$replacement" ]; then
+  echo "Usage: replace [rg flags] PATTERN REPLACEMENT [PATH...]"
+  exit 1
+fi
 
 # File counter
 i=0
 
-# Case sensitive search, returning only file names
-for file in $(rg "${query}" ${@:3} -ls); do
+# Run rg with all flags and target arguments
+for file in $(rg "${rg_flags[@]}" "${query}" "${target_args[@]}" -ls); do
   # Use double quotes to ensure variables are expanded correctly
   perl -pe "s/${query}/${replacement}/g" "$file" > temp.file
   mv temp.file "$file"

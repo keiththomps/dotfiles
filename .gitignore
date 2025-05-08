@@ -9,3 +9,5 @@ node_modules/
 yarn.lock
 .tuple/triggers/triggers.log*
 claude/statsig
+claude/todos
+claude/__store.db

@@ -11,3 +11,5 @@ yarn.lock
 claude/statsig
 claude/todos
 claude/__store.db
+claude/projects
+claude/settings.json

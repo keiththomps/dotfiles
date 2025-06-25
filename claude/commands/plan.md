@@ -1,6 +1,6 @@
 # Plan Command
 
-Analyze the following requirement and help clarify it before breaking it down into GitHub issues.
+Analyze the following requirement and help clarify it before breaking it down into GitHub issues or task files.
 
 Requirements to analyze: $ARGUMENTS
 
@@ -29,7 +29,7 @@ First, analyze the requirement and ultrathink about them:
    If you see a better approach, propose it with rationale.
 
 ## PHASE 2: ISSUE BREAKDOWN
-Once requirements are clear, break down into GitHub issues following these rules:
+Once requirements are clear, break down into GitHub issues or Task files following these rules:
 
 **Sizing Guidelines:**
 - Small (1-2 hours): Single file changes, simple logic
@@ -43,7 +43,6 @@ Each issue should include:
 Title: [Clear, action-oriented title]
 Type: [feature/bug/refactor/test/docs]
 Complexity: [small/medium/large]
-Time Estimate: [1-8 hours]
 Dependencies: [Issue numbers or 'none']
 
 Description:
@@ -62,9 +61,6 @@ Technical Hints:
 Test Strategy:
 - How to verify the implementation
 - Specific test cases to cover
-
-AI Agents:
-- Which AI agents can assist with this issue (e.g, developer, tester, designer, architext, etc.)
 ```
 
 ## PHASE 3: IMPLEMENTATION ROADMAP

@@ -42,7 +42,23 @@ prune_and_delete_merged() {
     git checkout main
     git pull --rebase
     git remote prune origin
-    git branch --merged | grep -v "\*" | xargs -n 1 git branch -d
+    
+    # Get list of branches used by worktrees
+    WORKTREE_BRANCHES=$(git worktree list --porcelain | grep '^branch' | cut -d' ' -f2 | cut -d'/' -f3-)
+    
+    # Process merged branches, skipping current branch and worktree branches
+    git branch --merged | grep -v "^\*" | while IFS= read -r branch; do
+        # Remove leading whitespace and * or + if present
+        stale_branch=$(echo "$stale_branch" | sed 's/^[* ]*//')
+        stale_branch=$(echo "$stale_branch" | sed 's/^[+ ]*//')
+        
+        # Skip if branch is used by a worktree
+        if echo "$WORKTREE_BRANCHES" | grep -q "^$branch$"; then
+            echo "Skipping branch '$branch' (used by worktree)"
+        else
+            git branch -d "$branch"
+        fi
+    done
 }
 
 clean_local() {
@@ -54,8 +70,22 @@ clean_local() {
             exit 0
         fi
     fi
-    for stale_branch in $(git branch --merged $BRANCH | grep -v $BRANCH); do
-        git branch -d $stale_branch
+    
+    # Get list of branches used by worktrees
+    WORKTREE_BRANCHES=$(git worktree list --porcelain | grep '^branch' | cut -d' ' -f2 | cut -d'/' -f3-)
+    
+    # Process merged branches, skipping worktree branches
+    git branch --merged "$BRANCH" | grep -v "^[* ]*$BRANCH$" | while IFS= read -r stale_branch; do
+        # Remove leading whitespace and * or + if present
+        stale_branch=$(echo "$stale_branch" | sed 's/^[* ]*//')
+        stale_branch=$(echo "$stale_branch" | sed 's/^[+ ]*//')
+
+        # Skip if branch is used by a worktree
+        if echo "$WORKTREE_BRANCHES" | grep -q "^$stale_branch$"; then
+            echo "Skipping branch '$stale_branch' (used by worktree)"
+        else
+            git branch -d "$stale_branch"
+        fi
     done
 }
 

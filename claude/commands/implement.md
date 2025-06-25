@@ -6,6 +6,7 @@ Follow this structured approach:
 
 ## 1. **Understand the Issue**
    - If it's a GitHub URL, use 'gh issue view' to get details
+   - If it's a task file, read the file to understand the task
    - Otherwise, parse the provided issue description
    - Identify acceptance criteria and technical hints
 
@@ -23,10 +24,9 @@ Follow this structured approach:
    - Update TodoWrite status as you complete each step
 
 ## 4. **Verification Phase**
-   - Run all tests: cargo test
-   - Check formatting: cargo fmt
-   - Run linter: cargo clippy
-   - Ensure no compiler warnings
+   - Run all tests using the testing command for the repo
+   - Run formatting and linter checks
+   - Ensure no compiler warnings if applicable
    - Verify all acceptance criteria are met
 
 ## 5. **Documentation Phase**
@@ -38,10 +38,11 @@ Follow this structured approach:
    - Ensure the branch is up-to-date with the main branch
    - Push changes and create a pull request
    - Include a clear description of what was implemented and how it meets the acceptance criteria
+   - Link to the original issue if present
 
 **IMPORTANT:**
-- Do NOT take shortcuts or use allow(dead_code)
-- Do NOT use unwrap() - handle all errors properly
+- Do NOT take shortcuts or allow dead code
+- Do NOT use unwrap() in Rust - handle all errors properly
 - Do NOT hardcode test results
 - Do NOT create unnecessary files
 - Do NOT commit unless explicitly asked

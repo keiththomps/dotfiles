@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+set -e
+
+SPRINT_DIR=".sprints"
+
+if ! command -v bd &> /dev/null; then
+  echo "Error: beads (bd) is not installed."
+  echo ""
+  echo "Run the setup script to install:"
+  echo "  scripts/setup-beads"
+  exit 1
+fi
+
+show_help() {
+  cat <<EOF
+sprint - Execute a planned sprint using Ralph autonomous workflow
+
+USAGE
+  bin/sprint <sprint-name> [iterations]
+
+ARGUMENTS
+  sprint-name   Name of sprint directory in .sprints/
+  iterations    Max iterations before stopping (default: 20)
+
+DESCRIPTION
+  Runs the Ralph loop against a sprint's PROMPT.md file. Each iteration:
+    1. Pre-flight checks (git status, available tasks)
+    2. Claims and implements one task (TDD style)
+    3. Updates PROGRESS.md (success or failure log)
+    4. Creates PR via graphite and closes the bead
+    5. Stops on signal: COMPLETE (done) or BLOCKED (needs human)
+
+EXIT CODES
+  0 - All tasks completed successfully
+  1 - Reached max iterations (may be incomplete)
+  2 - Blocked (task stuck after retries, needs human intervention)
+
+WORKFLOW
+  1. Plan sprint:    /sprint-plan <issue-or-description>
+  2. Review PRD:     cat .sprints/<name>/PRD.md
+  3. Create tasks:   /sprint-tasks <sprint-name>
+  4. Review beads:   bd list --parent <epic-id>
+  5. Execute:        bin/sprint <sprint-name>
+  6. Monitor:        Watch terminal or check PROGRESS.md
+
+EXAMPLES
+  bin/sprint user-auth           # Run with default 20 iterations
+  bin/sprint user-auth 50        # Run with 50 iterations
+
+FILES
+  .sprints/<name>/PROMPT.md      # Ralph execution instructions
+  .sprints/<name>/PRD.md         # Product requirements
+  .sprints/<name>/GUARDRAILS.md  # Constraints and patterns
+  .sprints/<name>/PROGRESS.md    # Work log and learnings
+EOF
+}
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  show_help
+  exit 0
+fi
+
+if [[ -z "$1" ]]; then
+  show_help
+  echo ""
+  echo "AVAILABLE SPRINTS"
+  if [[ -d "$SPRINT_DIR" ]]; then
+    ls -1 "$SPRINT_DIR" 2>/dev/null | sed 's/^/  /'
+    if [[ -z "$(ls -A "$SPRINT_DIR" 2>/dev/null)" ]]; then
+      echo "  (none)"
+    fi
+  else
+    echo "  (none - $SPRINT_DIR does not exist)"
+  fi
+  exit 1
+fi
+
+SPRINT_NAME=$1
+ITERATIONS=${2:-20}
+
+PROMPT_FILE="$SPRINT_DIR/$SPRINT_NAME/PROMPT.md"
+
+if [[ ! -d "$SPRINT_DIR/$SPRINT_NAME" ]]; then
+  echo "Error: Sprint not found: $SPRINT_NAME"
+  echo ""
+  echo "Available sprints:"
+  ls -1 "$SPRINT_DIR" 2>/dev/null | sed 's/^/  /' || echo "  (none)"
+  exit 1
+fi
+
+if [[ ! -f "$PROMPT_FILE" ]]; then
+  echo "Error: Missing PROMPT.md in sprint: $SPRINT_NAME"
+  echo ""
+  echo "Sprint directory contents:"
+  ls -1 "$SPRINT_DIR/$SPRINT_NAME" | sed 's/^/  /'
+  exit 1
+fi
+
+exec bin/ralph "$PROMPT_FILE" "$ITERATIONS"

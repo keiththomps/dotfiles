@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+set -e
+
+PROMPT_FILE=${1:-""}
+MAX=${2:-10}
+SLEEP=${3:-2}
+
+if [[ -z "$PROMPT_FILE" ]]; then
+  echo "Usage: ralph <prompt-file> [max-iterations] [sleep-seconds]"
+  echo ""
+  echo "  prompt-file     Path to file containing the prompt (required)"
+  echo "  max-iterations  Maximum iterations before stopping (default: 10)"
+  echo "  sleep-seconds   Seconds to wait between iterations (default: 2)"
+  exit 1
+fi
+
+if [[ ! -f "$PROMPT_FILE" ]]; then
+  echo "Error: Prompt file not found: $PROMPT_FILE"
+  exit 1
+fi
+
+PROMPT=$(cat "$PROMPT_FILE")
+PROMPT_DIR=$(dirname "$PROMPT_FILE")
+LOG_FILE="$PROMPT_DIR/ralph.log"
+
+echo "Starting Ralph - Max $MAX iterations"
+echo "Prompt file: $PROMPT_FILE"
+echo "Log file: $LOG_FILE"
+echo ""
+echo "To monitor in another terminal:"
+echo "  tail -f $LOG_FILE"
+echo ""
+
+: > "$LOG_FILE"
+: > "$LOG_FILE.json"
+
+for ((i = 1; i <= $MAX; i++)); do
+  echo "==========================================="
+  echo "  Iteration $i of $MAX"
+  echo "==========================================="
+
+  echo "" >> "$LOG_FILE"
+  echo "==========================================" >> "$LOG_FILE"
+  echo "  Iteration $i of $MAX - $(date)" >> "$LOG_FILE"
+  echo "==========================================" >> "$LOG_FILE"
+
+  claude --permission-mode acceptEdits --output-format stream-json --verbose -p "$PROMPT" 2>&1 | \
+    tee -a "$LOG_FILE.json" | \
+    jq -r --unbuffered '
+      if .type == "assistant" then
+        (.message.content[]? |
+          if .type == "text" then
+            .text
+          elif .type == "tool_use" then
+            "\n→ " + .name + ": " + ((.input | if .command then .command elif .file_path then .file_path elif .pattern then .pattern elif .prompt then (.prompt | .[0:100]) else (. | tostring | .[0:100]) end) // "")
+          else empty end
+        ) // empty
+      elif .type == "result" then
+        "\n══════════════════════════════════════════\nResult: " + ((.result | .[0:500]) // "[no result]")
+      else empty end
+    ' 2>/dev/null >> "$LOG_FILE"
+
+  echo "  Done. Checking for signals..."
+
+  # Check for completion (new format or legacy)
+  if tail -n 100 "$LOG_FILE.json" | grep -qE "(<!-- RALPH_SIGNAL: COMPLETE -->|<promise>COMPLETE</promise>)"; then
+    echo "==========================================="
+    echo "  All tasks complete after $i iterations!"
+    echo "==========================================="
+    exit 0
+  fi
+
+  # Check for blocked signal (needs human intervention)
+  if tail -n 100 "$LOG_FILE.json" | grep -q "<!-- RALPH_SIGNAL: BLOCKED -->"; then
+    echo "==========================================="
+    echo "  BLOCKED - needs human intervention"
+    echo "  Check PROGRESS.md for failure details"
+    echo "==========================================="
+    exit 2
+  fi
+
+  sleep $SLEEP
+done
+
+echo "==========================================="
+echo "  Reached max iterations ($MAX)"
+echo "  Sprint may be incomplete - check progress"
+echo "==========================================="
+exit 1

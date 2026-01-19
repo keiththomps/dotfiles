@@ -41,3 +41,4 @@ font-family = Source Code Pro
 theme = Dracula+
 font-size = 18
 window-padding-x = 12
+keybind = shift+enter=text:\n

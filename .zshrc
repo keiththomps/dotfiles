@@ -1,5 +1,3 @@
-source $HOME/.shell_defaults
-
 # ZSH CONFIGURATION #
 #####################
 
@@ -61,6 +59,8 @@ if [ -e /Users/keith/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/keith/.n
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
 
+source $HOME/.shell_defaults
+
 # pnpm
 export PNPM_HOME="/var/home/keith/.local/share/pnpm"
 case ":$PATH:" in
@@ -69,9 +69,19 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# Task Master aliases added on 4/14/2025
-alias tm='task-master'
-alias taskmaster='task-master'
-
 # cloudplatform: add Shopify clusters to your local kubernetes config
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/keith/.kube/config:/Users/keith/.kube/config.shopify.cloudplatform
+
+# Added by tec agent
+[[ -x /Users/keith/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/keith/.local/state/tec/profiles/base/current/global/init zsh)"
+
+# Auto-start Zellij
+if command -v zellij >/dev/null 2>&1; then
+  if [ -z "$ZELLIJ" ] && [ -z "$SSH_CONNECTION" ]; then
+    zellij -l welcome
+    exit
+  fi
+fi
+
+# Added by Antigravity
+export PATH="/Users/keith/.antigravity/antigravity/bin:$PATH"

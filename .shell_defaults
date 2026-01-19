@@ -20,13 +20,7 @@ export CLICOLOR="Yes"
 export LSCOLOR=""
 
 # Set Path
-export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:/usr/lib64/ccache:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/sbin:$PATH
-
-# Add linux neovim to path if present
-test -d /opt/nvim-linux-x86_64/bin && export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-
-# Add Gcloud to the path
-export PATH="$PATH:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin"
+export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 # Add custom global npm direcotry to PATH
 export PATH="$HOME/.npm-global/bin:$PATH"
@@ -95,16 +89,11 @@ alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 # Reload SHELL
 alias r='exec $SHELL'
 
+# Claude code
+alias yolo-claude="claude --dangerously-skip-permissions"
+
 # Ripgrep as Silver Searcher
 if ! command -v ag &> /dev/null; then alias ag=rg; fi
-
-# Tmux project orchestration
-function rdev() {
-  WORKSPACE=$1 tmuxp load ~/.tmuxp/rails_dev.yaml
-}
-
-# Dev setup
-[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
 # Keychain loader if present
 type keychain >/dev/null 2>&1 && eval `keychain --agents ssh --eval ~/.ssh/id_ed25519`
@@ -115,31 +104,8 @@ if [ -e $HOME/.asdf/asdf.sh ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 
-# Nix setup
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-# Chruby setup
-if [[ -f /usr/local/share/chruby/chruby.sh ]]; then
-  source /usr/local/share/chruby/chruby.sh
-elif [[ -f /opt/dev/sh/chruby/chruby.sh ]]; then
-  source /opt/dev/sh/chruby/chruby.sh
-elif [[ -f /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/chruby.sh ]]; then
-  source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/chruby.sh
-  source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/auto.sh
-fi
-
-# Load proper Ruby version
-if command -v chruby >/dev/null 2>&1 && [[ -f $HOME/.ruby-version ]]; then
-  chruby $(cat $HOME/.ruby-version)
-fi
-
 # Direnv setup
 type direnv >/dev/null 2>&1 && eval "$(direnv hook $SHELL)"
-
-# Nvm setup
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # 1Password SSH Management in WSL
 if [[ $OSTYPE == 'linux'* ]]; then
@@ -149,17 +115,4 @@ if [[ $OSTYPE == 'linux'* ]]; then
 fi
 
 # Global secrets setup
-[[ -f $HOME/.secrets ]] && . $HOME/.secrets
-[[ -f /etc/spin/secrets/openai-base-url ]] && export API_BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
-[[ -f /etc/spin/secrets/openai-base-url ]] && export OPENAI_BASE_URL=$(cat /etc/spin/secrets/openai-base-url)
-[[ -f /etc/spin/secrets/openai-api-key ]] && export OPENAI_API_KEY=$(cat /etc/spin/secrets/openai-api-key)
-
-# Fly.io setup
-export FLYCTL_INSTALL="$HOME/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
-
-# Bluefin bling
-test -f /usr/share/ublue-os/bluefin-cli/bling.sh && source /usr/share/ublue-os/bluefin-cli/bling.sh
-
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/keith/.kube/config:/Users/keith/.kube/config.shopify.cloudplatform
+[[ -f $HOME/.secrets ]] && source $HOME/.secrets

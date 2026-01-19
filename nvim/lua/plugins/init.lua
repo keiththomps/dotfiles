@@ -69,18 +69,18 @@ return {
   },
 
   -- AI coding
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "github/copilot.vim",
-    },
-    config = function()
-      require("config.ai")
-    end,
-  },
+  -- {
+  --   "olimorris/codecompanion.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "github/copilot.vim",
+  --   },
+  --   config = function()
+  --     require("config.ai")
+  --   end,
+  -- },
 
   -- Indent detection
   {

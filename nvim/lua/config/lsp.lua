@@ -32,12 +32,12 @@ vim.lsp.config['ruby_ls'] = {
 }
 
 -- Also configure RuboCop as an LSP (for diagnostics/formatting) if desired:
-vim.lsp.config['rubocop'] = {
-  cmd = { "rubocop", "--lsp" },  -- runs RuboCop in LSP mode (Rubocop 1.53+)
-  filetypes = { "ruby" },
-  root_markers = { ".rubocop.yml", ".git" },
-  init_options = { unsafeAutocorrect = false },  -- RuboCop LSP option (safe autocorrect)
-}
+-- vim.lsp.config['rubocop'] = {
+--   cmd = { "rubocop", "--lsp" },  -- runs RuboCop in LSP mode (Rubocop 1.53+)
+--   filetypes = { "ruby" },
+--   root_markers = { ".rubocop.yml", ".git" },
+--   init_options = { unsafeAutocorrect = false },  -- RuboCop LSP option (safe autocorrect)
+-- }
 
 -- Bacon LSP for Rust (for continuous diagnostics via bacon):
 vim.lsp.config['bacon_ls'] = {

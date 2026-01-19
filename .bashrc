@@ -68,3 +68,6 @@ test -f /usr/share/ublue-os/bluefin-cli/bling.sh && source /usr/share/ublue-os/b
 
 # cloudplatform: add Shopify clusters to your local kubernetes config
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/keith/.kube/config:/Users/keith/.kube/config.shopify.cloudplatform
+
+# Added by tec agent
+[[ -x /Users/keith/.local/state/tec/profiles/base/current/global/init ]] && [[ $- == *i* ]] && eval "$(/Users/keith/.local/state/tec/profiles/base/current/global/init bash)"
